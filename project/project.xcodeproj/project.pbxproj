@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070F4FB01CA0E411004F77C1 /* MySetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FAF1CA0E411004F77C1 /* MySetsTableViewController.swift */; };
+		070F4FB41CA0E6D3004F77C1 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FB31CA0E6D3004F77C1 /* NavigationViewController.swift */; };
+		070F4FB61CA0FBC7004F77C1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FB51CA0FBC7004F77C1 /* User.swift */; };
+		070F4FB81CA0FC98004F77C1 /* CardSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FB71CA0FC98004F77C1 /* CardSet.swift */; };
+		070F4FBA1CA0FD0D004F77C1 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FB91CA0FD0D004F77C1 /* Card.swift */; };
+		070F4FBC1CA10081004F77C1 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FBB1CA10081004F77C1 /* DataModel.swift */; };
+		070F4FBE1CA108F4004F77C1 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FBD1CA108F4004F77C1 /* AddCardViewController.swift */; };
+		070F4FC01CA10BB5004F77C1 /* SetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FBF1CA10BB5004F77C1 /* SetTableViewController.swift */; };
+		070F4FC21CA10E50004F77C1 /* EditSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */; };
 		B5B17F451C8CE15100DAF08B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F441C8CE15100DAF08B /* AppDelegate.swift */; };
 		B5B17F471C8CE15100DAF08B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F461C8CE15100DAF08B /* ViewController.swift */; };
 		B5B17F4A1C8CE15100DAF08B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B17F481C8CE15100DAF08B /* Main.storyboard */; };
@@ -18,6 +27,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		070F4FAF1CA0E411004F77C1 /* MySetsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySetsTableViewController.swift; sourceTree = "<group>"; };
+		070F4FB31CA0E6D3004F77C1 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		070F4FB51CA0FBC7004F77C1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		070F4FB71CA0FC98004F77C1 /* CardSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSet.swift; sourceTree = "<group>"; };
+		070F4FB91CA0FD0D004F77C1 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		070F4FBB1CA10081004F77C1 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		070F4FBD1CA108F4004F77C1 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
+		070F4FBF1CA10BB5004F77C1 /* SetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTableViewController.swift; sourceTree = "<group>"; };
+		070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSetTableViewController.swift; sourceTree = "<group>"; };
 		B5B17F411C8CE15100DAF08B /* project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B17F441C8CE15100DAF08B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5B17F461C8CE15100DAF08B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +87,15 @@
 				B5B17F501C8CE15100DAF08B /* LaunchScreen.storyboard */,
 				B5B17F531C8CE15100DAF08B /* Info.plist */,
 				B5B17F4B1C8CE15100DAF08B /* project.xcdatamodeld */,
+				070F4FAF1CA0E411004F77C1 /* MySetsTableViewController.swift */,
+				070F4FB31CA0E6D3004F77C1 /* NavigationViewController.swift */,
+				070F4FBF1CA10BB5004F77C1 /* SetTableViewController.swift */,
+				070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */,
+				070F4FB51CA0FBC7004F77C1 /* User.swift */,
+				070F4FB71CA0FC98004F77C1 /* CardSet.swift */,
+				070F4FB91CA0FD0D004F77C1 /* Card.swift */,
+				070F4FBB1CA10081004F77C1 /* DataModel.swift */,
+				070F4FBD1CA108F4004F77C1 /* AddCardViewController.swift */,
 			);
 			path = project;
 			sourceTree = "<group>";
@@ -146,9 +173,18 @@
 			files = (
 				B5B17F5C1C8CE44C00DAF08B /* CreateAccountViewController.swift in Sources */,
 				B5B17F471C8CE15100DAF08B /* ViewController.swift in Sources */,
+				070F4FBC1CA10081004F77C1 /* DataModel.swift in Sources */,
+				070F4FB01CA0E411004F77C1 /* MySetsTableViewController.swift in Sources */,
 				B5B17F4D1C8CE15100DAF08B /* project.xcdatamodeld in Sources */,
+				070F4FC01CA10BB5004F77C1 /* SetTableViewController.swift in Sources */,
+				070F4FB61CA0FBC7004F77C1 /* User.swift in Sources */,
 				B5B17F451C8CE15100DAF08B /* AppDelegate.swift in Sources */,
+				070F4FB41CA0E6D3004F77C1 /* NavigationViewController.swift in Sources */,
+				070F4FBE1CA108F4004F77C1 /* AddCardViewController.swift in Sources */,
+				070F4FBA1CA0FD0D004F77C1 /* Card.swift in Sources */,
 				B5B17F5A1C8CE43C00DAF08B /* HomeViewController.swift in Sources */,
+				070F4FC21CA10E50004F77C1 /* EditSetTableViewController.swift in Sources */,
+				070F4FB81CA0FC98004F77C1 /* CardSet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +334,7 @@
 				B5B17F581C8CE15100DAF08B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
