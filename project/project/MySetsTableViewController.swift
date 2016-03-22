@@ -11,7 +11,7 @@ import CoreData
 
 class MySetsTableViewController: UITableViewController {
 
-    var cards = [NSManagedObject]()
+    var sets = [NSManagedObject]()
     let reuseIdentifier = "setId"
 
     override func viewDidLoad() {
@@ -22,6 +22,8 @@ class MySetsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        let setToSave = CardSet(name: "Spanish", date: "Mar 21", id: 1)
+        saveSet(setToSave);
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -32,7 +34,7 @@ class MySetsTableViewController: UITableViewController {
         let managedContext = appDelegate.managedObjectContext
         
         //
-        let fetchRequest = NSFetchRequest(entityName:"Card")
+        let fetchRequest = NSFetchRequest(entityName:"CardSet")
         
         //
         var fetchedResults:[NSManagedObject]? = nil
@@ -47,7 +49,7 @@ class MySetsTableViewController: UITableViewController {
         }
         
         if let results = fetchedResults {
-            cards = results
+            sets = results
         } else {
             print("Could not fetch")
         }
@@ -67,7 +69,7 @@ class MySetsTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.cards.count
+        return self.sets.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -82,14 +84,44 @@ class MySetsTableViewController: UITableViewController {
         
         ////////////////////////////////////////////////////////
         // Get the data from Core Data
-        let card = cards[indexPath.row]
-        let front = "\(card.valueForKey("front") as! String)"
-        let back = "\(card.valueForKey("back") as! String)"
+        let set = sets[indexPath.row]
+        let front = "\(set.valueForKey("name") as! String)"
+        let back = "\(set.valueForKey("date") as! String)"
         cell.textLabel!.text = front
         print(front)
         cell.detailTextLabel!.text = back
         
         return cell
+    }
+    
+    func saveSet(setToSave:CardSet) {
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        // Create the entity we want to save
+        let entity =  NSEntityDescription.entityForName("CardSet", inManagedObjectContext: managedContext)
+        
+        let set = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+        
+        // Set the attribute values
+        set.setValue(setToSave.name, forKey: "name")
+        set.setValue(setToSave.date, forKey: "date")
+        set.setValue(setToSave.id, forKey: "id")
+        
+        // Commit the changes.
+        do {
+            try managedContext.save()
+        } catch {
+            // what to do if an error occurs?
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        // Add the new entity to our array of managed objects
+        sets.append(set)
     }
 
     /*

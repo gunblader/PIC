@@ -11,6 +11,7 @@ import Foundation
 class CardSet {
     
     private var _name:String = ""
+    private var _date:String = ""
     private var _id:Int = 0
     
     var name:String {
@@ -19,6 +20,15 @@ class CardSet {
         }
         set (newValue) {
             _name = newValue
+        }
+    }
+    
+    var date:String {
+        get {
+            return _date
+        }
+        set (newValue) {
+            _date = newValue
         }
     }
     
@@ -31,16 +41,17 @@ class CardSet {
         }
     }
     
-    init(name:String, cards:[Int], id:Int) {
+    init(name:String, date:String, id:Int) {
         self.name = name
+        self.date = date
         self.id = id
     }
     
     convenience init() {
-        self.init(name:"<NoName>", cards:[Int](), id: 0)
+        self.init(name:"<NoName>", date:"<NoDate>", id: 0)
     }
     
     func description() -> String {
-        return "name: \(name), id: \(id)"
+        return "name: \(name), date: \(date) id: \(id)"
     }
 }

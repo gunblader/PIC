@@ -322,7 +322,7 @@
         <!--My Sets-->
         <scene sceneID="vYY-4J-RpT">
             <objects>
-                <tableViewController title="My Sets" id="d5c-3W-rfh" sceneMemberID="viewController">
+                <tableViewController title="My Sets" id="d5c-3W-rfh" customClass="MySetsTableViewController" customModule="project" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BJu-Hi-itI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -638,7 +638,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="xa3-RB-p2Y"/>
-        <segue reference="sx9-aO-APP"/>
-        <segue reference="f1j-Wx-wUq"/>
+        <segue reference="qbk-Kc-iP1"/>
+        <segue reference="k1A-SZ-yIh"/>
     </inferredMetricsTieBreakers>
 </document>
