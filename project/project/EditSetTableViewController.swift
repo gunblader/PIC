@@ -13,6 +13,9 @@ class EditSetTableViewController: UITableViewController {
     
     var cards = [NSManagedObject]()
     let reuseIdentifier = "cardEditId"
+    var setName =  ""
+    
+    @IBOutlet weak var setNameTextField: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +25,17 @@ class EditSetTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.title = "Edit Set"
+        setNameTextField!.text = setName
+        getCards()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        getCards()
+    }
+    
+    func getCards() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -135,13 +144,15 @@ class EditSetTableViewController: UITableViewController {
     }
     */
     
-    /*
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
+        if let destination = segue.destinationViewController as? SetTableViewController {
+            destination.setName = setName
+        }
     }
-    */
 }

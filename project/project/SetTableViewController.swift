@@ -12,6 +12,7 @@ import CoreData
 class SetTableViewController: UITableViewController {
     
     var cards = [NSManagedObject]()
+    var setName =  ""
     let reuseIdentifier = "cardId"
     
     override func viewDidLoad() {
@@ -22,6 +23,8 @@ class SetTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.title = setName
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -135,14 +138,17 @@ class SetTableViewController: UITableViewController {
     }
     */
     
-    /*
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
+        if let destination = segue.destinationViewController as? EditSetTableViewController {
+            destination.setName = setName
+        }
     }
-    */
+    
     
 }

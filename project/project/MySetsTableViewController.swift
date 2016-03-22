@@ -22,8 +22,6 @@ class MySetsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        let setToSave = CardSet(name: "Spanish", date: "Mar 21", id: 1)
-        saveSet(setToSave);
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -50,7 +48,11 @@ class MySetsTableViewController: UITableViewController {
         
         if let results = fetchedResults {
             sets = results
-        } else {
+            // Manually create a set to add cards to. TODO: Implement set creation
+            if(sets.count == 0) {
+                let setToSave = CardSet(name: "Spanish", date: "Mar 21", id: 1)
+                saveSet(setToSave)
+            }        } else {
             print("Could not fetch")
         }
     }
@@ -88,14 +90,12 @@ class MySetsTableViewController: UITableViewController {
         let front = "\(set.valueForKey("name") as! String)"
         let back = "\(set.valueForKey("date") as! String)"
         cell.textLabel!.text = front
-        print(front)
         cell.detailTextLabel!.text = back
         
         return cell
     }
     
     func saveSet(setToSave:CardSet) {
-        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -104,6 +104,7 @@ class MySetsTableViewController: UITableViewController {
         let entity =  NSEntityDescription.entityForName("CardSet", inManagedObjectContext: managedContext)
         
         let set = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+        
         
         // Set the attribute values
         set.setValue(setToSave.name, forKey: "name")
@@ -169,14 +170,18 @@ class MySetsTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let destination = segue.destinationViewController as? SetTableViewController {
+            let idx:Int = self.tableView!.indexPathForSelectedRow!.row
+            let set = sets[idx]
+            
+            destination.setName = set.valueForKey("name") as! String
+        }
     }
-    */
+
 
 }

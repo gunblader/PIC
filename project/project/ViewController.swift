@@ -73,10 +73,11 @@ class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDel
         else {
             // If you ask for multiple permissions at once, you
             // should check if specific permissions missing
-            if result.grantedPermissions.contains("email")
+            if result.grantedPermissions.contains("public_profile")
             {
                 // Do work
                 returnUserData()
+                moveToHome()
             }
         }
     }
@@ -107,5 +108,15 @@ class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDel
             }
         })
     }
+    
+    func moveToHome ()
+    {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let vc: MySetsTableViewController  = storyboard.instantiateViewControllerWithIdentifier("homeView") as! MySetsTableViewController
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
 }
 
