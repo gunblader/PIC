@@ -18,7 +18,6 @@
 		070F4FC21CA10E50004F77C1 /* EditSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */; };
 		6068AF9C1CA355FF00BD1631 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068AF9B1CA355FF00BD1631 /* SettingsViewController.swift */; };
 		6068AF9E1CA358E800BD1631 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068AF9D1CA358E800BD1631 /* ProfileViewController.swift */; };
-		6068AFA11CA35A4A00BD1631 /* fatNinja.png in Resources */ = {isa = PBXBuildFile; fileRef = 6068AFA01CA35A4A00BD1631 /* fatNinja.png */; };
 		7E9192232B748AF4DD00BB7D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7C43203D6F0E2F2ED33842 /* Pods.framework */; };
 		B5B17F451C8CE15100DAF08B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F441C8CE15100DAF08B /* AppDelegate.swift */; };
 		B5B17F471C8CE15100DAF08B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F461C8CE15100DAF08B /* ViewController.swift */; };
@@ -28,6 +27,7 @@
 		B5B17F521C8CE15100DAF08B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B17F501C8CE15100DAF08B /* LaunchScreen.storyboard */; };
 		B5B17F5A1C8CE43C00DAF08B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F591C8CE43C00DAF08B /* HomeViewController.swift */; };
 		B5B17F5C1C8CE44C00DAF08B /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F5B1C8CE44C00DAF08B /* CreateAccountViewController.swift */; };
+		B5B29D3C1CA35E1200EFD478 /* fatNinja.png in Resources */ = {isa = PBXBuildFile; fileRef = B5B29D3B1CA35E1200EFD478 /* fatNinja.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +42,6 @@
 		070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSetTableViewController.swift; sourceTree = "<group>"; };
 		6068AF9B1CA355FF00BD1631 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6068AF9D1CA358E800BD1631 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		6068AFA01CA35A4A00BD1631 /* fatNinja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fatNinja.png; path = ../../../fatNinja.png; sourceTree = "<group>"; };
 		9F7C43203D6F0E2F2ED33842 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B17F411C8CE15100DAF08B /* project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B17F441C8CE15100DAF08B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +53,7 @@
 		B5B17F531C8CE15100DAF08B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5B17F591C8CE43C00DAF08B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B5B17F5B1C8CE44C00DAF08B /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		B5B29D3B1CA35E1200EFD478 /* fatNinja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fatNinja.png; path = ../../../../../../Downloads/fatNinja.png; sourceTree = "<group>"; };
 		C7049D56429E1F442D2BBFC3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F16AB7B269D86BADB20045F4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,7 +73,7 @@
 		6068AF9F1CA35A2000BD1631 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				6068AFA01CA35A4A00BD1631 /* fatNinja.png */,
+				B5B29D3B1CA35E1200EFD478 /* fatNinja.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -204,7 +204,7 @@
 			files = (
 				B5B17F521C8CE15100DAF08B /* LaunchScreen.storyboard in Resources */,
 				B5B17F4F1C8CE15100DAF08B /* Assets.xcassets in Resources */,
-				6068AFA11CA35A4A00BD1631 /* fatNinja.png in Resources */,
+				B5B29D3C1CA35E1200EFD478 /* fatNinja.png in Resources */,
 				B5B17F4A1C8CE15100DAF08B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

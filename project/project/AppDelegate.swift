@@ -18,6 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // change tint color of navigation bar items
+        UINavigationBar.appearance().tintColor = UIColor.blackColor() /* Change tint color using Xcode default vales */
+        
+        // change tint color of navigation bar background
+        UINavigationBar.appearance().barTintColor = UIColor.grayColor() /* Change background color using Xcode default vales */
+
         return true
     }
     
