@@ -16,6 +16,9 @@
 		070F4FBE1CA108F4004F77C1 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FBD1CA108F4004F77C1 /* AddCardViewController.swift */; };
 		070F4FC01CA10BB5004F77C1 /* SetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FBF1CA10BB5004F77C1 /* SetTableViewController.swift */; };
 		070F4FC21CA10E50004F77C1 /* EditSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */; };
+		6068AF9C1CA355FF00BD1631 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068AF9B1CA355FF00BD1631 /* SettingsViewController.swift */; };
+		6068AF9E1CA358E800BD1631 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068AF9D1CA358E800BD1631 /* ProfileViewController.swift */; };
+		6068AFA11CA35A4A00BD1631 /* fatNinja.png in Resources */ = {isa = PBXBuildFile; fileRef = 6068AFA01CA35A4A00BD1631 /* fatNinja.png */; };
 		7E9192232B748AF4DD00BB7D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7C43203D6F0E2F2ED33842 /* Pods.framework */; };
 		B5B17F451C8CE15100DAF08B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F441C8CE15100DAF08B /* AppDelegate.swift */; };
 		B5B17F471C8CE15100DAF08B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F461C8CE15100DAF08B /* ViewController.swift */; };
@@ -37,6 +40,9 @@
 		070F4FBD1CA108F4004F77C1 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
 		070F4FBF1CA10BB5004F77C1 /* SetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTableViewController.swift; sourceTree = "<group>"; };
 		070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSetTableViewController.swift; sourceTree = "<group>"; };
+		6068AF9B1CA355FF00BD1631 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6068AF9D1CA358E800BD1631 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6068AFA01CA35A4A00BD1631 /* fatNinja.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fatNinja.png; path = ../../../fatNinja.png; sourceTree = "<group>"; };
 		9F7C43203D6F0E2F2ED33842 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B17F411C8CE15100DAF08B /* project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B17F441C8CE15100DAF08B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6068AF9F1CA35A2000BD1631 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				6068AFA01CA35A4A00BD1631 /* fatNinja.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
 		B5B17F381C8CE15100DAF08B = {
 			isa = PBXGroup;
 			children = (
@@ -94,15 +108,18 @@
 				B5B17F501C8CE15100DAF08B /* LaunchScreen.storyboard */,
 				B5B17F531C8CE15100DAF08B /* Info.plist */,
 				B5B17F4B1C8CE15100DAF08B /* project.xcdatamodeld */,
+				6068AF9F1CA35A2000BD1631 /* images */,
 				070F4FAF1CA0E411004F77C1 /* MySetsTableViewController.swift */,
 				070F4FB31CA0E6D3004F77C1 /* NavigationViewController.swift */,
 				070F4FBF1CA10BB5004F77C1 /* SetTableViewController.swift */,
 				070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */,
+				070F4FBD1CA108F4004F77C1 /* AddCardViewController.swift */,
+				6068AF9B1CA355FF00BD1631 /* SettingsViewController.swift */,
+				6068AF9D1CA358E800BD1631 /* ProfileViewController.swift */,
 				070F4FB51CA0FBC7004F77C1 /* User.swift */,
 				070F4FB71CA0FC98004F77C1 /* CardSet.swift */,
 				070F4FB91CA0FD0D004F77C1 /* Card.swift */,
 				070F4FBB1CA10081004F77C1 /* DataModel.swift */,
-				070F4FBD1CA108F4004F77C1 /* AddCardViewController.swift */,
 			);
 			path = project;
 			sourceTree = "<group>";
@@ -187,6 +204,7 @@
 			files = (
 				B5B17F521C8CE15100DAF08B /* LaunchScreen.storyboard in Resources */,
 				B5B17F4F1C8CE15100DAF08B /* Assets.xcassets in Resources */,
+				6068AFA11CA35A4A00BD1631 /* fatNinja.png in Resources */,
 				B5B17F4A1C8CE15100DAF08B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,8 +270,10 @@
 				070F4FB01CA0E411004F77C1 /* MySetsTableViewController.swift in Sources */,
 				B5B17F4D1C8CE15100DAF08B /* project.xcdatamodeld in Sources */,
 				070F4FC01CA10BB5004F77C1 /* SetTableViewController.swift in Sources */,
+				6068AF9E1CA358E800BD1631 /* ProfileViewController.swift in Sources */,
 				070F4FB61CA0FBC7004F77C1 /* User.swift in Sources */,
 				B5B17F451C8CE15100DAF08B /* AppDelegate.swift in Sources */,
+				6068AF9C1CA355FF00BD1631 /* SettingsViewController.swift in Sources */,
 				070F4FB41CA0E6D3004F77C1 /* NavigationViewController.swift in Sources */,
 				070F4FBE1CA108F4004F77C1 /* AddCardViewController.swift in Sources */,
 				070F4FBA1CA0FD0D004F77C1 /* Card.swift in Sources */,
