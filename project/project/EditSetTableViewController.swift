@@ -25,6 +25,7 @@ class EditSetTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        navigationController?.setToolbarHidden(false, animated: false)
         self.title = "Edit Set"
         setNameTextField!.text = setName
         getCards()
@@ -154,5 +155,9 @@ class EditSetTableViewController: UITableViewController {
         if let destination = segue.destinationViewController as? SetTableViewController {
             destination.setName = setName
         }
+        else if let destination = segue.destinationViewController as? AddCardViewController {
+            destination.setName = setName
+        }
+        navigationController?.setToolbarHidden(true, animated: false)
     }
 }

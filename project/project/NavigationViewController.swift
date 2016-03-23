@@ -25,6 +25,8 @@ class NavigationViewController: UINavigationController {
         navBorder.backgroundColor = UIColor(red:0.92, green:0.43, blue:0.46, alpha:1.0)
         navBorder.opaque = true
         navigationBar.addSubview(navBorder)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
