@@ -25,9 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDel
         }
         else
         {
-//            facebookLoginBtn = FBSDKLoginButton()
-//            self.view.addSubview(facebookLoginBtn)
-//            facebookLoginBtn.center = self.view.center
+
             facebookLoginBtn.readPermissions = ["public_profile", "email", "user_friends"]
             facebookLoginBtn.delegate = self
         }
@@ -52,7 +50,6 @@ class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDel
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         // Hide the keyboard.
         // self.usernameTxtField.resignFirstResponder()
-        // self.passwordTxtField.resignFirstResponder()
         return true
     }
     
