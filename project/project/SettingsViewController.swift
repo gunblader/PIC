@@ -63,7 +63,7 @@ class SettingsViewController: UIViewController {
         UINavigationBar.appearance().tintColor = UIColor.blackColor() /* Change tint color using Xcode default vales */
         
         // change tint color of navigation bar background
-        UINavigationBar.appearance().barTintColor = UIColor.grayColor() /* Change background color using Xcode default vales */
+        UINavigationBar.appearance().barTintColor = UIColor.whiteColor() /* Change background color using Xcode default vales */
 
     }
 
