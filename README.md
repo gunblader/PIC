@@ -4,24 +4,30 @@ GROUP 3 README
 						
 Contributions:
 						
-Paul Bass: 10%
+Paul Bass: 35%
 - Initial App Flow/Layout
 - Some of the Login screen
 - Settings screen
-- Learning the heroku API and setting up the backend database
+- Learning the heroku API and setting up the backend database for Final Product
 						
-Erica Halpern: 55%
-- Most of the UI Design
-- Some of the Table view that shows the list of items • Detail screen
-
-						
-Christopher Komplin: 25%
+Erica Halpern: 45%
+- UI Design of Entire App
+- Core Data Models
+- Implemented card creation and view
+					
+Christopher Komplin: 20%
 - Some of the Login screen
 - Working on the Drawing functionality which is essential to Final Product
-						
+		
+				
 Differences:
 						
-None 
+- App Setting page and elements are present but functionalities that are dependent on future features will come in later releases.
+- Changed card creation flow to be more user friendly
+
+Notes:
+- Just incase you do not want to login to our app with Facebook, we made a convenient and temporary “bypass login” button so you can jump right into our app!
+ 
 
 *****************************************************************************************************************************
 An iOS applicaion 
