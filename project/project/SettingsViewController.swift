@@ -44,30 +44,28 @@ class SettingsViewController: UIViewController {
     @IBAction func redColorChangeBtn(sender: AnyObject) {
         
         // change tint color of navigation bar items
-        UINavigationBar.appearance().tintColor = UIColor.blackColor() /* Change tint color using Xcode default vales */
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
         
         // change tint color of navigation bar background
-        UINavigationBar.appearance().barTintColor = UIColor.redColor() /* Change background color using Xcode default vales */
+        UINavigationBar.appearance().barTintColor = UIColor.redColor()
     }
     
     @IBAction func greenColorChangeBtn(sender: AnyObject) {
         
         // change tint color of navigation bar items
-        UINavigationBar.appearance().tintColor = UIColor.blackColor() /* Change tint color using Xcode default vales */
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
         
         // change tint color of navigation bar background
-        UINavigationBar.appearance().barTintColor = UIColor.greenColor() /* Change background color using Xcode default vales */
-
+        UINavigationBar.appearance().barTintColor = UIColor.greenColor()
     }
     
     @IBAction func blackColorChangeBtn(sender: AnyObject) {
         
         // change tint color of navigation bar items
-        UINavigationBar.appearance().tintColor = UIColor.blackColor() /* Change tint color using Xcode default vales */
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
         
         // change tint color of navigation bar background
-        UINavigationBar.appearance().barTintColor = UIColor.whiteColor() /* Change background color using Xcode default vales */
-
+        UINavigationBar.appearance().barTintColor = UIColor.whiteColor() 
     }
 
     
