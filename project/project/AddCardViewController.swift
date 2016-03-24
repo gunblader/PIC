@@ -22,6 +22,7 @@ class AddCardViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // Turn navbar back on
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
@@ -33,7 +34,22 @@ class AddCardViewController: UIViewController {
         let card:Card = Card(front: front.text!, back: back.text!, id: 1, setId: 1)
         self.saveCard(card)
         view.endEditing(true)
-//        savedLabel.text! = "Person Saved!"
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        // Hide the keyboard.
+        self.front.resignFirstResponder()
+        self.back.resignFirstResponder()
+        return true
     }
     
     func saveCard(cardToSave:Card) {

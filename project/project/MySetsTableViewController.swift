@@ -22,6 +22,8 @@ class MySetsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        navigationController?.setNavigationBarHidden(false, animated: false)
+
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -77,14 +79,6 @@ class MySetsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
         
-        ////////////////////////////////////////////////////////
-        // Get the data from our DataModel object
-        //let person = self.data.get(index: indexPath.row)
-        
-        //        cell.textLabel!.text! = person.name
-        //        cell.detailTextLabel!.text! = String(person.age)
-        
-        ////////////////////////////////////////////////////////
         // Get the data from Core Data
         let set = sets[indexPath.row]
         let front = "\(set.valueForKey("name") as! String)"

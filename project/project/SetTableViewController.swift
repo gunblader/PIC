@@ -34,10 +34,8 @@ class SetTableViewController: UITableViewController {
         
         let managedContext = appDelegate.managedObjectContext
         
-        //
         let fetchRequest = NSFetchRequest(entityName:"Card")
         
-        //
         var fetchedResults:[NSManagedObject]? = nil
         
         do {

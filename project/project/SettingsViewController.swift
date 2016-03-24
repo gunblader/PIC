@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class SettingsViewController: UIViewController {
 
@@ -33,6 +34,8 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func logoutBtn(sender: AnyObject) {
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logOut()
     }
     
     @IBAction func privateAccountBtn(sender: AnyObject) {
