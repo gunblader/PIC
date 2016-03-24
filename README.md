@@ -5,19 +5,19 @@ GROUP 3 README
 Contributions:
 						
 Paul Bass: 10%
-• Initial App Flow/Layout
-• Some of the Login screen
-• Settings screen
-• Learning the heroku API and setting up the backend database
+- Initial App Flow/Layout
+- Some of the Login screen
+- Settings screen
+- Learning the heroku API and setting up the backend database
 						
 Erica Halpern: 55%
-• Most of the UI Design
-• Some of the Table view that shows the list of items • Detail screen
+- Most of the UI Design
+- Some of the Table view that shows the list of items • Detail screen
 
 						
 Christopher Komplin: 25%
-• Some of the Login screen
-• Working on the Drawing functionality which is essential to Final Product
+- Some of the Login screen
+- Working on the Drawing functionality which is essential to Final Product
 						
 Differences:
 						
