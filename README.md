@@ -1,5 +1,25 @@
-# PIC
+# PIC - Alpha Release
 
+GROUP 3 README
+						
+Contributions:
+						
+Paul Bass: 10%
+• Some of the Login screen
+						
+Erica Halpern: 55%
+• Majority of the Login screen
+• Settings screen
+• Learned the Parse API and set up the backend database
+						
+Christopher Komplin: 35%
+• Some of the Table view that shows the list of items • Detail screen
+						
+Differences:
+						
+None 
+
+*****************************************************************************************************************************
 An iOS applicaion 
 
 General Description: 
