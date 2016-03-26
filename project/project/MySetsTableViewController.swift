@@ -17,11 +17,7 @@ class MySetsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -31,10 +27,8 @@ class MySetsTableViewController: UITableViewController {
         
         let managedContext = appDelegate.managedObjectContext
         
-        //
         let fetchRequest = NSFetchRequest(entityName:"CardSet")
         
-        //
         var fetchedResults:[NSManagedObject]? = nil
         
         do {
@@ -77,14 +71,6 @@ class MySetsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
         
-        ////////////////////////////////////////////////////////
-        // Get the data from our DataModel object
-        //let person = self.data.get(index: indexPath.row)
-        
-        //        cell.textLabel!.text! = person.name
-        //        cell.detailTextLabel!.text! = String(person.age)
-        
-        ////////////////////////////////////////////////////////
         // Get the data from Core Data
         let set = sets[indexPath.row]
         let front = "\(set.valueForKey("name") as! String)"
@@ -125,52 +111,7 @@ class MySetsTableViewController: UITableViewController {
         sets.append(set)
     }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.f
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
+      
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

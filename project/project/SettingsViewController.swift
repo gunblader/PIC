@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class SettingsViewController: UIViewController {
 
@@ -33,6 +34,8 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func logoutBtn(sender: AnyObject) {
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logOut()
     }
     
     @IBAction func privateAccountBtn(sender: AnyObject) {
@@ -41,30 +44,28 @@ class SettingsViewController: UIViewController {
     @IBAction func redColorChangeBtn(sender: AnyObject) {
         
         // change tint color of navigation bar items
-        UINavigationBar.appearance().tintColor = UIColor.blackColor() /* Change tint color using Xcode default vales */
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
         
         // change tint color of navigation bar background
-        UINavigationBar.appearance().barTintColor = UIColor.redColor() /* Change background color using Xcode default vales */
+        UINavigationBar.appearance().barTintColor = UIColor.redColor()
     }
     
     @IBAction func greenColorChangeBtn(sender: AnyObject) {
         
         // change tint color of navigation bar items
-        UINavigationBar.appearance().tintColor = UIColor.blackColor() /* Change tint color using Xcode default vales */
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
         
         // change tint color of navigation bar background
-        UINavigationBar.appearance().barTintColor = UIColor.greenColor() /* Change background color using Xcode default vales */
-
+        UINavigationBar.appearance().barTintColor = UIColor.greenColor()
     }
     
     @IBAction func blackColorChangeBtn(sender: AnyObject) {
         
         // change tint color of navigation bar items
-        UINavigationBar.appearance().tintColor = UIColor.blackColor() /* Change tint color using Xcode default vales */
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
         
         // change tint color of navigation bar background
-        UINavigationBar.appearance().barTintColor = UIColor.grayColor() /* Change background color using Xcode default vales */
-
+        UINavigationBar.appearance().barTintColor = UIColor.whiteColor() 
     }
 
     

@@ -11,9 +11,13 @@ import FBSDKLoginKit
 
 class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
 
+    @IBOutlet weak var facebookLoginBtn: FBSDKLoginButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
         if (FBSDKAccessToken.currentAccessToken() != nil)
         {
             // User is already logged in, do work such as go to next view controller.
@@ -21,11 +25,9 @@ class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDel
         }
         else
         {
-            let loginView : FBSDKLoginButton = FBSDKLoginButton()
-            self.view.addSubview(loginView)
-            loginView.center = self.view.center
-            loginView.readPermissions = ["public_profile", "email", "user_friends"]
-            loginView.delegate = self
+
+            facebookLoginBtn.readPermissions = ["public_profile", "email", "user_friends"]
+            facebookLoginBtn.delegate = self
         }
         
     }
@@ -47,8 +49,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDel
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         // Hide the keyboard.
-//        self.usernameTxtField.resignFirstResponder()
-//        self.passwordTxtField.resignFirstResponder()
+        // self.usernameTxtField.resignFirstResponder()
         return true
     }
     
