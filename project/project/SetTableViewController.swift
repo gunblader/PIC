@@ -13,6 +13,7 @@ class SetTableViewController: UITableViewController {
     
     var cards = [NSManagedObject]()
     var setName =  ""
+    var setId =  -1
     let reuseIdentifier = "cardId"
     
     override func viewDidLoad() {
@@ -24,7 +25,9 @@ class SetTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.title = setName
-
+        navigationController?.setToolbarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        tableView?.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,6 +42,7 @@ class SetTableViewController: UITableViewController {
         var fetchedResults:[NSManagedObject]? = nil
         
         do {
+            fetchRequest.predicate = NSPredicate(format: "setId == %d", setId)
             try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
         } catch {
             // what to do if an error occurs?
@@ -73,11 +77,12 @@ class SetTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
-        
+
         // Get the data from Core Data
         let card = cards[indexPath.row]
         let front = "\(card.valueForKey("front") as! String)"
         let back = "\(card.valueForKey("back") as! String)"
+
         cell.textLabel!.text = front
         cell.detailTextLabel!.text = back
         return cell
@@ -92,6 +97,7 @@ class SetTableViewController: UITableViewController {
     // Pass the selected object to the new view controller.
         if let destination = segue.destinationViewController as? EditSetTableViewController {
             destination.setName = setName
+            destination.setId = setId
         }
     }
     

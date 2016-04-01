@@ -13,16 +13,21 @@ class MySetsTableViewController: UITableViewController {
 
     var sets = [NSManagedObject]()
     let reuseIdentifier = "setId"
+    var test:String = "1"
 
+    @IBOutlet var mySetsTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getCardSets()
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+    }
+    
+    func getCardSets() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -42,11 +47,7 @@ class MySetsTableViewController: UITableViewController {
         
         if let results = fetchedResults {
             sets = results
-            // Manually create a set to add cards to. TODO: Implement set creation
-            if(sets.count == 0) {
-                let setToSave = CardSet(name: "Spanish", date: "Mar 21", id: 1)
-                saveSet(setToSave)
-            }        } else {
+        } else {
             print("Could not fetch")
         }
     }
@@ -73,42 +74,12 @@ class MySetsTableViewController: UITableViewController {
         
         // Get the data from Core Data
         let set = sets[indexPath.row]
-        let front = "\(set.valueForKey("name") as! String)"
-        let back = "\(set.valueForKey("date") as! String)"
-        cell.textLabel!.text = front
-        cell.detailTextLabel!.text = back
+        let name = "\(set.valueForKey("name") as! String)"
+        let date = "\(set.valueForKey("date") as! String)"
+        cell.textLabel!.text = name
+        cell.detailTextLabel!.text = date
         
         return cell
-    }
-    
-    func saveSet(setToSave:CardSet) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-        // Create the entity we want to save
-        let entity =  NSEntityDescription.entityForName("CardSet", inManagedObjectContext: managedContext)
-        
-        let set = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
-        
-        
-        // Set the attribute values
-        set.setValue(setToSave.name, forKey: "name")
-        set.setValue(setToSave.date, forKey: "date")
-        set.setValue(setToSave.id, forKey: "id")
-        
-        // Commit the changes.
-        do {
-            try managedContext.save()
-        } catch {
-            // what to do if an error occurs?
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-        
-        // Add the new entity to our array of managed objects
-        sets.append(set)
     }
 
       
@@ -121,6 +92,7 @@ class MySetsTableViewController: UITableViewController {
             let set = sets[idx]
             
             destination.setName = set.valueForKey("name") as! String
+            destination.setId = set.valueForKey("id") as! Int
         }
     }
 
