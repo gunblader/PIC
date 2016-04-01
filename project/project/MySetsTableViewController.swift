@@ -13,7 +13,6 @@ class MySetsTableViewController: UITableViewController {
 
     var sets = [NSManagedObject]()
     let reuseIdentifier = "setId"
-    var test:String = "1"
 
     @IBOutlet var mySetsTableView: UITableView!
     
@@ -90,9 +89,12 @@ class MySetsTableViewController: UITableViewController {
         if let destination = segue.destinationViewController as? SetTableViewController {
             let idx:Int = self.tableView!.indexPathForSelectedRow!.row
             let set = sets[idx]
-            
+            destination.set = set
             destination.setName = set.valueForKey("name") as! String
             destination.setId = set.valueForKey("id") as! Int
+        }
+        if let destination = segue.destinationViewController as? NewSetTableViewController {
+            destination.setId = sets.count
         }
     }
 

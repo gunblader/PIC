@@ -14,6 +14,8 @@ class SetTableViewController: UITableViewController {
     var cards = [NSManagedObject]()
     var setName =  ""
     var setId =  -1
+    var set:NSManagedObject? = nil
+
     let reuseIdentifier = "cardId"
     
     override func viewDidLoad() {
@@ -28,11 +30,15 @@ class SetTableViewController: UITableViewController {
         navigationController?.setToolbarHidden(false, animated: false)
         navigationController?.setNavigationBarHidden(false, animated: false)
         tableView?.reloadData()
+        print("setId: \(setId)")
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        getCards()
+    }
+    
+    func getCards() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -82,7 +88,7 @@ class SetTableViewController: UITableViewController {
         let card = cards[indexPath.row]
         let front = "\(card.valueForKey("front") as! String)"
         let back = "\(card.valueForKey("back") as! String)"
-
+        print(card)
         cell.textLabel!.text = front
         cell.detailTextLabel!.text = back
         return cell
@@ -98,6 +104,7 @@ class SetTableViewController: UITableViewController {
         if let destination = segue.destinationViewController as? EditSetTableViewController {
             destination.setName = setName
             destination.setId = setId
+            destination.set = set
         }
     }
     

@@ -19,6 +19,7 @@ class NewSetTableViewController: UITableViewController {
     var setName =  ""
     var listItems = [EditSetListItem]()
     var newCard: Bool = false
+    var setId = -1
     
     @IBOutlet weak var cardSetName: UITextField!
     
@@ -44,7 +45,7 @@ class NewSetTableViewController: UITableViewController {
     }
     
     @IBAction func addCardBtn(sender: AnyObject) {
-        let newCard = Card(front: String(), back: String(), id: cards.count, setId: sets.count)
+        let newCard = Card(front: String(), back: String(), id: cards.count, setId: setId)
         saveNewCard(newCard)
     }
     
@@ -93,7 +94,7 @@ class NewSetTableViewController: UITableViewController {
         var fetchedResults:[NSManagedObject]? = nil
         
         do {
-            fetchRequest.predicate = NSPredicate(format: "setId == %d", sets.count)
+            fetchRequest.predicate = NSPredicate(format: "setId == %d", setId)
             try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
         } catch {
             // what to do if an error occurs?
@@ -104,9 +105,6 @@ class NewSetTableViewController: UITableViewController {
         
         if let results = fetchedResults {
             cards = results
-            if (cards.count < 1) {
-                
-            }
         } else {
             print("Could not fetch")
         }
@@ -119,7 +117,7 @@ class NewSetTableViewController: UITableViewController {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         newCardSet.date = dateFormatter.stringFromDate(date)
-        newCardSet.id = sets.count
+        newCardSet.id = setId
         print("new card set id: \(newCardSet.id)")
         saveCardSet(newCardSet)
         performSegueWithIdentifier("newSetSegue", sender: self)

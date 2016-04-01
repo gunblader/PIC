@@ -12,17 +12,24 @@ import CoreData
 class EditSetTableViewController: UITableViewController {
     
     var cards = [NSManagedObject]()
-    var sets = [NSManagedObject]()
+//    var sets = [NSManagedObject]()
 
     let reuseIdentifier = "cardEditId"
     var setName =  ""
     var setId = -1
     var listItems = [EditSetListItem]()
     var newCard: Bool = false
-    
+    var set:NSManagedObject? = nil
     
     @IBOutlet weak var setNameTextField: UITextField!
     
+    @IBAction func saveBtn(sender: AnyObject) {
+        print("hi")
+        saveCards()
+        
+        performSegueWithIdentifier("saveEditedSetSegue", sender: self)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +39,8 @@ class EditSetTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         navigationController?.setToolbarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
         self.title = "Edit Set"
         setNameTextField.text = setName
         getCards()
@@ -122,7 +131,6 @@ class EditSetTableViewController: UITableViewController {
     @IBAction func saveSetBtn(sender: AnyObject) {
               print("hi")
         saveCards()
-        saveCardSet()
   
         performSegueWithIdentifier("saveEditedSetSegue", sender: self)
     }
@@ -130,21 +138,6 @@ class EditSetTableViewController: UITableViewController {
     @IBAction func addCardBtn(sender: AnyObject) {
         let newCard = Card(front: String(), back: String(), id: cards.count, setId: setId)
         saveNewCard(newCard)
-    }
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-        if let destination = segue.destinationViewController as? SetTableViewController {
-            destination.setName = setName
-        }
-        else if let destination = segue.destinationViewController as? AddCardViewController {
-            destination.setName = setName
-        }
-        navigationController?.setToolbarHidden(true, animated: false)
     }
     
     func saveNewCard(cardToSave:Card) {
@@ -182,57 +175,13 @@ class EditSetTableViewController: UITableViewController {
     }
     
     
-    func saveCardSet() {
-        // Get set
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        let managedContext = appDelegate.managedObjectContext
-        
-        let fetchRequest = NSFetchRequest(entityName:"CardSet")
-        
-        var fetchedResults:[NSManagedObject]? = nil
-        
-        do {
-            fetchRequest.predicate = NSPredicate(format: "setId == %d", setId)
-            try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
-        } catch {
-            // what to do if an error occurs?
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-        
-        if let results = fetchedResults {
-            sets = results
-        } else {
-            print("Could not fetch")
-        }
-        
-        // Update set
-        print("new card sets: \(sets)")
-        var cardSet = sets[0]
-        
-        // Set the attribute values
-        cardSet.setValue(setNameTextField.text, forKey: "name")
-        
-        // Commit the changes.
-        do {
-            try managedContext.save()
-        } catch {
-            // what to do if an error occurs?
-            let nserror = error as NSError
-            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-            abort()
-        }
-        
-        // Add the new entity to our array of managed objects
-    }
-    
     func saveCards() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
         
+        set?.setValue(setNameTextField.text, forKey: "name")
+
         // Commit the changes.
         do {
             try managedContext.save()
@@ -242,5 +191,18 @@ class EditSetTableViewController: UITableViewController {
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
+    }
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if let destination = segue.destinationViewController as? SetTableViewController {
+            destination.setName = setNameTextField.text!
+        }
+        else if let destination = segue.destinationViewController as? AddCardViewController {
+            destination.setName = setNameTextField.text!
+        }
+        navigationController?.setToolbarHidden(true, animated: false)
     }
 }
