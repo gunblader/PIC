@@ -13,6 +13,7 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var front: UITextField!
     @IBOutlet weak var back: UITextField!
+    
     var cardSet:CardSet = CardSet()
     
     var newCard:Bool = false
@@ -82,7 +83,6 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         front.placeholder = "Front"
         back.placeholder = "Back"
-
     }
     
     let leftMarginForLabel: CGFloat = 15.0
@@ -95,6 +95,7 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        
         return false
     }
 
@@ -105,7 +106,6 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
             
             listItems?.card.setValue(front.text, forKey: "front")
             listItems?.card.setValue(back.text, forKey: "back")
-//            saveCard((listItems?.card)!)
         }
         return true
     }

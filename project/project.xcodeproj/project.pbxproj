@@ -128,9 +128,9 @@
 				07A82E141CA36F3B00D2804B /* NavigationViewController.swift */,
 				070F4FAF1CA0E411004F77C1 /* MySetsTableViewController.swift */,
 				070F4FBF1CA10BB5004F77C1 /* SetTableViewController.swift */,
+				070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */,
 				07D7D91B1CAA064700C2FF13 /* EditSetTableViewCell.swift */,
 				07D7D9191CAA061B00C2FF13 /* EditSetListItem.swift */,
-				070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */,
 				07D7D91D1CADA31400C2FF13 /* NewSetTableViewController.swift */,
 			);
 			path = project;

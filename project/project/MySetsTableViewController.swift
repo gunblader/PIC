@@ -13,6 +13,7 @@ class MySetsTableViewController: UITableViewController {
 
     var sets = [NSManagedObject]()
     let reuseIdentifier = "setId"
+    var cardSets = [CardSet]()
 
     @IBOutlet var mySetsTableView: UITableView!
     
@@ -20,6 +21,7 @@ class MySetsTableViewController: UITableViewController {
         super.viewDidLoad()
         getCardSets()
         navigationController?.setNavigationBarHidden(false, animated: false)
+        tableView.reloadData()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -87,11 +89,10 @@ class MySetsTableViewController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? SetTableViewController {
-            let idx:Int = self.tableView!.indexPathForSelectedRow!.row
-            let set = sets[idx]
-            destination.set = set
-            destination.setName = set.valueForKey("name") as! String
-            destination.setId = set.valueForKey("id") as! Int
+            let setId:Int = self.tableView!.indexPathForSelectedRow!.row
+            destination.setId = setId
+            destination.setName = sets[setId].valueForKey("name") as! String
+            destination.selectedSet = sets[setId]
         }
         if let destination = segue.destinationViewController as? NewSetTableViewController {
             destination.setId = sets.count

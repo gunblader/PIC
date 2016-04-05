@@ -12,7 +12,6 @@ import CoreData
 class EditSetTableViewController: UITableViewController {
     
     var cards = [NSManagedObject]()
-//    var sets = [NSManagedObject]()
 
     let reuseIdentifier = "cardEditId"
     var setName =  ""
@@ -20,11 +19,11 @@ class EditSetTableViewController: UITableViewController {
     var listItems = [EditSetListItem]()
     var newCard: Bool = false
     var set:NSManagedObject? = nil
+    var listOfCards = [Card]()
     
     @IBOutlet weak var setNameTextField: UITextField!
     
     @IBAction func saveBtn(sender: AnyObject) {
-        print("hi")
         saveCards()
         
         performSegueWithIdentifier("saveEditedSetSegue", sender: self)
@@ -47,12 +46,13 @@ class EditSetTableViewController: UITableViewController {
         
         // 1
         tableView.registerClass(EditSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
+        getCards()
+        listItems = [EditSetListItem]()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        getCards()
-        listItems = [EditSetListItem]()
     }
     
     func getCards() {
@@ -99,14 +99,13 @@ class EditSetTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        // Get the data from Core Data
-        let card = cards[indexPath.row]
-        let front = "\(card.valueForKey("front") as! String)"
-        let back = "\(card.valueForKey("back") as! String)"
-        let id = card.valueForKey("id") as! Int
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EditSetTableViewCell
         
-        listItems += [EditSetListItem(front: front, back: back, id: id, card: card, newCard: false)]
+        let card = listOfCards[indexPath.row]
+        let front = card.front
+        let back = card.back
+        let id = card.id
+        listItems += [EditSetListItem(front: front, back: back, id: id, card: cards[indexPath.row], newCard: false)]
         
         // Configure the cell...
         let item = listItems[indexPath.row]
@@ -120,16 +119,8 @@ class EditSetTableViewController: UITableViewController {
         
         return cell
     }
-    
-//    @IBAction func saveCardsBtn(sender: AnyObject) {
-//        saveCards()
-//        saveCardSet()
-//        print("hi")
-//        performSegueWithIdentifier("saveEditedSetSegue", sender: self)
-//    }
 
     @IBAction func saveSetBtn(sender: AnyObject) {
-              print("hi")
         saveCards()
   
         performSegueWithIdentifier("saveEditedSetSegue", sender: self)
@@ -141,7 +132,6 @@ class EditSetTableViewController: UITableViewController {
     }
     
     func saveNewCard(cardToSave:Card) {
-        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -156,7 +146,7 @@ class EditSetTableViewController: UITableViewController {
         card.setValue(cardToSave.back, forKey: "back")
         card.setValue(cards.count, forKey: "id")
         card.setValue(setId, forKey: "setId")
-        
+
         // Commit the changes.
         do {
             try managedContext.save()
@@ -170,10 +160,12 @@ class EditSetTableViewController: UITableViewController {
         // Add the new entity to our array of managed objects
         cards.append(card)
         listItems += [EditSetListItem(front: cardToSave.front, back: cardToSave.back, id: cardToSave.id, card: card, newCard: true)]
+        
+        listOfCards += [Card(front: cardToSave.front, back: cardToSave.back, id: cardToSave.id, setId: setId)]
+            
         newCard = true
         tableView?.reloadData()
     }
-    
     
     func saveCards() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -183,6 +175,7 @@ class EditSetTableViewController: UITableViewController {
         set?.setValue(setNameTextField.text, forKey: "name")
 
         // Commit the changes.
+        
         do {
             try managedContext.save()
         } catch {
@@ -193,12 +186,16 @@ class EditSetTableViewController: UITableViewController {
         }
     }
     
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let destination = segue.destinationViewController as? SetTableViewController {
+            saveCards()
             destination.setName = setNameTextField.text!
+            destination.setId = setId
+            destination.listOfCards = listOfCards
         }
         else if let destination = segue.destinationViewController as? AddCardViewController {
             destination.setName = setNameTextField.text!

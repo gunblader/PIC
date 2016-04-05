@@ -14,7 +14,8 @@ class SetTableViewController: UITableViewController {
     var cards = [NSManagedObject]()
     var setName =  ""
     var setId =  -1
-    var set:NSManagedObject? = nil
+    var selectedSet:NSManagedObject? = nil
+    var listOfCards = [Card]()
 
     let reuseIdentifier = "cardId"
     
@@ -29,13 +30,14 @@ class SetTableViewController: UITableViewController {
         self.title = setName
         navigationController?.setToolbarHidden(false, animated: false)
         navigationController?.setNavigationBarHidden(false, animated: false)
-        tableView?.reloadData()
-        print("setId: \(setId)")
+        
+        getCards()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        getCards()
+
     }
     
     func getCards() {
@@ -88,7 +90,9 @@ class SetTableViewController: UITableViewController {
         let card = cards[indexPath.row]
         let front = "\(card.valueForKey("front") as! String)"
         let back = "\(card.valueForKey("back") as! String)"
-        print(card)
+        let selectedCard = Card(front: front, back: back, id: indexPath.row, setId: setId)
+        listOfCards += [selectedCard]
+        
         cell.textLabel!.text = front
         cell.detailTextLabel!.text = back
         return cell
@@ -102,9 +106,10 @@ class SetTableViewController: UITableViewController {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
         if let destination = segue.destinationViewController as? EditSetTableViewController {
-            destination.setName = setName
             destination.setId = setId
-            destination.set = set
+            destination.setName = setName
+            destination.set = selectedSet
+            destination.listOfCards =  listOfCards
         }
     }
     
