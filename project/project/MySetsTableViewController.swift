@@ -96,6 +96,7 @@ class MySetsTableViewController: UITableViewController {
         }
         if let destination = segue.destinationViewController as? NewSetTableViewController {
             destination.setId = sets.count
+            destination.sets = sets
         }
     }
 

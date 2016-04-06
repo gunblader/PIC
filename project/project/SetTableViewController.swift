@@ -111,6 +111,11 @@ class SetTableViewController: UITableViewController {
             destination.set = selectedSet
             destination.listOfCards =  listOfCards
         }
+        
+        if let destination = segue.destinationViewController as? ReviewSetCollectionViewController {
+            destination.setName = setName
+            destination.cards = self.cards
+        }
     }
     
     

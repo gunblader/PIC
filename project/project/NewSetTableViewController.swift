@@ -36,7 +36,19 @@ class NewSetTableViewController: UITableViewController {
         
         tableView.registerClass(EditSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         getCards()
+        
+        self.navigationItem.hidesBackButton = true
+//        let newBackButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Bordered, target: self, action: "back:")
+//        self.navigationItem.leftBarButtonItem = newBackButton;
     }
+    
+//    func back(sender: UIBarButtonItem) {
+//        // Perform your custom actions
+//        performSegueWithIdentifier("newSetSegue", sender: self)
+//
+//        // Go back to the previous ViewController
+//        self.navigationController?.popViewControllerAnimated(true)
+//    }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -193,9 +205,11 @@ class NewSetTableViewController: UITableViewController {
         return cell
     }
 
+
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        navigationController?.setNavigationBarHidden(false, animated: false)
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
