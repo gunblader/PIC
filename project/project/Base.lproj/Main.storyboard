@@ -346,17 +346,19 @@
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ITp-JA-drW">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="176"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1d-UR-vhq">
+                                            <rect key="frame" x="27" y="36" width="78" height="104"/>
+                                            <state key="normal" title="Review">
+                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="Bkb-sT-rfx" kind="show" id="Qke-J9-pzf"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1d-UR-vhq">
-                                    <rect key="frame" x="41" y="117" width="49" height="30"/>
-                                    <state key="normal" title="Review">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <segue destination="Bkb-sT-rfx" kind="show" id="Qke-J9-pzf"/>
-                                    </connections>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68Q-B3-Iop">
                                     <rect key="frame" x="179" y="117" width="57" height="30"/>
                                     <state key="normal" title="Practice">
@@ -613,9 +615,6 @@
                                             <rect key="frame" x="17" y="28" width="191" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <action selector="saveNewCardSetBtn:" destination="KWA-lx-HLi" eventType="editingDidEnd" id="eYV-jk-oPr"/>
-                                            </connections>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -672,7 +671,6 @@
                     <navigationItem key="navigationItem" title="Edit Set" id="gUm-Rt-VJA">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="dGk-Hr-n4R">
                             <connections>
-                                <action selector="saveNewCardSetBtn:" destination="KWA-lx-HLi" id="A1S-qQ-Aqv"/>
                                 <segue destination="d5c-3W-rfh" kind="show" identifier="newSetSegue" id="yU0-uZ-gFe"/>
                             </connections>
                         </barButtonItem>
@@ -752,9 +750,9 @@
         <image name="test" width="148" height="148"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="lcA-tE-8gB"/>
+        <segue reference="xa3-RB-p2Y"/>
         <segue reference="sx9-aO-APP"/>
         <segue reference="f1j-Wx-wUq"/>
-        <segue reference="lcA-tE-8gB"/>
-        <segue reference="yU0-uZ-gFe"/>
     </inferredMetricsTieBreakers>
 </document>

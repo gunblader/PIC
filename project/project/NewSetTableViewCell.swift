@@ -89,6 +89,7 @@ class NewSetTableViewCell: UITableViewCell, UITextFieldDelegate {
             card.front = front.text!
             card.back = back.text!
         }
+        textField.resignFirstResponder()
         return true
     }
     

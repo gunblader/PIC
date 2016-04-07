@@ -38,8 +38,6 @@ class SetTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-                print("*SET VC")
-
     }
     
     func getCards() {
@@ -86,7 +84,6 @@ class SetTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        print("new row")
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
 
         // Get the data from Core Data
@@ -97,8 +94,6 @@ class SetTableViewController: UITableViewController {
 
         let selectedCard = Card(front: front, back: back, id: id, setId: setId, edited: false, newCard: false)
         listOfCards += [selectedCard]
-
-        print("front: \(front), back: \(back), id: \(id)")
 
         cell.textLabel!.text = front
         cell.detailTextLabel!.text = back

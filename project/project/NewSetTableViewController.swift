@@ -40,7 +40,6 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         tableView.registerClass(NewSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         setId = idCounter.integerForKey("numSets")
         
-        print(setId)
         self.cardSetName.delegate = self;
     }
 
@@ -50,9 +49,8 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
 
-        cardSetName.resignFirstResponder()
-        self.view.endEditing(true)
         return true
     }
     
@@ -60,14 +58,13 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         let cardId = (idCounter.objectForKey("numCards") as? Int)!
         
         let createdCard = Card(front: String(), back: String(), id: cardId, setId: setId, edited: false, newCard: true)
-        print("CardID: \(cardId)")
         idCounter.setObject(cardId + 1, forKey: "numCards")
         createdCard.newCard = true
         listOfCards.append(createdCard)
         tableView.reloadData()
     }
     
-    @IBAction func saveNewCardSetBtn(sender: AnyObject) {
+    func saveCardsSegue() {
         self.view.endEditing(true)
 
         newCardSet.name = cardSetName.text!
@@ -81,7 +78,6 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         
         saveCardSet(newCardSet)
         saveCards()
-        performSegueWithIdentifier("newSetSegue", sender: self)
     }
     
     func saveCards() {
@@ -99,7 +95,6 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
                 let entity =  NSEntityDescription.entityForName("Card", inManagedObjectContext: managedContext)
                 
                 let card = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
-                print("New \(cardToSave.id) \(cardToSave.back)")
                 card.setValue(cardToSave.front, forKey: "front")
                 card.setValue(cardToSave.back, forKey: "back")
                 card.setValue(cardToSave.id, forKey: "id")
@@ -108,7 +103,6 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
                 cardToSave.newCard = false
             } else if (cardToSave.edited) {
                 let card = cards[cardToSave.id]
-                print("Edited \(cardToSave.id) \(cardToSave.back)")
                 card.setValue(cardToSave.front, forKey: "front")
                 card.setValue(cardToSave.back, forKey: "back")
                 cardToSave.edited = false
@@ -196,6 +190,10 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         navigationController?.setNavigationBarHidden(false, animated: false)
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let destination = segue.destinationViewController as? MySetsTableViewController {
+            saveCardsSegue()
+        }
+        
     }
 
 }

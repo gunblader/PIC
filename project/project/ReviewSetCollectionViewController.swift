@@ -35,7 +35,6 @@ class ReviewSetCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("numberofItemsInSection is \(self.cards.count)")
         return self.cards.count
     }
     
@@ -46,7 +45,6 @@ class ReviewSetCollectionViewController: UICollectionViewController {
         let index:Int = indexPath.row
         
         // Set the cell to display the info
-        print("index is \(index)" )
         cell.front = self.cards[index].valueForKey("front") as! String
         cell.back = self.cards[index].valueForKey("back") as! String
         cell.label.text = cell.front
@@ -57,7 +55,6 @@ class ReviewSetCollectionViewController: UICollectionViewController {
     
     //    function to implement for touch events
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print("touched \(indexPath.row)")
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! ReviewCollectionCell
         cell.tapped()
         

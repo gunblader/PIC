@@ -51,7 +51,6 @@ class EditSetTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-                print("EDIT SET VC")
     }
     
     func getCards() {
@@ -113,7 +112,6 @@ class EditSetTableViewController: UITableViewController {
     
     @IBAction func addCardBtn(sender: AnyObject) {
         let cardId = (idCounter.objectForKey("numCards") as? Int)!
-        print("CardID: \(cardId)")
         let createdCard = Card(front: String(), back: String(), id: cardId, setId: setId, edited: false, newCard: true)
         idCounter.setObject(cardId + 1, forKey: "numCards")
 
@@ -131,13 +129,9 @@ class EditSetTableViewController: UITableViewController {
         
         var fetchedResults:[NSManagedObject]? = nil
         
-        var cardsToDelete = [Card]()
-        
         for cardToSave in listOfCards {
-            print("Saving Card: \(cardToSave.id) Front: \(cardToSave.front) Back: \(cardToSave.back) SetId: \(cardToSave.setId) New?: \(cardToSave.newCard)")
+            // print("Card: \(cardToSave.id) Front: \(cardToSave.front) Back: \(cardToSave.back) SetId: \(cardToSave.setId) New?: \(cardToSave.newCard)")
             if (cardToSave.edited && !cardToSave.newCard) {
-
-                print("Edited \(cardToSave.id) \(cardToSave.back)")
                 
                 do {
                     fetchRequest.predicate = NSPredicate(format: "id == %d AND setId == %d", cardToSave.id, setId)
@@ -170,7 +164,6 @@ class EditSetTableViewController: UITableViewController {
                 let entity =  NSEntityDescription.entityForName("Card", inManagedObjectContext: managedContext)
                 
                 let card = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
-                print("New Id: \(cardToSave.id) Back: \(cardToSave.back)")
                 card.setValue(cardToSave.front, forKey: "front")
                 card.setValue(cardToSave.back, forKey: "back")
                 card.setValue(cardToSave.id, forKey: "id")
