@@ -20,8 +20,10 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     var listItems = [NewSetListItem]()
     var newCard: Bool = false
     var setId = -1
+    var listOfCards = [Card]()
     
     var cardsToSave = [Card]()
+    let idCounter = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var cardSetName: UITextField!
     
@@ -36,7 +38,9 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         self.title = "New Set"
         
         tableView.registerClass(NewSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        setId = idCounter.integerForKey("numSets")
         
+        print(setId)
         self.cardSetName.delegate = self;
     }
 
@@ -46,30 +50,34 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+
+        cardSetName.resignFirstResponder()
         self.view.endEditing(true)
-        
         return true
     }
     
     @IBAction func addCardBtn(sender: AnyObject) {
-        let createdCard = Card(front: String(), back: String(), id: cardsToSave.count, setId: setId, edited: false, newCard: true)
-        print("\(createdCard.id)")
-        
-        cardsToSave.append(createdCard)
+        let createdCard = Card(front: String(), back: String(), id: listOfCards.count, setId: setId, edited: false, newCard: true)
+        createdCard.newCard = true
+        listOfCards.append(createdCard)
         tableView.reloadData()
     }
     
     @IBAction func saveNewCardSetBtn(sender: AnyObject) {
+        self.view.endEditing(true)
+
         newCardSet.name = cardSetName.text!
         
         let date = NSDate()
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
+        dateFormatter.dateFormat = "MM-dd-yyyy"
         newCardSet.date = dateFormatter.stringFromDate(date)
-        newCardSet.id = setId
-        print("new card set id: \(newCardSet.id)")
+        newCardSet.id = (idCounter.objectForKey("numSets") as? Int)!
+
+        idCounter.setObject(setId + 1, forKey: "numSets")
+        
         saveCardSet(newCardSet)
-         saveCards()
+        saveCards()
         performSegueWithIdentifier("newSetSegue", sender: self)
     }
     
@@ -78,18 +86,31 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         
         let managedContext = appDelegate.managedObjectContext
         
-        for cardToSave in cardsToSave {
-            print(cardToSave.id)
+        for cardToSave in listOfCards {
+            if(cardToSave.front == "" && cardToSave.back == "") {
+                if(!cardToSave.newCard) {
+                    managedContext.deleteObject(cards[cardToSave.id])
+                }
+            } else if (cardToSave.newCard) {
+                // Create the entity we want to save
+                let entity =  NSEntityDescription.entityForName("Card", inManagedObjectContext: managedContext)
+                
+                let card = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
+                print("New \(cardToSave.id) \(cardToSave.back)")
+                card.setValue(cardToSave.front, forKey: "front")
+                card.setValue(cardToSave.back, forKey: "back")
+                card.setValue(cardToSave.id, forKey: "id")
+                card.setValue(cardToSave.setId, forKey: "setId")
+                cardToSave.edited = false
+                cardToSave.newCard = false
+            } else if (cardToSave.edited) {
+                let card = cards[cardToSave.id]
+                print("Edited \(cardToSave.id) \(cardToSave.back)")
+                card.setValue(cardToSave.front, forKey: "front")
+                card.setValue(cardToSave.back, forKey: "back")
+                cardToSave.edited = false
+            }
             
-            // Create the entity we want to save
-            let entity =  NSEntityDescription.entityForName("Card", inManagedObjectContext: managedContext)
-            
-            let card = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
-            
-            card.setValue(cardToSave.front, forKey: "front")
-            card.setValue(cardToSave.back, forKey: "back")
-            card.setValue(cardToSave.id, forKey: "id")
-            card.setValue(cardToSave.setId, forKey: "setId")
         }
         
         // Commit the changes.
@@ -148,7 +169,7 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return cardsToSave.count
+        return listOfCards.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -156,21 +177,16 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! NewSetTableViewCell
         
         // Get the data from Core Data
-        let card = cardsToSave[indexPath.row]
-
+        let card = listOfCards[indexPath.row]
         cell.listItems = card
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
-        if(newCard && (indexPath.row == cards.count - 1)) {
-            
+        if(card.newCard) {
             cell.front.becomeFirstResponder()
-            newCard = false
         }
-
+        
         return cell
     }
-
-
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

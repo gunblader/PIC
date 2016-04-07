@@ -42,15 +42,15 @@ class EditSetTableViewController: UITableViewController {
         
         self.title = "Edit Set"
         setNameTextField.text = setName
-        
         // 1
         tableView.registerClass(EditSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         getCards()
-//        listItems = [EditSetListItem]()
+
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+                print("EDIT SET VC")
     }
     
     func getCards() {
@@ -122,33 +122,62 @@ class EditSetTableViewController: UITableViewController {
         
         let managedContext = appDelegate.managedObjectContext
         
+        let fetchRequest = NSFetchRequest(entityName:"Card")
+        
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        var cardsToDelete = [Card]()
+        
         for cardToSave in listOfCards {
-            if(cardToSave.front == "" && cardToSave.back == "") {
-                if(!cardToSave.newCard) {
-                    managedContext.deleteObject(cards[cardToSave.id])
+            if (cardToSave.edited && !cardToSave.newCard) {
+
+                print("Edited \(cardToSave.id) \(cardToSave.back)")
+                
+                do {
+                    fetchRequest.predicate = NSPredicate(format: "id == %d AND setId == %d", cardToSave.id, setId)
+                    try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+                } catch {
+                    // what to do if an error occurs?
+                    let nserror = error as NSError
+                    NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+                    abort()
                 }
-            } else if (cardToSave.newCard) {
+                
+                if let results = fetchedResults {
+                    let card = results[0]
+                    
+                    // Save or delete card
+                    if(cardToSave.front == "" && cardToSave.back == "") {
+                        managedContext.deleteObject(card)
+                    } else {
+                        card.setValue(cardToSave.front, forKey: "front")
+                        card.setValue(cardToSave.back, forKey: "back")
+                        cardToSave.edited = false
+                    }
+                } else {
+                    print("Could not fetch")
+                }
+            } else if (cardToSave.newCard && (cardToSave.front != "" && cardToSave.back != "")) {
                 // Create the entity we want to save
                 let entity =  NSEntityDescription.entityForName("Card", inManagedObjectContext: managedContext)
                 
                 let card = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
-                print("New \(cardToSave.id) \(cardToSave.back)")
+                print("New Id: \(cardToSave.id) Back: \(cardToSave.back)")
                 card.setValue(cardToSave.front, forKey: "front")
                 card.setValue(cardToSave.back, forKey: "back")
                 card.setValue(cardToSave.id, forKey: "id")
                 card.setValue(cardToSave.setId, forKey: "setId")
                 cardToSave.edited = false
                 cardToSave.newCard = false
-            } else if (cardToSave.edited) {
-                let card = cards[cardToSave.id]
-                print("Edited \(cardToSave.id) \(cardToSave.back)")
-                card.setValue(cardToSave.front, forKey: "front")
-                card.setValue(cardToSave.back, forKey: "back")
-                cardToSave.edited = false
             }
-
         }
         
+        
+//        for cardToDelete in cardsToDelete {
+//            print("deleting")
+//            managedContext.deleteObject(cardToDelete)
+//        }
+
         // Commit the changes.
         do {
             try managedContext.save()
@@ -166,8 +195,8 @@ class EditSetTableViewController: UITableViewController {
         if let destination = segue.destinationViewController as? SetTableViewController {
             destination.setName = setNameTextField.text!
             destination.setId = setId
-            destination.listOfCards = listOfCards
             self.view.endEditing(true)
+            
             saveNewCards()
         }
         else if let destination = segue.destinationViewController as? AddCardViewController {

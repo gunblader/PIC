@@ -80,7 +80,7 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        return false
+        return true
     }
 
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
@@ -91,6 +91,7 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
             card.back = back.text!
             listItems?.edited = true
         }
+        textField.resignFirstResponder()
         return true
     }
     

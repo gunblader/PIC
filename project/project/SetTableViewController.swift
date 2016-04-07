@@ -38,6 +38,7 @@ class SetTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+                print("*SET VC")
 
     }
     
@@ -81,10 +82,11 @@ class SetTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.cards.count
+        return cards.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        print("new row")
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
 
         // Get the data from Core Data
@@ -97,8 +99,6 @@ class SetTableViewController: UITableViewController {
         listOfCards += [selectedCard]
 
         print("front: \(front), back: \(back), id: \(id)")
-        
-        print(selectedCard.front)
 
         cell.textLabel!.text = front
         cell.detailTextLabel!.text = back
@@ -114,7 +114,7 @@ class SetTableViewController: UITableViewController {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
         if let destination = segue.destinationViewController as? EditSetTableViewController {
-            destination.setId = setId
+//            destination.setId = setId
             destination.setName = setName
             destination.set = selectedSet
             destination.listOfCards = listOfCards
