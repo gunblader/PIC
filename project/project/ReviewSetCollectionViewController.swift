@@ -50,6 +50,8 @@ class ReviewSetCollectionViewController: UICollectionViewController {
         cell.front = self.cards[index].valueForKey("front") as! String
         cell.back = self.cards[index].valueForKey("back") as! String
         cell.label.text = cell.front
+        cell.layer.borderWidth = 1.0
+        cell.layer.borderColor = UIColor(red:0.87, green:0.91, blue:0.96, alpha:1.0).CGColor
         return cell
     }
     

@@ -105,16 +105,10 @@ class EditSetTableViewController: UITableViewController {
     
         if(card.newCard) {
             cell.front.becomeFirstResponder()
-//            newCard = false
         }
         
         return cell
     }
-
-//    @IBAction func saveSetBtn(sender: AnyObject) {
-//        saveNewCards()
-//        performSegueWithIdentifier("saveEditedSetSegue", sender: self)
-//    }
     
     @IBAction func addCardBtn(sender: AnyObject) {
         let createdCard = Card(front: String(), back: String(), id: listOfCards.count, setId: setId, edited: false, newCard: true)
@@ -129,7 +123,11 @@ class EditSetTableViewController: UITableViewController {
         let managedContext = appDelegate.managedObjectContext
         
         for cardToSave in listOfCards {
-            if (cardToSave.newCard) {
+            if(cardToSave.front == "" && cardToSave.back == "") {
+                if(!cardToSave.newCard) {
+                    managedContext.deleteObject(cards[cardToSave.id])
+                }
+            } else if (cardToSave.newCard) {
                 // Create the entity we want to save
                 let entity =  NSEntityDescription.entityForName("Card", inManagedObjectContext: managedContext)
                 
@@ -147,7 +145,6 @@ class EditSetTableViewController: UITableViewController {
                 card.setValue(cardToSave.front, forKey: "front")
                 card.setValue(cardToSave.back, forKey: "back")
                 cardToSave.edited = false
-                
             }
 
         }
