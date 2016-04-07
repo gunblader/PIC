@@ -57,7 +57,11 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func addCardBtn(sender: AnyObject) {
-        let createdCard = Card(front: String(), back: String(), id: listOfCards.count, setId: setId, edited: false, newCard: true)
+        let cardId = (idCounter.objectForKey("numCards") as? Int)!
+        
+        let createdCard = Card(front: String(), back: String(), id: cardId, setId: setId, edited: false, newCard: true)
+        print("CardID: \(cardId)")
+        idCounter.setObject(cardId + 1, forKey: "numCards")
         createdCard.newCard = true
         listOfCards.append(createdCard)
         tableView.reloadData()
@@ -73,7 +77,6 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         dateFormatter.dateFormat = "MM-dd-yyyy"
         newCardSet.date = dateFormatter.stringFromDate(date)
         newCardSet.id = (idCounter.objectForKey("numSets") as? Int)!
-
         idCounter.setObject(setId + 1, forKey: "numSets")
         
         saveCardSet(newCardSet)

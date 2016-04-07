@@ -20,6 +20,7 @@ class EditSetTableViewController: UITableViewController {
     var newCard: Bool = false
     var set:NSManagedObject? = nil
     var listOfCards = [Card]()
+    let idCounter = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var setNameTextField: UITextField!
     
@@ -111,7 +112,11 @@ class EditSetTableViewController: UITableViewController {
     }
     
     @IBAction func addCardBtn(sender: AnyObject) {
-        let createdCard = Card(front: String(), back: String(), id: listOfCards.count, setId: setId, edited: false, newCard: true)
+        let cardId = (idCounter.objectForKey("numCards") as? Int)!
+        print("CardID: \(cardId)")
+        let createdCard = Card(front: String(), back: String(), id: cardId, setId: setId, edited: false, newCard: true)
+        idCounter.setObject(cardId + 1, forKey: "numCards")
+
         createdCard.newCard = true
         listOfCards.append(createdCard)
         tableView.reloadData()
@@ -129,6 +134,7 @@ class EditSetTableViewController: UITableViewController {
         var cardsToDelete = [Card]()
         
         for cardToSave in listOfCards {
+            print("Saving Card: \(cardToSave.id) Front: \(cardToSave.front) Back: \(cardToSave.back) SetId: \(cardToSave.setId) New?: \(cardToSave.newCard)")
             if (cardToSave.edited && !cardToSave.newCard) {
 
                 print("Edited \(cardToSave.id) \(cardToSave.back)")
@@ -144,20 +150,22 @@ class EditSetTableViewController: UITableViewController {
                 }
                 
                 if let results = fetchedResults {
-                    let card = results[0]
-                    
-                    // Save or delete card
-                    if(cardToSave.front == "" && cardToSave.back == "") {
-                        managedContext.deleteObject(card)
-                    } else {
-                        card.setValue(cardToSave.front, forKey: "front")
-                        card.setValue(cardToSave.back, forKey: "back")
-                        cardToSave.edited = false
+                    if(results.count > 0) {
+                        let card = results[0]
+                        
+                        // Save or delete card
+                        if(cardToSave.front == "" && cardToSave.back == "") {
+                            managedContext.deleteObject(card)
+                        } else {
+                            card.setValue(cardToSave.front, forKey: "front")
+                            card.setValue(cardToSave.back, forKey: "back")
+                            cardToSave.edited = false
+                        }
                     }
                 } else {
                     print("Could not fetch")
                 }
-            } else if (cardToSave.newCard && (cardToSave.front != "" && cardToSave.back != "")) {
+            } else if (cardToSave.newCard && !(cardToSave.front == "" && cardToSave.back == "")) {
                 // Create the entity we want to save
                 let entity =  NSEntityDescription.entityForName("Card", inManagedObjectContext: managedContext)
                 
@@ -171,12 +179,6 @@ class EditSetTableViewController: UITableViewController {
                 cardToSave.newCard = false
             }
         }
-        
-        
-//        for cardToDelete in cardsToDelete {
-//            print("deleting")
-//            managedContext.deleteObject(cardToDelete)
-//        }
 
         // Commit the changes.
         do {

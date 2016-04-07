@@ -29,9 +29,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let idCounter = NSUserDefaults.standardUserDefaults()
 
-        idCounter.setObject(0, forKey: "numSets")
-        idCounter.setObject(0, forKey: "numCards")
+        if let setId = idCounter.objectForKey("numSets"){
+           print("set")
+        } else {
+            idCounter.setObject(0, forKey: "numSets")
+        }
 
+        
+        if let cardId = idCounter.objectForKey("numCards"){
+            print("card")
+        } else {
+            idCounter.setObject(0, forKey: "numCards")
+        }
+        
         return true
     }
     

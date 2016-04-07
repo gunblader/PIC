@@ -114,7 +114,7 @@ class SetTableViewController: UITableViewController {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
         if let destination = segue.destinationViewController as? EditSetTableViewController {
-//            destination.setId = setId
+            destination.setId = setId
             destination.setName = setName
             destination.set = selectedSet
             destination.listOfCards = listOfCards
