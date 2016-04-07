@@ -32,6 +32,7 @@ class SetTableViewController: UITableViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
         
         getCards()
+        listOfCards = [Card]()
         tableView.reloadData()
     }
     
@@ -90,9 +91,15 @@ class SetTableViewController: UITableViewController {
         let card = cards[indexPath.row]
         let front = "\(card.valueForKey("front") as! String)"
         let back = "\(card.valueForKey("back") as! String)"
-        let selectedCard = Card(front: front, back: back, id: indexPath.row, setId: setId)
+        let id = card.valueForKey("id") as! Int
+
+        let selectedCard = Card(front: front, back: back, id: id, setId: setId, edited: false, newCard: false)
         listOfCards += [selectedCard]
+
+        print("front: \(front), back: \(back), id: \(id)")
         
+        print(selectedCard.front)
+
         cell.textLabel!.text = front
         cell.detailTextLabel!.text = back
         return cell
@@ -109,7 +116,7 @@ class SetTableViewController: UITableViewController {
             destination.setId = setId
             destination.setName = setName
             destination.set = selectedSet
-            destination.listOfCards =  listOfCards
+            destination.listOfCards = listOfCards
         }
         
         if let destination = segue.destinationViewController as? ReviewSetCollectionViewController {

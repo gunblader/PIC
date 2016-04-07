@@ -31,7 +31,7 @@ class AddCardViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func saveBtn(sender: AnyObject) {
-        let card:Card = Card(front: front.text!, back: back.text!, id: 1, setId: 1)
+        let card:Card = Card(front: front.text!, back: back.text!, id: 1, setId: 1, edited: false, newCard: false)
         self.saveCard(card)
         view.endEditing(true)
     }

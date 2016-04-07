@@ -20,6 +20,8 @@
 		07A82E171CA377DD00D2804B /* pic-04.png in Resources */ = {isa = PBXBuildFile; fileRef = 07A82E161CA377DD00D2804B /* pic-04.png */; };
 		07B8E8121CB41F7F00ACEC65 /* ReviewSetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8E8111CB41F7F00ACEC65 /* ReviewSetCollectionViewController.swift */; };
 		07B8E8141CB4275E00ACEC65 /* ReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8E8131CB4275E00ACEC65 /* ReviewCollectionViewCell.swift */; };
+		07B8E8161CB591D300ACEC65 /* NewSetListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8E8151CB591D300ACEC65 /* NewSetListItem.swift */; };
+		07B8E8181CB5920400ACEC65 /* NewSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B8E8171CB5920400ACEC65 /* NewSetTableViewCell.swift */; };
 		07D7D91A1CAA061B00C2FF13 /* EditSetListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7D9191CAA061B00C2FF13 /* EditSetListItem.swift */; };
 		07D7D91C1CAA064700C2FF13 /* EditSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7D91B1CAA064700C2FF13 /* EditSetTableViewCell.swift */; };
 		07D7D91E1CADA31400C2FF13 /* NewSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7D91D1CADA31400C2FF13 /* NewSetTableViewController.swift */; };
@@ -50,6 +52,8 @@
 		07A82E161CA377DD00D2804B /* pic-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pic-04.png"; sourceTree = "<group>"; };
 		07B8E8111CB41F7F00ACEC65 /* ReviewSetCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewSetCollectionViewController.swift; sourceTree = "<group>"; };
 		07B8E8131CB4275E00ACEC65 /* ReviewCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		07B8E8151CB591D300ACEC65 /* NewSetListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSetListItem.swift; sourceTree = "<group>"; };
+		07B8E8171CB5920400ACEC65 /* NewSetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSetTableViewCell.swift; sourceTree = "<group>"; };
 		07D7D9191CAA061B00C2FF13 /* EditSetListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSetListItem.swift; sourceTree = "<group>"; };
 		07D7D91B1CAA064700C2FF13 /* EditSetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSetTableViewCell.swift; sourceTree = "<group>"; };
 		07D7D91D1CADA31400C2FF13 /* NewSetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSetTableViewController.swift; sourceTree = "<group>"; };
@@ -130,14 +134,16 @@
 				070F4FB91CA0FD0D004F77C1 /* Card.swift */,
 				070F4FBB1CA10081004F77C1 /* DataModel.swift */,
 				07A82E141CA36F3B00D2804B /* NavigationViewController.swift */,
-				07D7D91D1CADA31400C2FF13 /* NewSetTableViewController.swift */,
 				070F4FAF1CA0E411004F77C1 /* MySetsTableViewController.swift */,
+				07D7D91D1CADA31400C2FF13 /* NewSetTableViewController.swift */,
 				070F4FBF1CA10BB5004F77C1 /* SetTableViewController.swift */,
 				070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */,
 				07D7D91B1CAA064700C2FF13 /* EditSetTableViewCell.swift */,
 				07D7D9191CAA061B00C2FF13 /* EditSetListItem.swift */,
 				07B8E8111CB41F7F00ACEC65 /* ReviewSetCollectionViewController.swift */,
 				07B8E8131CB4275E00ACEC65 /* ReviewCollectionViewCell.swift */,
+				07B8E8151CB591D300ACEC65 /* NewSetListItem.swift */,
+				07B8E8171CB5920400ACEC65 /* NewSetTableViewCell.swift */,
 			);
 			path = project;
 			sourceTree = "<group>";
@@ -293,6 +299,7 @@
 				07B8E8141CB4275E00ACEC65 /* ReviewCollectionViewCell.swift in Sources */,
 				07D7D91A1CAA061B00C2FF13 /* EditSetListItem.swift in Sources */,
 				6068AF9E1CA358E800BD1631 /* ProfileViewController.swift in Sources */,
+				07B8E8161CB591D300ACEC65 /* NewSetListItem.swift in Sources */,
 				070F4FB61CA0FBC7004F77C1 /* User.swift in Sources */,
 				07A82E151CA36F3B00D2804B /* NavigationViewController.swift in Sources */,
 				B5B17F451C8CE15100DAF08B /* AppDelegate.swift in Sources */,
@@ -300,6 +307,7 @@
 				070F4FBE1CA108F4004F77C1 /* AddCardViewController.swift in Sources */,
 				070F4FBA1CA0FD0D004F77C1 /* Card.swift in Sources */,
 				07B8E8121CB41F7F00ACEC65 /* ReviewSetCollectionViewController.swift in Sources */,
+				07B8E8181CB5920400ACEC65 /* NewSetTableViewCell.swift in Sources */,
 				B5B17F5A1C8CE43C00DAF08B /* HomeViewController.swift in Sources */,
 				070F4FC21CA10E50004F77C1 /* EditSetTableViewController.swift in Sources */,
 				07D7D91C1CAA064700C2FF13 /* EditSetTableViewCell.swift in Sources */,
