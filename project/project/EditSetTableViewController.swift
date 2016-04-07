@@ -123,7 +123,7 @@ class EditSetTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func saveNewCards() -> Bool {
+    func saveNewCards() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -147,7 +147,7 @@ class EditSetTableViewController: UITableViewController {
                 card.setValue(cardToSave.front, forKey: "front")
                 card.setValue(cardToSave.back, forKey: "back")
                 cardToSave.edited = false
-
+                
             }
 
         }
@@ -161,22 +161,8 @@ class EditSetTableViewController: UITableViewController {
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
-                    return true
     }
     
-    
-    
-    @IBAction func saveEditedSetBtn(sender: AnyObject) {
-        self.view.endEditing(true)
-        let setSaved = saveNewCards()
-        // if success 
-        if (setSaved) {
-            
-        } else {
-            // warning
-        }
-        
-    }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -184,6 +170,8 @@ class EditSetTableViewController: UITableViewController {
             destination.setName = setNameTextField.text!
             destination.setId = setId
             destination.listOfCards = listOfCards
+            self.view.endEditing(true)
+            saveNewCards()
         }
         else if let destination = segue.destinationViewController as? AddCardViewController {
             destination.setName = setNameTextField.text!
