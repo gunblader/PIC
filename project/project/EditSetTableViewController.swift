@@ -103,11 +103,10 @@ class EditSetTableViewController: UITableViewController {
         cell.listItems = card
         cell.selectionStyle = UITableViewCellSelectionStyle.None
     
-        print(card.newCard)
-//        if(newCard && (indexPath.row == cards.count - 1)) {
-//            cell.front.becomeFirstResponder()
+        if(card.newCard) {
+            cell.front.becomeFirstResponder()
 //            newCard = false
-//        }
+        }
         
         return cell
     }
@@ -124,7 +123,7 @@ class EditSetTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func saveNewCards() {
+    func saveNewCards() -> Bool {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -142,13 +141,15 @@ class EditSetTableViewController: UITableViewController {
                 card.setValue(cardToSave.setId, forKey: "setId")
                 cardToSave.edited = false
                 cardToSave.newCard = false
-            } else if (cardToSave.edited && cards.count > cardToSave.id) {
+            } else if (cardToSave.edited) {
                 let card = cards[cardToSave.id]
                 print("Edited \(cardToSave.id) \(cardToSave.back)")
                 card.setValue(cardToSave.front, forKey: "front")
                 card.setValue(cardToSave.back, forKey: "back")
                 cardToSave.edited = false
+
             }
+
         }
         
         // Commit the changes.
@@ -160,8 +161,22 @@ class EditSetTableViewController: UITableViewController {
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
+                    return true
     }
     
+    
+    
+    @IBAction func saveEditedSetBtn(sender: AnyObject) {
+        self.view.endEditing(true)
+        let setSaved = saveNewCards()
+        // if success 
+        if (setSaved) {
+            
+        } else {
+            // warning
+        }
+        
+    }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -169,7 +184,6 @@ class EditSetTableViewController: UITableViewController {
             destination.setName = setNameTextField.text!
             destination.setId = setId
             destination.listOfCards = listOfCards
-            saveNewCards()
         }
         else if let destination = segue.destinationViewController as? AddCardViewController {
             destination.setName = setNameTextField.text!
