@@ -22,8 +22,12 @@ class MySetsTableViewController: UITableViewController, UISearchBarDelegate, UIS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getCardSets()
+        
         navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setToolbarHidden(true, animated: false)
+
         self.searchController = UISearchController(searchResultsController: nil)
         let pink = UIColor(red:0.92, green:0.43, blue:0.46, alpha:1.0)
         

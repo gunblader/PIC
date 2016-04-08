@@ -24,12 +24,6 @@ class EditSetTableViewController: UITableViewController {
     
     @IBOutlet weak var setNameTextField: UITextField!
     
-//    @IBAction func saveBtn(sender: AnyObject) {
-//        saveNewCards()
-//        
-//        performSegueWithIdentifier("saveEditedSetSegue", sender: self)
-//        
-//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +37,7 @@ class EditSetTableViewController: UITableViewController {
         
         self.title = "Edit Set"
         setNameTextField.text = setName
+        tableView.alwaysBounceVertical = false
         // 1
         tableView.registerClass(EditSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         getCards()
@@ -102,12 +97,27 @@ class EditSetTableViewController: UITableViewController {
         let card = listOfCards[indexPath.row]
         cell.listItems = card
         cell.selectionStyle = UITableViewCellSelectionStyle.None
+        attatchKeyboardToolbar(cell.front)
+        attatchKeyboardToolbar(cell.back)
     
         if(card.newCard) {
             cell.front.becomeFirstResponder()
         }
         
         return cell
+    }
+    
+    func attatchKeyboardToolbar(textField : UITextField) {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = UIBarStyle.Default
+        toolbar.sizeToFit()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let addCard = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: "addCardBtn:")
+        let font = UIFont(name: "Helvetica", size: 35)
+        addCard.setTitleTextAttributes([NSFontAttributeName: font!], forState: UIControlState.Normal)
+        addCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
+        toolbar.items = [flexSpace, addCard, flexSpace]
+        textField.inputAccessoryView = toolbar
     }
     
     @IBAction func addCardBtn(sender: AnyObject) {
@@ -183,6 +193,8 @@ class EditSetTableViewController: UITableViewController {
             abort()
         }
     }
+    
+    
     
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
