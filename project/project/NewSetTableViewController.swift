@@ -13,16 +13,12 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     var newCardSet:CardSet = CardSet(name: "start", date: "0", id: 0)
     
     var sets = [NSManagedObject]()
-    
     var cards = [NSManagedObject]()
     let reuseIdentifier = "newCardEditId"
     var setName =  ""
-    var listItems = [NewSetListItem]()
-    var newCard: Bool = false
     var setId = -1
     var listOfCards = [Card]()
     
-    var cardsToSave = [Card]()
     let idCounter = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var cardSetName: UITextField!
@@ -36,9 +32,10 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         navigationController?.setToolbarHidden(false, animated: false)
         self.title = "New Set"
-        
+        cardSetName.delegate = self
         tableView.registerClass(NewSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         setId = idCounter.integerForKey("numSets")
+        attatchKeyboardToolbar(cardSetName)
         
         self.cardSetName.delegate = self;
     }
@@ -52,6 +49,10 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
 
         return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     @IBAction func addCardBtn(sender: AnyObject) {
@@ -177,6 +178,8 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         let card = listOfCards[indexPath.row]
         cell.listItems = card
         cell.selectionStyle = UITableViewCellSelectionStyle.None
+        attatchKeyboardToolbar(cell.front)
+        attatchKeyboardToolbar(cell.back)
         
         if(card.newCard) {
             cell.front.becomeFirstResponder()
@@ -185,12 +188,25 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         return cell
     }
     
+    func attatchKeyboardToolbar(textField : UITextField) {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = UIBarStyle.Default
+        toolbar.sizeToFit()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let addCard = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NewSetTableViewController.addCardBtn(_:)))
+        let font = UIFont(name: "Helvetica", size: 35)
+        addCard.setTitleTextAttributes([NSFontAttributeName: font!], forState: UIControlState.Normal)
+        addCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
+        toolbar.items = [flexSpace, addCard, flexSpace]
+        textField.inputAccessoryView = toolbar
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         navigationController?.setNavigationBarHidden(false, animated: false)
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if let destination = segue.destinationViewController as? MySetsTableViewController {
+        if segue.destinationViewController as? MySetsTableViewController != nil{
             saveCardsSegue()
         }
         

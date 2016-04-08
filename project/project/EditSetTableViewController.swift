@@ -9,15 +9,13 @@
 import UIKit
 import CoreData
 
-class EditSetTableViewController: UITableViewController {
+class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
     
     var cards = [NSManagedObject]()
 
     let reuseIdentifier = "cardEditId"
     var setName =  ""
     var setId = -1
-    var listItems = [EditSetListItem]()
-    var newCard: Bool = false
     var set:NSManagedObject? = nil
     var listOfCards = [Card]()
     let idCounter = NSUserDefaults.standardUserDefaults()
@@ -38,10 +36,21 @@ class EditSetTableViewController: UITableViewController {
         self.title = "Edit Set"
         setNameTextField.text = setName
         tableView.alwaysBounceVertical = false
-        // 1
+        attatchKeyboardToolbar(setNameTextField)
+        setNameTextField.delegate = self
         tableView.registerClass(EditSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         getCards()
 
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -112,7 +121,7 @@ class EditSetTableViewController: UITableViewController {
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
         let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        let addCard = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: "addCardBtn:")
+        let addCard = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditSetTableViewController.addCardBtn(_:)))
         let font = UIFont(name: "Helvetica", size: 35)
         addCard.setTitleTextAttributes([NSFontAttributeName: font!], forState: UIControlState.Normal)
         addCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
@@ -194,9 +203,6 @@ class EditSetTableViewController: UITableViewController {
         }
     }
     
-    
-    
-    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? SetTableViewController {
@@ -205,9 +211,6 @@ class EditSetTableViewController: UITableViewController {
             self.view.endEditing(true)
             
             saveNewCards()
-        }
-        else if let destination = segue.destinationViewController as? AddCardViewController {
-            destination.setName = setNameTextField.text!
         }
         navigationController?.setToolbarHidden(true, animated: false)
     }

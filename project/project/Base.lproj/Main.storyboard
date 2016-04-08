@@ -356,15 +356,21 @@
                                                 <segue destination="Bkb-sT-rfx" kind="show" id="Qke-J9-pzf"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Y0-zd-AjT">
+                                            <rect key="frame" x="168" y="36" width="78" height="104"/>
+                                            <state key="normal" title="Practice">
+                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nN-Y4-SD1">
+                                            <rect key="frame" x="309" y="36" width="78" height="104"/>
+                                            <state key="normal" title="Test">
+                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68Q-B3-Iop">
-                                    <rect key="frame" x="179" y="117" width="57" height="30"/>
-                                    <state key="normal" title="Practice">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="practice" translatesAutoresizingMaskIntoConstraints="NO" id="QPS-M9-hxs">
                                     <rect key="frame" x="172" y="37" width="70" height="70"/>
                                 </imageView>
@@ -374,12 +380,6 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="e4f-4h-1np">
                                     <rect key="frame" x="312" y="37" width="70" height="70"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jl3-8s-ZiT">
-                                    <rect key="frame" x="332" y="117" width="30" height="30"/>
-                                    <state key="normal" title="Test">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.74117647060000003" green="0.82352941180000006" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
@@ -526,52 +526,6 @@
             </objects>
             <point key="canvasLocation" x="2796" y="316"/>
         </scene>
-        <!--Add Card View Controller-->
-        <scene sceneID="Etu-LK-Ilv">
-            <objects>
-                <viewController id="sjk-W5-WUK" customClass="AddCardViewController" customModule="project" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5Ua-Db-LNP"/>
-                        <viewControllerLayoutGuide type="bottom" id="WND-Pc-hxi"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NZN-MW-Pz3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Front" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gAr-n3-Xfr">
-                                <rect key="frame" x="82" y="210" width="249" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Back" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tUR-nf-b7F">
-                                <rect key="frame" x="82" y="275" width="249" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9t-q5-J34">
-                                <rect key="frame" x="190" y="353" width="34" height="30"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" red="0.89411764705882357" green="0.33725490196078434" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveBtn:" destination="sjk-W5-WUK" eventType="touchUpInside" id="GDw-xl-7hI"/>
-                                    <segue destination="1Uu-oC-rod" kind="show" id="4Xl-mv-nB8"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <connections>
-                        <outlet property="back" destination="tUR-nf-b7F" id="Q5T-01-vyt"/>
-                        <outlet property="front" destination="gAr-n3-Xfr" id="6Pq-as-fkb"/>
-                        <outlet property="savedLabel" destination="f9t-q5-J34" id="PPS-gx-OdG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TMj-4C-oPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3344" y="316"/>
-        </scene>
         <!--Navigation View Controller-->
         <scene sceneID="g0G-aM-ULH">
             <objects>
@@ -697,12 +651,12 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="EwB-8C-Rjs">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="50"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yQy-H6-lzA">
                             <size key="itemSize" width="317" height="519"/>
                             <size key="headerReferenceSize" width="0.0" height="50"/>
-                            <size key="footerReferenceSize" width="0.0" height="61"/>
+                            <size key="footerReferenceSize" width="0.0" height="20"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
@@ -728,13 +682,21 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Zet-tm-uCd">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reviewCollectionView" id="Zet-tm-uCd">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </collectionReusableView>
-                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5Di-O6-XPv">
-                            <rect key="frame" x="0.0" y="569" width="414" height="61"/>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="colViewFooter" id="5Di-O6-XPv">
+                            <rect key="frame" x="0.0" y="569" width="414" height="20"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XpK-y5-TCw">
+                                    <rect key="frame" x="228" y="20" width="0.0" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="Bkb-sT-rfx" id="cfU-UM-5kG"/>
@@ -756,8 +718,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lcA-tE-8gB"/>
-        <segue reference="yU0-uZ-gFe"/>
+        <segue reference="xa3-RB-p2Y"/>
         <segue reference="sx9-aO-APP"/>
-        <segue reference="f1j-Wx-wUq"/>
     </inferredMetricsTieBreakers>
 </document>

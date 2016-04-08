@@ -17,10 +17,21 @@ class ReviewSetCollectionViewController: UICollectionViewController {
     let reuseIdentifier = "reviewCollection"
     var setName =  ""
     
+    @IBOutlet weak var noCardsLabel: UILabel!
+    
     private let sectionInsets = UIEdgeInsets(top: 25.0, left: 10.0, bottom: 25.0, right: 10.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(cards.count == 0) {
+            let label = UILabel(frame: CGRectMake(0, 0, 200, 21))
+            label.center = CGPointMake(160, 284)
+            label.textAlignment = NSTextAlignment.Center
+            label.text = "No cards to display."
+            self.view.addSubview(label)
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,16 +71,4 @@ class ReviewSetCollectionViewController: UICollectionViewController {
         
         
     }
-    
-    //    override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
-    //        let cell = collectionView.cellForItemAtIndexPath(indexPath)
-    //        cell?.backgroundColor = UIColor.redColor()
-    //    }
-    //
-    //    override func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
-    //        let cell = collectionView.cellForItemAtIndexPath(indexPath)
-    //            cell!.backgroundColor = UIColor.greenColor()
-    //    }
-    
-    
 }
