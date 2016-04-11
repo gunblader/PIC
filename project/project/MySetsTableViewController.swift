@@ -14,6 +14,7 @@ class MySetsTableViewController: UITableViewController, UISearchBarDelegate, UIS
     var sets = [NSManagedObject]()
     let reuseIdentifier = "setId"
     var cardSets = [CardSet]()
+    var user = Dictionary<String,String>()
     
     var setsSearchResults:Array<CardSet>?
     var searchController:UISearchController!
