@@ -14,6 +14,8 @@ class Card {
     private var _back:String = ""
     private var _id:Int = 0
     private var _setId:Int = 0
+    private var _edited:Bool = false
+    private var _newCard:Bool = true
 
     var front:String {
         get {
@@ -51,15 +53,35 @@ class Card {
         }
     }
     
-    init(front:String, back:String, id:Int, setId:Int) {
+    var edited:Bool {
+        get {
+            return _edited
+        }
+        set (newValue) {
+            _edited = newValue
+        }
+    }
+    
+    var newCard:Bool {
+        get {
+            return _newCard
+        }
+        set (newValue) {
+            _newCard = newValue
+        }
+    }
+    
+    init(front:String, back:String, id:Int, setId:Int, edited:Bool, newCard:Bool) {
         self.front = front
         self.back = back
         self.id = id
         self.setId = setId
+        self.edited = false
+        self.newCard = false
     }
     
     convenience init() {
-        self.init(front:"<NoFront>", back:"<NoBack>", id: 0, setId: 0)
+        self.init(front:"<NoFront>", back:"<NoBack>", id: 0, setId: 0, edited: false, newCard: false)
     }
     
     func description() -> String {

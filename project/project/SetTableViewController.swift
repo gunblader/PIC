@@ -13,6 +13,10 @@ class SetTableViewController: UITableViewController {
     
     var cards = [NSManagedObject]()
     var setName =  ""
+    var setId =  -1
+    var selectedSet:NSManagedObject? = nil
+    var listOfCards = [Card]()
+
     let reuseIdentifier = "cardId"
     
     override func viewDidLoad() {
@@ -24,12 +28,19 @@ class SetTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.title = setName
-
+        navigationController?.setToolbarHidden(true, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        getCards()
+        listOfCards = [Card]()
+        tableView.reloadData()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+    }
+    
+    func getCards() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -39,6 +50,7 @@ class SetTableViewController: UITableViewController {
         var fetchedResults:[NSManagedObject]? = nil
         
         do {
+            fetchRequest.predicate = NSPredicate(format: "setId == %d", setId)
             try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
         } catch {
             // what to do if an error occurs?
@@ -68,20 +80,26 @@ class SetTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.cards.count
+        return cards.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
-        
+
         // Get the data from Core Data
         let card = cards[indexPath.row]
         let front = "\(card.valueForKey("front") as! String)"
         let back = "\(card.valueForKey("back") as! String)"
+        let id = card.valueForKey("id") as! Int
+
+        let selectedCard = Card(front: front, back: back, id: id, setId: setId, edited: false, newCard: false)
+        listOfCards += [selectedCard]
+
         cell.textLabel!.text = front
         cell.detailTextLabel!.text = back
         return cell
     }
+    
     
     
     // MARK: - Navigation
@@ -91,7 +109,15 @@ class SetTableViewController: UITableViewController {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
         if let destination = segue.destinationViewController as? EditSetTableViewController {
+            destination.setId = setId
             destination.setName = setName
+            destination.set = selectedSet
+            destination.listOfCards = listOfCards
+        }
+        
+        if let destination = segue.destinationViewController as? ReviewSetCollectionViewController {
+            destination.setName = setName
+            destination.cards = self.cards
         }
     }
     

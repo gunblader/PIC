@@ -23,7 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.blackColor()
         
         // change tint color of navigation bar background
-        UINavigationBar.appearance().barTintColor = UIColor.whiteColor() 
+        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+        
+        let idCounter = NSUserDefaults.standardUserDefaults()
+
+        if idCounter.objectForKey("numSets") == nil{
+          idCounter.setObject(0, forKey: "numSets")
+        }
+
+        if idCounter.objectForKey("numCards") == nil{
+            idCounter.setObject(0, forKey: "numCards")
+        }
+        
         return true
     }
     

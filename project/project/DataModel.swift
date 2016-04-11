@@ -14,7 +14,7 @@ class DataModel {
     
     init() {
         // Create the list of people
-        list.append(Card(front: "hi", back: "bye", id: 0, setId: 0))
+        list.append(Card(front: "hi", back: "bye", id: 0, setId: 0, edited: false, newCard: false))
     }
     
     func count() -> Int {
@@ -25,7 +25,7 @@ class DataModel {
         if index < list.count {
             return list[index]
         } else {
-            return Card(front: "bad", back: "bad", id: 0, setId: 0)
+            return Card(front: "bad", back: "bad", id: 0, setId: 0, edited: false, newCard: false)
         }
     }
     
