@@ -25,6 +25,7 @@
 		601B43C61CD84222000D9E8E /* NetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 601B43C51CD84222000D9E8E /* NetData.swift */; };
 		6068AF9C1CA355FF00BD1631 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068AF9B1CA355FF00BD1631 /* SettingsViewController.swift */; };
 		6068AF9E1CA358E800BD1631 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068AF9D1CA358E800BD1631 /* ProfileViewController.swift */; };
+		60B4469D1CD9122900F34B3C /* Cloudinary_Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 60B4469C1CD9122900F34B3C /* Cloudinary_Bridge.m */; };
 		7E9192232B748AF4DD00BB7D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7C43203D6F0E2F2ED33842 /* Pods.framework */; };
 		B5B17F451C8CE15100DAF08B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F441C8CE15100DAF08B /* AppDelegate.swift */; };
 		B5B17F471C8CE15100DAF08B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F461C8CE15100DAF08B /* ViewController.swift */; };
@@ -55,6 +56,8 @@
 		601B43C51CD84222000D9E8E /* NetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetData.swift; sourceTree = "<group>"; };
 		6068AF9B1CA355FF00BD1631 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6068AF9D1CA358E800BD1631 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		60B4469B1CD9122900F34B3C /* project-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "project-Bridging-Header.h"; sourceTree = "<group>"; };
+		60B4469C1CD9122900F34B3C /* Cloudinary_Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cloudinary_Bridge.m; sourceTree = "<group>"; };
 		9F7C43203D6F0E2F2ED33842 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B17F411C8CE15100DAF08B /* project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B17F441C8CE15100DAF08B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 				07B8E8131CB4275E00ACEC65 /* ReviewCollectionViewCell.swift */,
 				07B8E8171CB5920400ACEC65 /* NewSetTableViewCell.swift */,
 				601B43C51CD84222000D9E8E /* NetData.swift */,
+				60B4469C1CD9122900F34B3C /* Cloudinary_Bridge.m */,
+				60B4469B1CD9122900F34B3C /* project-Bridging-Header.h */,
 			);
 			path = project;
 			sourceTree = "<group>";
@@ -188,7 +193,7 @@
 		B5B17F391C8CE15100DAF08B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = cs378;
 				TargetAttributes = {
@@ -285,6 +290,7 @@
 			files = (
 				B5B17F5C1C8CE44C00DAF08B /* CreateAccountViewController.swift in Sources */,
 				B5B17F471C8CE15100DAF08B /* ViewController.swift in Sources */,
+				60B4469D1CD9122900F34B3C /* Cloudinary_Bridge.m in Sources */,
 				070F4FBC1CA10081004F77C1 /* DataModel.swift in Sources */,
 				070F4FB01CA0E411004F77C1 /* MySetsTableViewController.swift in Sources */,
 				B5B17F4D1C8CE15100DAF08B /* project.xcdatamodeld in Sources */,
@@ -417,10 +423,13 @@
 			baseConfigurationReference = F16AB7B269D86BADB20045F4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cs378.project;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "../../../../../Users/gunblade/Desktop/PIC/project/project/project-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -429,10 +438,12 @@
 			baseConfigurationReference = C7049D56429E1F442D2BBFC3 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cs378.project;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "../../../../../Users/gunblade/Desktop/PIC/project/project/project-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>Cloudinary.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -28,6 +33,11 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+		<key>Pods 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
@@ -62,7 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>E78B7ACCB8F60B6DFFF0A6305F577975</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>F5ACF367AE3BD7A7F2AF2D430901DF7B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FBBEF6AA8E8483FE9C432B16A32B8362</key>
 		<dict>
 			<key>primary</key>
 			<true/>
