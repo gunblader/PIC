@@ -136,11 +136,11 @@
 				076A406F1CC6BD1E00BF936B /* SetTableViewCell.swift */,
 				070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */,
 				07D7D91B1CAA064700C2FF13 /* EditSetTableViewCell.swift */,
+				07B624D91CD83CC3006AD3B9 /* DrawViewController.swift */,
 				07B8E8111CB41F7F00ACEC65 /* ReviewSetCollectionViewController.swift */,
 				07B8E8131CB4275E00ACEC65 /* ReviewCollectionViewCell.swift */,
 				07D7D91D1CADA31400C2FF13 /* NewSetTableViewController.swift */,
 				07B8E8171CB5920400ACEC65 /* NewSetTableViewCell.swift */,
-				07B624D91CD83CC3006AD3B9 /* DrawViewController.swift */,
 			);
 			path = project;
 			sourceTree = "<group>";

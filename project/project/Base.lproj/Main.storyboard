@@ -388,7 +388,7 @@
                                 <rect key="frame" x="0.0" y="206" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7ji-F1-11j" id="89J-XX-aTO">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Evp-ua-h34">
@@ -403,10 +403,18 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0H5-lJ-cMe">
+                                            <rect key="frame" x="8" y="2" width="188" height="95"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Ph-YO-rlp">
+                                            <rect key="frame" x="204" y="2" width="188" height="95"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="backImg" destination="5Ph-YO-rlp" id="5iF-Pe-ogh"/>
                                     <outlet property="backLabel" destination="Evp-ua-h34" id="p3D-Ci-Yvt"/>
+                                    <outlet property="frontImg" destination="0H5-lJ-cMe" id="j1M-T0-vIL"/>
                                     <outlet property="frontLabel" destination="wyW-dd-iNE" id="mWk-Sl-okz"/>
                                 </connections>
                             </tableViewCell>
@@ -483,14 +491,14 @@
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="00H-d5-ExC">
-                                            <rect key="frame" x="19" y="11" width="156" height="83"/>
+                                            <rect key="frame" x="15" y="8" width="156" height="83"/>
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="back" destination="Mjf-XN-NZz" id="p2n-Rv-TDF"/>
                                     <outlet property="front" destination="rDd-ds-1DI" id="78P-oJ-tfD"/>
-                                    <outlet property="frontImg" destination="00H-d5-ExC" id="1rG-LG-wwf"/>
+                                    <outlet property="frontImgView" destination="00H-d5-ExC" id="KyG-QU-ZW2"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -586,7 +594,7 @@
                                 <rect key="frame" x="0.0" y="115" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bMe-aM-qNO" id="mDS-gU-lQB">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Back" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4lQ-sE-EZc">
@@ -662,7 +670,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reviewCollection" id="ZnU-kA-X0K" customClass="ReviewCollectionCell" customModule="project" customModuleProvider="target">
-                                <rect key="frame" x="49" y="50" width="317" height="519"/>
+                                <rect key="frame" x="48.5" y="50" width="317" height="519"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="317" height="519"/>
@@ -727,7 +735,7 @@
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="saveDrawingBtn:" destination="L1F-f7-rYM" eventType="touchUpInside" id="khx-40-Cnj"/>
-                                    <segue destination="1Uu-oC-rod" kind="show" id="4vx-Ix-c7D"/>
+                                    <segue destination="1Uu-oC-rod" kind="showDetail" action="showViewController:sender:" id="4vx-Ix-c7D"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzh-cF-fkR">
@@ -783,7 +791,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="sx9-aO-APP"/>
         <segue reference="f1j-Wx-wUq"/>
+        <segue reference="xa3-RB-p2Y"/>
         <segue reference="lcA-tE-8gB"/>
-        <segue reference="ik9-2n-dLf"/>
     </inferredMetricsTieBreakers>
 </document>

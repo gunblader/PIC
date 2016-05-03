@@ -58,7 +58,7 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func addCardBtn(sender: AnyObject) {
         let cardId = (idCounter.objectForKey("numCards") as? Int)!
 
-        let createdCard = Card(front: String(), back: String(), frontIsImg: false, backIsImg: false, frontImg: UIImage(), backImg: UIImage(), id: cardId, setId: setId, edited: false, newCard: true)
+        let createdCard = Card(front: String(), back: String(), frontIsImg: false, backIsImg: false, frontImg: UIImage(), backImg: UIImage(), id: cardId, setId: setId, edited: false, newCard: true, drawFront: true)
         print("hi \(createdCard.front)")
         idCounter.setObject(cardId + 1, forKey: "numCards")
         createdCard.newCard = true

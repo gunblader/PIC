@@ -19,13 +19,20 @@ class DrawViewController: UIViewController {
     var setId = -1
     var set:NSManagedObject? = nil
     var listOfCards = [Card]()
-    var isFront = false
+    var drawFront = true
     var card = Card()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // If editing an image, load it
+        if(drawFront && card.frontIsImg) {
+            mainImageView.image = card.frontImg
+        } else if(!drawFront && card.backIsImg) {
+            mainImageView.image = card.backImg
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,7 +83,14 @@ class DrawViewController: UIViewController {
         mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
             width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        card.frontImg = image
+
+        if(drawFront) {
+            card.frontImg = image
+            card.frontIsImg = true
+        } else {
+            card.backImg = image
+            card.backIsImg = true
+        }
     }
     
     @IBAction func pencilPressed(sender: AnyObject) {

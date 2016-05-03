@@ -15,7 +15,7 @@ class DataModel {
     
     init() {
         // Create the list of people
-        list.append(Card(front: "hi", back: "bye", frontIsImg: false, backIsImg: false, frontImg: UIImage(), backImg: UIImage(), id: 0, setId: 0, edited: false, newCard: false))
+        list.append(Card(front: "hi", back: "bye", frontIsImg: false, backIsImg: false, frontImg: UIImage(), backImg: UIImage(), id: 0, setId: 0, edited: false, newCard: false, drawFront: true))
     }
     
     func count() -> Int {
@@ -26,7 +26,7 @@ class DataModel {
         if index < list.count {
             return list[index]
         } else {
-            return Card(front: "bad", back: "bad", frontIsImg: false, backIsImg: false, frontImg: UIImage(), backImg: UIImage(), id: 0, setId: 0, edited: false, newCard: false)
+            return Card(front: "bad", back: "bad", frontIsImg: false, backIsImg: false, frontImg: UIImage(), backImg: UIImage(), id: 0, setId: 0, edited: false, newCard: false, drawFront: true)
         }
     }
     

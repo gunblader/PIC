@@ -91,24 +91,29 @@ class SetTableViewController: UITableViewController {
         let back = "\(card.valueForKey("back") as! String)"
         let frontIsImg = card.valueForKey("frontIsImg") as! Bool
         let backIsImg = card.valueForKey("backIsImg") as! Bool
-        let frontImg = UIImage()
-        let backImg = UIImage()
+        var frontImg = UIImage()
+        var backImg = UIImage()
+        
         if(frontIsImg) {
-            let frontImg = UIImage(data: card.valueForKey("frontImg") as! NSData)
+            frontImg = UIImage(data: card.valueForKey("frontImg") as! NSData)!
+            cell.frontImg.image = frontImg
+            
+        } else {
+            cell.frontLabel!.text = front
         }
+        
         if(backIsImg) {
-            let backImg = UIImage(data: card.valueForKey("backImg") as! NSData)
+            backImg = UIImage(data: card.valueForKey("backImg") as! NSData)!
+            cell.backImg.image = backImg
+        } else {
+            cell.backLabel!.text = back
         }
 
         let id = card.valueForKey("id") as! Int
 
-        let selectedCard = Card(front: front, back: back, frontIsImg: frontIsImg, backIsImg: backIsImg, frontImg: frontImg, backImg: backImg, id: id, setId: setId, edited: false, newCard: false)
+        let selectedCard = Card(front: front, back: back, frontIsImg: frontIsImg, backIsImg: backIsImg, frontImg: frontImg, backImg: backImg, id: id, setId: setId, edited: false, newCard: false, drawFront: true)
         listOfCards += [selectedCard]
 
-        cell.frontLabel!.text = front
-        cell.backLabel!.text = back
-//        cell.frontImg!.image = UIImage(named: "turtle.jpg")
-        
         return cell
     }
     

@@ -21,6 +21,7 @@ class Card {
     private var _setId:Int = 0
     private var _edited:Bool = false
     private var _newCard:Bool = true
+    private var _drawFront:Bool = true
 
     var front:String {
         get {
@@ -112,7 +113,16 @@ class Card {
         }
     }
     
-    init(front:String, back:String, frontIsImg:Bool, backIsImg:Bool,frontImg:UIImage, backImg:UIImage, id:Int, setId:Int, edited:Bool, newCard:Bool) {
+    var drawFront:Bool {
+        get {
+            return _drawFront
+        }
+        set (newValue) {
+            _drawFront = newValue
+        }
+    }
+    
+    init(front:String, back:String, frontIsImg:Bool, backIsImg:Bool,frontImg:UIImage, backImg:UIImage, id:Int, setId:Int, edited:Bool, newCard:Bool, drawFront:Bool) {
         self.front = front
         self.back = back
         self.frontImg = frontImg
@@ -123,10 +133,11 @@ class Card {
         self.setId = setId
         self.edited = false
         self.newCard = false
+        self.drawFront = true
     }
     
     convenience init() {
-        self.init(front:"<NoFront>", back:"<NoBack>", frontIsImg:false, backIsImg:false, frontImg:UIImage(), backImg:UIImage(),id: 0, setId: 0, edited: false, newCard: false)
+        self.init(front:"<NoFront>", back:"<NoBack>", frontIsImg:false, backIsImg:false, frontImg:UIImage(), backImg:UIImage(),id: 0, setId: 0, edited: false, newCard: false, drawFront: true)
     }
     
     func description() -> String {
