@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Alamofire
 
 class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
     
@@ -105,14 +106,14 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
         
         let card = listOfCards[indexPath.row]
         cell.listItems = card
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.Blue
         attatchKeyboardToolbar(cell.front)
         attatchKeyboardToolbar(cell.back)
-    
+        cell.front.userInteractionEnabled = false
         if(card.newCard) {
             cell.front.becomeFirstResponder()
         }
-        
+        cell.front.userInteractionEnabled = true
         return cell
     }
     
@@ -202,6 +203,197 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
             abort()
         }
     }
+    
+    // MARK: - Image Storage
+    
+//    // this function creates the required URLRequestConvertible and NSData we need to use Alamofire.upload
+//    func urlRequestWithComponents(urlString:String, parameters:Dictionary<String, String>, imageData:NSData) -> (URLRequestConvertible, NSData) {
+//        
+//        // create url request to send
+//        var mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+//        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
+//        let boundaryConstant = "myRandomBoundary12345";
+//        let contentType = "multipart/form-data;boundary="+boundaryConstant
+//        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+//        
+//        
+//        // create upload data to send
+//        let uploadData = NSMutableData()
+//        
+//        // add image
+//        uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+//        uploadData.appendData("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+//        uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+//        uploadData.appendData(imageData)
+//        
+//        // add parameters
+//        for (key, value) in parameters {
+//            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+//            uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+//        }
+//        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+//        
+//        
+//        
+//        // return URLRequestConvertible and NSData
+//        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
+//    }
+//    
+//    func sendImage(){
+//        
+////        let docDir:AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+////        let imagePath = (docDir as! String) + "/turtle.jpg"
+////        
+////        var imageData = UIImage.init(contentsOfFile: imagePath)
+////        
+////        var parameters = [
+////            "pic"           :NetData(pngImage: UIImage(named:"pic-04")!, filename: "pic-o4.png"),
+////            "otherParm"     :"Value"
+////        ]
+////        
+////        print(parameters)
+////        let urlRequest = self.urlRequestWithComponents("https://shielded-basin-17847.herokuapp.com/upload", parameters: parameters)
+//
+//        // init paramters Dictionary
+//        var parameters = [
+//            "task": "task",
+//            "variable1": "var"
+//        ]
+//
+//        // add addtionial parameters
+//        parameters["userId"] = "27"
+//        parameters["body"] = "This is the body text."
+//
+//        // example image data
+//        let image = UIImage(named: "pic-04.png")
+//        let imageData = UIImagePNGRepresentation(image!)
+//
+//
+//        // CREATE AND SEND REQUEST ----------
+//
+//        let urlRequest = urlRequestWithComponents("https://shielded-basin-17847.herokuapp.com/upload", parameters: parameters, imageData: imageData!)
+//        Alamofire.upload(urlRequest.0, data: urlRequest.1).progress{ (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+//            print("\(totalBytesWritten) / \(totalBytesExpectedToWrite)")
+//        }.responseJSON { (response) in
+//            print("REQUEST \(response.request)")
+//            print("RESPONSE \(response.response)")
+//            print("JSON \(response.debugDescription)")
+//
+//        }
+//        
+//    }
+//    
+//    func urlRequestWithComponents(urlString:String, parameters:NSDictionary) -> (URLRequestConvertible, NSData) {
+//        
+//        // create url request to send
+//        var mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+//        mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
+//        //let boundaryConstant = "myRandomBoundary12345"
+//        let boundaryConstant = "NET-POST-boundary-\(arc4random())-\(arc4random())"
+//        let contentType = "multipart/form-data;boundary="+boundaryConstant
+//        mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
+//        
+//        
+//        // create upload data to send
+//        let uploadData = NSMutableData()
+//        
+//        // add parameters
+//        for (key, value) in parameters {
+//            print("here")
+//            uploadData.appendData("\r\n--\(boundaryConstant)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+//            
+//            if value is NetData {
+//                // add image
+//                var postData = value as! NetData
+//                print("here2")
+//                
+//                //uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(postData.filename)\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+//                
+//                // append content disposition
+//                var filenameClause = " filename=\"\(postData.filename)\""
+//                let contentDispositionString = "Content-Disposition: form-data; name=\"\(key)\";\(filenameClause)\r\n"
+//                let contentDispositionData = contentDispositionString.dataUsingEncoding(NSUTF8StringEncoding)
+//                uploadData.appendData(contentDispositionData!)
+//                
+//                
+//                // append content type
+//                //uploadData.appendData("Content-Type: image/png\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!) // mark this.
+//                let contentTypeString = "Content-Type: \(postData.mimeType.getString())\r\n\r\n"
+//                let contentTypeData = contentTypeString.dataUsingEncoding(NSUTF8StringEncoding)
+//                uploadData.appendData(contentTypeData!)
+//                uploadData.appendData(postData.data)
+//                
+//            }else{
+//                uploadData.appendData("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n\(value)".dataUsingEncoding(NSUTF8StringEncoding)!)
+//            }
+//        }
+//        uploadData.appendData("\r\n--\(boundaryConstant)--\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+//        
+//        
+//        print("return")
+//        // return URLRequestConvertible and NSData
+//        return (Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: nil).0, uploadData)
+//    }
+    
+    @IBAction func addPIC(sender: AnyObject) {
+        print ("save image")
+//        self.sendImage()
+        let URL = "https://shielded-basin-17847.herokuapp.com/upload"
+        
+        // example image data
+        let image = UIImage(named: "pic-04.png")
+        let imageData = UIImagePNGRepresentation(image!)
+        
+        let postDataProlife:[String:AnyObject] = ["CardId": 1,"ImageType": 1,"ImageData": imageData!]
+        let parameters = [
+            "CardId": 1,
+            "ImageType": 1,
+            "front": "hey",
+            "back": "you",
+            "ImageData": imageData!
+        ]
+        
+        uplaodImageData(URL, postData: parameters, successHandler: successDataHandler, failureHandler: failureDataHandler)
+    }
+    
+    func successDataHandler(responseData:String){
+        
+        print ("IMAGE UPLOAD SUCCESSFUL    !!!")
+        
+    }
+    
+    func failureDataHandler(errorData:String){
+        
+        print ("  !!!   IMAGE UPLOAD FAILURE   !!! ")
+        
+    }
+    
+    
+    func uplaodImageData(RequestURL: String,postData:[String:AnyObject]?,successHandler: (String) -> (),failureHandler: (String) -> ()) -> () {
+        
+//        let headerData:[String : String] = ["Content-Type":"application/json"]
+        
+        
+        let headers = [
+            "Content-Type": "application/json"
+        ]
+        
+//        Alamofire.request(.POST, "https://shielded-basin-17847.herokuapp.com/upload", headers: headers, parameters: parameters, encoding: .JSON)
+
+        
+        Alamofire.request(.POST,RequestURL, parameters: postData, headers: headers).responseString{ response in
+            switch response.result {
+            case .Success:
+                print(response.response?.statusCode)
+                print(response.response?.debugDescription)
+                successHandler(response.result.value!)
+            case .Failure(let error):
+                failureHandler("\(error)")
+            }
+        }
+    }
+    
+    // MARK: - Segue
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

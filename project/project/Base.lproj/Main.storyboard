@@ -275,7 +275,7 @@
                         <color key="separatorColor" red="0.74117647060000003" green="0.82352941180000006" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="setId" textLabel="Kkt-kZ-izd" detailTextLabel="6FN-em-zHL" rowHeight="60" style="IBUITableViewCellStyleValue1" id="F4g-o1-qqn">
-                                <rect key="frame" x="0.0" y="28" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F4g-o1-qqn" id="3Pv-Ig-4O8">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="59"/>
@@ -454,6 +454,13 @@
                                             <attributedString key="attributedText"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3x-Cn-qkD">
+                                            <rect key="frame" x="311" y="28" width="30" height="30"/>
+                                            <state key="normal" title="PIC"/>
+                                            <connections>
+                                                <action selector="addPIC:" destination="1Uu-oC-rod" eventType="touchUpInside" id="0rv-mm-Jxd"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
@@ -524,7 +531,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7aY-7f-6gt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2796" y="316"/>
+            <point key="canvasLocation" x="2740" y="316"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="g0G-aM-ULH">
@@ -562,7 +569,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.74117647060000003" green="0.82352941180000006" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="tnt-dg-73d">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="87"/>
+                            <rect key="frame" x="0.0" y="64" width="414" height="87"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0t-Yp-RYP">
@@ -582,7 +589,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newCardEditId" rowHeight="60" id="bMe-aM-qNO" customClass="NewSetTableViewCell" customModule="project" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="115" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="179" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bMe-aM-qNO" id="mDS-gU-lQB">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="59"/>
@@ -718,7 +725,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="sx9-aO-APP"/>
-        <segue reference="ik9-2n-dLf"/>
-        <segue reference="lcA-tE-8gB"/>
+        <segue reference="yU0-uZ-gFe"/>
+        <segue reference="3hT-YV-Upp"/>
     </inferredMetricsTieBreakers>
 </document>

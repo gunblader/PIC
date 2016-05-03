@@ -27,6 +27,7 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
 
         // Configure the view for the selected state
     }
@@ -91,6 +92,7 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
             card.back = back.text!
             listItems?.edited = true
         }
+        print("bye")
         textField.resignFirstResponder()
         return true
     }
