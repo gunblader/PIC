@@ -2,7 +2,11 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15D21" minimumToolsVersion="Automatic">
     <entity name="Card" syncable="YES">
         <attribute name="back" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="backImg" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="backIsImg" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="front" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="frontImg" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="frontIsImg" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="setId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -18,7 +22,7 @@
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Card" positionX="-63" positionY="9" width="128" height="105"/>
+        <element name="Card" positionX="-63" positionY="9" width="128" height="165"/>
         <element name="CardSet" positionX="-54" positionY="27" width="128" height="90"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>

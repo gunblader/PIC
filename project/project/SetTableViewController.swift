@@ -30,7 +30,6 @@ class SetTableViewController: UITableViewController {
         self.title = setName
         navigationController?.setToolbarHidden(true, animated: false)
         navigationController?.setNavigationBarHidden(false, animated: false)
-        
         getCards()
         listOfCards = [Card]()
         tableView.reloadData()
@@ -84,19 +83,32 @@ class SetTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SetTableViewCell
 
         // Get the data from Core Data
         let card = cards[indexPath.row]
         let front = "\(card.valueForKey("front") as! String)"
         let back = "\(card.valueForKey("back") as! String)"
+        let frontIsImg = card.valueForKey("frontIsImg") as! Bool
+        let backIsImg = card.valueForKey("backIsImg") as! Bool
+        let frontImg = UIImage()
+        let backImg = UIImage()
+        if(frontIsImg) {
+            let frontImg = UIImage(data: card.valueForKey("frontImg") as! NSData)
+        }
+        if(backIsImg) {
+            let backImg = UIImage(data: card.valueForKey("backImg") as! NSData)
+        }
+
         let id = card.valueForKey("id") as! Int
 
-        let selectedCard = Card(front: front, back: back, id: id, setId: setId, edited: false, newCard: false)
+        let selectedCard = Card(front: front, back: back, frontIsImg: frontIsImg, backIsImg: backIsImg, frontImg: frontImg, backImg: backImg, id: id, setId: setId, edited: false, newCard: false)
         listOfCards += [selectedCard]
 
-        cell.textLabel!.text = front
-        cell.detailTextLabel!.text = back
+        cell.frontLabel!.text = front
+        cell.backLabel!.text = back
+//        cell.frontImg!.image = UIImage(named: "turtle.jpg")
+        
         return cell
     }
     

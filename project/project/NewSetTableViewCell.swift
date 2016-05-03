@@ -36,8 +36,8 @@ class NewSetTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     var listItems:Card? {
         didSet {
-            front.text = listItems!.front
-            back.text = listItems!.back
+//            front.text = listItems!.front
+//            back.text = listItems!.back
         }
     }
     

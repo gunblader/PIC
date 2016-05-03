@@ -9,16 +9,18 @@
 import UIKit
 import CoreData
 
-class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
+class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
     
     var cards = [NSManagedObject]()
-
+    var testing = "nope"
     let reuseIdentifier = "cardEditId"
     var setName =  ""
     var setId = -1
     var set:NSManagedObject? = nil
     var listOfCards = [Card]()
     let idCounter = NSUserDefaults.standardUserDefaults()
+    var imgToSave:UIImage = UIImage()
+    var returningFromDraw:Bool = false
     
     @IBOutlet weak var setNameTextField: UITextField!
     
@@ -34,6 +36,8 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
         navigationController?.setNavigationBarHidden(false, animated: false)
         
         self.title = "Edit Set"
+        self.tableView.rowHeight = 100.0
+
         setNameTextField.text = setName
         tableView.alwaysBounceVertical = false
         attatchKeyboardToolbar(setNameTextField)
@@ -44,6 +48,7 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        print("im done")
         textField.resignFirstResponder()
         
         return true
@@ -102,17 +107,37 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EditSetTableViewCell
-        
         let card = listOfCards[indexPath.row]
         cell.listItems = card
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.Blue
+        
+
         attatchKeyboardToolbar(cell.front)
         attatchKeyboardToolbar(cell.back)
-    
-        if(card.newCard) {
-            cell.front.becomeFirstResponder()
+        
+        cell.front.accessibilityLabel = "\(indexPath.row)"
+        cell.back.accessibilityLabel = "\(indexPath.row)"
+        cell.card = card
+        cell.nsindex = indexPath
+        cell.tableView = self
+        
+        if(returningFromDraw){
+            testing = card.front
         }
         
+        if(card.newCard) {
+            cell.front.becomeFirstResponder()
+            cell.front.accessibilityLabel = "\(indexPath.row)"
+        }
+        
+
+//        let imageName = "turtle.jpg"
+//        let image = UIImage(named: imageName)
+        let image = card.frontImg
+        let imageView = UIImageView(image: image)
+        imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 90)
+        cell.addSubview(imageView)
+
         return cell
     }
     
@@ -125,18 +150,26 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
         let font = UIFont(name: "Helvetica", size: 35)
         addCard.setTitleTextAttributes([NSFontAttributeName: font!], forState: UIControlState.Normal)
         addCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
-        toolbar.items = [flexSpace, addCard, flexSpace]
+        
+        let drawCard = UIBarButtonItem(title: "Draw", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditSetTableViewController.drawCardBtn(_:)))
+        drawCard.setTitleTextAttributes([NSFontAttributeName: font!], forState: UIControlState.Normal)
+        drawCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
+        toolbar.items = [flexSpace, addCard, flexSpace, drawCard]
         textField.inputAccessoryView = toolbar
     }
     
     @IBAction func addCardBtn(sender: AnyObject) {
         let cardId = (idCounter.objectForKey("numCards") as? Int)!
-        let createdCard = Card(front: String(), back: String(), id: cardId, setId: setId, edited: false, newCard: true)
+        let createdCard = Card(front: String(), back: String(), frontIsImg: false, backIsImg: false, frontImg: UIImage(), backImg: UIImage(), id: cardId, setId: setId, edited: false, newCard: true)
         idCounter.setObject(cardId + 1, forKey: "numCards")
 
         createdCard.newCard = true
         listOfCards.append(createdCard)
         tableView.reloadData()
+    }
+    
+    @IBAction func drawCardBtn(sender: AnyObject) {
+        performSegueWithIdentifier("editToDrawSegue", sender: nil)
     }
     
     func saveNewCards() {
@@ -185,6 +218,10 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
                 let card = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
                 card.setValue(cardToSave.front, forKey: "front")
                 card.setValue(cardToSave.back, forKey: "back")
+                card.setValue(cardToSave.frontIsImg, forKey: "frontIsImg")
+                card.setValue(cardToSave.backIsImg, forKey: "backIsImg")
+                card.setValue(UIImageJPEGRepresentation(cardToSave.frontImg, 0), forKey: "frontImg")
+                card.setValue(UIImageJPEGRepresentation(cardToSave.backImg, 0), forKey: "backImg")
                 card.setValue(cardToSave.id, forKey: "id")
                 card.setValue(cardToSave.setId, forKey: "setId")
                 cardToSave.edited = false
@@ -212,6 +249,19 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate {
             
             saveNewCards()
         }
+        
+        if let destination = segue.destinationViewController as? DrawViewController {
+//            self.view.endEditing(true)
+            print(testing)
+//            let x = self.tableView?.indexPathForSelectedRow!.row
+//            print(x)
+            
+            destination.setId = setId
+            destination.setName = setName
+            destination.listOfCards = listOfCards
+            destination.card = listOfCards[(self.tableView?.indexPathForSelectedRow!.row)!]
+        }
+        
         navigationController?.setToolbarHidden(true, animated: false)
     }
 }

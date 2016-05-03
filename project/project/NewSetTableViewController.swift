@@ -57,8 +57,9 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func addCardBtn(sender: AnyObject) {
         let cardId = (idCounter.objectForKey("numCards") as? Int)!
-        
-        let createdCard = Card(front: String(), back: String(), id: cardId, setId: setId, edited: false, newCard: true)
+
+        let createdCard = Card(front: String(), back: String(), frontIsImg: false, backIsImg: false, frontImg: UIImage(), backImg: UIImage(), id: cardId, setId: setId, edited: false, newCard: true)
+        print("hi \(createdCard.front)")
         idCounter.setObject(cardId + 1, forKey: "numCards")
         createdCard.newCard = true
         listOfCards.append(createdCard)
@@ -97,6 +98,11 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
                 
                 let card = NSManagedObject(entity: entity!, insertIntoManagedObjectContext:managedContext)
                 card.setValue(cardToSave.front, forKey: "front")
+                card.setValue(cardToSave.back, forKey: "back")
+                card.setValue(cardToSave.frontIsImg, forKey: "frontIsImg")
+                card.setValue(cardToSave.backIsImg, forKey: "backIsImg")
+                card.setValue(UIImageJPEGRepresentation(cardToSave.frontImg, 0), forKey: "frontImg")
+                card.setValue(UIImageJPEGRepresentation(cardToSave.backImg, 0), forKey: "backImg")
                 card.setValue(cardToSave.back, forKey: "back")
                 card.setValue(cardToSave.id, forKey: "id")
                 card.setValue(cardToSave.setId, forKey: "setId")
@@ -173,7 +179,7 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! NewSetTableViewCell
-        
+        print("new cell created")
         // Get the data from Core Data
         let card = listOfCards[indexPath.row]
         cell.listItems = card

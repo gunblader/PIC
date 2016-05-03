@@ -14,11 +14,17 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var front: UITextField!
     @IBOutlet weak var back: UITextField!
     
+    @IBOutlet weak var frontImg: UIImageView!
+    
     var cardSet:CardSet = CardSet()
     var card:Card = Card()
-
+    var addImg = false
     
     var newCard:Bool = false
+    
+    var tableView:UITableViewController? = nil
+    var nsindex: NSIndexPath? = nil
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +33,7 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        print(front.text)
         // Configure the view for the selected state
     }
     
@@ -82,6 +88,10 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         return true
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        tableView!.tableView.selectRowAtIndexPath(nsindex, animated: true, scrollPosition: UITableViewScrollPosition.None)
+    }
 
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         if listItems != nil {
@@ -91,11 +101,13 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
             card.back = back.text!
             listItems?.edited = true
         }
+        
+        print((textField.placeholder)!)
+        print((textField.accessibilityLabel)!)
+        
         textField.resignFirstResponder()
         return true
     }
-    
-
     
     
 }

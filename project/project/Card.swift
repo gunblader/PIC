@@ -7,11 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
 class Card {
     
     private var _front:String = ""
     private var _back:String = ""
+    private var _frontImg:UIImage = UIImage()
+    private var _backImg:UIImage = UIImage()
+    private var _frontIsImg:Bool = false
+    private var _backIsImg:Bool = false
     private var _id:Int = 0
     private var _setId:Int = 0
     private var _edited:Bool = false
@@ -32,6 +37,42 @@ class Card {
         }
         set (newValue) {
             _back = newValue
+        }
+    }
+    
+    var frontImg:UIImage {
+        get {
+            return _frontImg
+        }
+        set (newValue) {
+            _frontImg = newValue
+        }
+    }
+    
+    var backImg:UIImage {
+        get {
+            return _backImg
+        }
+        set (newValue) {
+            _backImg = newValue
+        }
+    }
+    
+    var frontIsImg:Bool {
+        get {
+            return _frontIsImg
+        }
+        set (newValue) {
+            _frontIsImg = newValue
+        }
+    }
+    
+    var backIsImg:Bool {
+        get {
+            return _backIsImg
+        }
+        set (newValue) {
+            _backIsImg = newValue
         }
     }
     
@@ -71,9 +112,13 @@ class Card {
         }
     }
     
-    init(front:String, back:String, id:Int, setId:Int, edited:Bool, newCard:Bool) {
+    init(front:String, back:String, frontIsImg:Bool, backIsImg:Bool,frontImg:UIImage, backImg:UIImage, id:Int, setId:Int, edited:Bool, newCard:Bool) {
         self.front = front
         self.back = back
+        self.frontImg = frontImg
+        self.backImg = backImg
+        self.frontIsImg = frontIsImg
+        self.backIsImg = backIsImg
         self.id = id
         self.setId = setId
         self.edited = false
@@ -81,7 +126,7 @@ class Card {
     }
     
     convenience init() {
-        self.init(front:"<NoFront>", back:"<NoBack>", id: 0, setId: 0, edited: false, newCard: false)
+        self.init(front:"<NoFront>", back:"<NoBack>", frontIsImg:false, backIsImg:false, frontImg:UIImage(), backImg:UIImage(),id: 0, setId: 0, edited: false, newCard: false)
     }
     
     func description() -> String {
