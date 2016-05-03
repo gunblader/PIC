@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '593096D6BA192CA33C35A042'
-               BlueprintName = 'FBSDKCoreKit'
+               BlueprintIdentifier = '9ADBB0C5933BA3D88692AFDF'
+               BlueprintName = 'Cloudinary'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'FBSDKCoreKit.framework'>
+               BuildableName = 'Cloudinary.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
