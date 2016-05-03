@@ -132,11 +132,11 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
             cell.front.accessibilityLabel = "\(indexPath.row)"
         }
         
-//        if(cell.frontIsImg) {
-//            cell.frontImgView!.userInteractionEnabled = true
-//            let tapRecognizer = UITapGestureRecognizer(target: self, action: "editCard:")
-//            cell.frontImgView!.addGestureRecognizer(tapRecognizer)
-//        }
+        if(cell.frontIsImg) {
+            cell.frontImgView!.userInteractionEnabled = true
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(drawCardBtn(_:)))
+            cell.frontImgView!.addGestureRecognizer(tapRecognizer)
+        }
 
         return cell
     }

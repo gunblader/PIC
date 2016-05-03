@@ -39,6 +39,22 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
+        
+        if (frontIsImg){
+            frontImgView?.hidden = false
+            front.hidden = true
+        } else {
+            front.hidden = false
+            frontImgView?.hidden = true
+        }
+        
+        if (backIsImg){
+            backImgView?.hidden = false
+            back.hidden = true
+        } else {
+            back.hidden = false
+            backImgView?.hidden = true
+        }
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -62,8 +78,8 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
         // 1
         front = UITextField(frame: CGRect.null)
         back = UITextField(frame: CGRect.null)
-        frontImgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 90))
-        backImgView = UIImageView(frame: CGRect(x: 50, y: 0, width: 100, height: 90))
+        frontImgView = UIImageView(frame: CGRect.null)
+        backImgView = UIImageView(frame: CGRect.null)
 
         
         front.textColor = UIColor.blackColor()
@@ -72,12 +88,15 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
         front.font = UIFont.systemFontOfSize(16)
         back.font = UIFont.systemFontOfSize(16)
 
+        frontImgView?.contentMode = UIViewContentMode.ScaleAspectFit
+        backImgView?.contentMode = UIViewContentMode.ScaleAspectFit
+
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         // 2
         front.delegate = self
         back.delegate = self
-
 
         front.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
         back.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
@@ -96,11 +115,13 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        bounds.size.width/2
+
         front.frame = CGRect(x: leftMarginForLabel, y: 0, width: bounds.size.width - leftMarginForLabel, height: bounds.size.height)
-        back.frame = CGRect(x: leftMarginForLabel + 200, y: 0, width: bounds.size.width - leftMarginForLabel, height: bounds.size.height)
-        frontImgView!.frame = CGRect(x: leftMarginForLabel, y: 0, width: bounds.size.width - leftMarginForLabel, height: bounds.size.height)
-        backImgView!.frame =  CGRect(x: leftMarginForLabel + 200, y: 0, width: bounds.size.width - leftMarginForLabel, height: bounds.size.height)
+        frontImgView!.frame = CGRect(x: leftMarginForLabel, y: 0, width: bounds.size.width/2 - leftMarginForLabel, height: bounds.size.height)
+
+        
+        back.frame = CGRect(x: leftMarginForLabel + bounds.size.width/2, y: 0, width: bounds.size.width - leftMarginForLabel, height: bounds.size.height)
+        backImgView!.frame =  CGRect(x: leftMarginForLabel + bounds.size.width/2, y: 0, width: bounds.size.width/2 - leftMarginForLabel, height: bounds.size.height)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
