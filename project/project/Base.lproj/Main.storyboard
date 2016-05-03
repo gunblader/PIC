@@ -676,8 +676,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="317" height="519"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3F-FB-2WD">
-                                            <rect key="frame" x="28" y="178" width="260" height="167"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jqX-iX-TOi">
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="519"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y3F-FB-2WD">
+                                            <rect key="frame" x="28" y="176" width="260" height="167"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -687,6 +690,7 @@
                                 </view>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="imgView" destination="jqX-iX-TOi" id="ihL-HB-YsO"/>
                                     <outlet property="label" destination="Y3F-FB-2WD" id="M1J-dK-lBE"/>
                                 </connections>
                             </collectionViewCell>
@@ -791,7 +795,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="sx9-aO-APP"/>
         <segue reference="f1j-Wx-wUq"/>
-        <segue reference="xa3-RB-p2Y"/>
         <segue reference="lcA-tE-8gB"/>
+        <segue reference="ik9-2n-dLf"/>
     </inferredMetricsTieBreakers>
 </document>

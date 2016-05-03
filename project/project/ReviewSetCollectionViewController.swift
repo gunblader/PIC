@@ -55,10 +55,29 @@ class ReviewSetCollectionViewController: UICollectionViewController {
         
         let index:Int = indexPath.row
         
+        var card = self.cards[index]
         // Set the cell to display the info
-        cell.front = self.cards[index].valueForKey("front") as! String
-        cell.back = self.cards[index].valueForKey("back") as! String
-        cell.label.text = cell.front
+        cell.front = card.valueForKey("front") as! String
+        cell.back = card.valueForKey("back") as! String
+        cell.frontImg = UIImage()
+        cell.frontIsImg = card.valueForKey("frontIsImg") as! Bool
+        cell.backIsImg = card.valueForKey("backIsImg") as! Bool
+        cell.backImg = UIImage()
+        
+        if(cell.frontIsImg) {
+            cell.imgView.hidden = false
+            cell.frontImg = UIImage(data: card.valueForKey("frontImg") as! NSData)!
+            cell.imgView.image = cell.frontImg
+            cell.label.text = ""
+        } else {
+            cell.imgView.hidden = true
+            cell.label.text = cell.front
+        }
+        
+        if(cell.backIsImg) {
+            cell.backImg = UIImage(data: card.valueForKey("backImg") as! NSData)!
+        }
+        
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = UIColor(red:0.87, green:0.91, blue:0.96, alpha:1.0).CGColor
         return cell
