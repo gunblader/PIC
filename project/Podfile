@@ -8,3 +8,4 @@ pod 'Alamofire'
 pod 'FBSDKLoginKit'
 pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
+pod ‘Cloudinary’
