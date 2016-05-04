@@ -75,7 +75,7 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM-dd-yyyy"
         newCardSet.date = dateFormatter.stringFromDate(date)
-        newCardSet.id = (idCounter.objectForKey("numSets") as? Int)!
+        newCardSet.id = (idCounter.objectForKey("numSets") as? Int)! //crashed on making a set
         idCounter.setObject(setId + 1, forKey: "numSets")
         
         saveCardSet(newCardSet)

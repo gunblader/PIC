@@ -12,6 +12,7 @@ class PracticeDrawViewController: UIViewController {
     
     var cards = [Card]()
     var setName =  ""
+    var cardAnswers = [UIImage?]()
     
     var brush: CGFloat = 10.0
     var opacity: CGFloat = 1.0
@@ -214,6 +215,8 @@ class PracticeDrawViewController: UIViewController {
             
             destination.setName = self.setName
             destination.cards = self.cards
+            cardAnswers[indexDrawingAt] = image
+            destination.cardAnswers = self.cardAnswers
         }
         
     }
