@@ -96,6 +96,9 @@ class TestSetCollectionViewController: UICollectionViewController {
             cell.drawAnswerBtn.hidden = true
             cell.nextBtn.hidden = true
             cell.answerImageView.hidden = false
+            cell.currentCardLabel.hidden = true
+            cell.currentCardImage.hidden = false
+            cell.currentCardImage.image = card.backImg
             cell.answerImageView.image = self.returnedDrawImage
             cell.messageLabel.text = ""
             cell.correctBtn.hidden = false
