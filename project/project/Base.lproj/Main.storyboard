@@ -388,7 +388,7 @@
                                 <rect key="frame" x="0.0" y="206" width="414" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7ji-F1-11j" id="89J-XX-aTO">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="99.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Evp-ua-h34">
@@ -594,7 +594,7 @@
                                 <rect key="frame" x="0.0" y="115" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bMe-aM-qNO" id="mDS-gU-lQB">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="59.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Back" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4lQ-sE-EZc">
@@ -670,7 +670,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reviewCollection" id="ZnU-kA-X0K" customClass="ReviewCollectionCell" customModule="project" customModuleProvider="target">
-                                <rect key="frame" x="48.5" y="50" width="317" height="519"/>
+                                <rect key="frame" x="49" y="50" width="317" height="519"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="317" height="519"/>
@@ -734,14 +734,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gz3-xS-pTS">
-                                <rect key="frame" x="348" y="662" width="46" height="30"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="saveDrawingBtn:" destination="L1F-f7-rYM" eventType="touchUpInside" id="khx-40-Cnj"/>
-                                    <segue destination="1Uu-oC-rod" kind="showDetail" action="showViewController:sender:" id="4vx-Ix-c7D"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gzh-cF-fkR">
                                 <rect key="frame" x="20" y="662" width="46" height="30"/>
                                 <state key="normal" title="Erase"/>
@@ -766,14 +758,33 @@
                                 <rect key="frame" x="300" y="662" width="46" height="30"/>
                                 <state key="normal" title="Clear"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dyw-IU-KJl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dyw-IU-KJl">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="654"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="brG-1q-Y3q">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="brG-1q-Y3q">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="654"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gz3-xS-pTS">
+                                <rect key="frame" x="348" y="654" width="46" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveDrawingBtn:" destination="L1F-f7-rYM" eventType="touchUpInside" id="khx-40-Cnj"/>
+                                    <segue destination="1Uu-oC-rod" kind="showDetail" action="showViewController:sender:" id="4vx-Ix-c7D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dyw-IU-KJl" firstAttribute="top" secondItem="44M-Rq-TCp" secondAttribute="top" id="1jK-9R-lgJ"/>
+                            <constraint firstItem="brG-1q-Y3q" firstAttribute="top" secondItem="44M-Rq-TCp" secondAttribute="top" id="3Bm-Xl-vfo"/>
+                            <constraint firstItem="h8J-SD-2Yi" firstAttribute="top" secondItem="Gz3-xS-pTS" secondAttribute="bottom" id="6gx-ak-h5u"/>
+                            <constraint firstItem="dyw-IU-KJl" firstAttribute="bottom" secondItem="brG-1q-Y3q" secondAttribute="bottom" id="HTY-G2-ek1"/>
+                            <constraint firstItem="h8J-SD-2Yi" firstAttribute="top" secondItem="Gz3-xS-pTS" secondAttribute="bottom" constant="8" id="X1a-wl-IKt"/>
+                            <constraint firstAttribute="trailing" secondItem="dyw-IU-KJl" secondAttribute="trailing" id="ffz-C8-yXi"/>
+                            <constraint firstAttribute="trailing" secondItem="brG-1q-Y3q" secondAttribute="trailing" id="gSy-PF-13q"/>
+                            <constraint firstItem="dyw-IU-KJl" firstAttribute="leading" secondItem="44M-Rq-TCp" secondAttribute="leading" id="odb-SJ-YS1"/>
+                            <constraint firstItem="brG-1q-Y3q" firstAttribute="leading" secondItem="44M-Rq-TCp" secondAttribute="leading" id="t3F-qY-tEU"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
@@ -794,7 +805,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="sx9-aO-APP"/>
-        <segue reference="f1j-Wx-wUq"/>
+        <segue reference="4vx-Ix-c7D"/>
         <segue reference="lcA-tE-8gB"/>
         <segue reference="ik9-2n-dLf"/>
     </inferredMetricsTieBreakers>

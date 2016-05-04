@@ -31,6 +31,7 @@ class DrawViewController: UIViewController {
         if(drawFront && card.frontIsImg) {
             mainImageView.image = card.frontImg
         } else if(!drawFront && card.backIsImg) {
+            print("draw back")
             mainImageView.image = card.backImg
         }
     }
@@ -83,7 +84,7 @@ class DrawViewController: UIViewController {
         mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
             width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
         let image = UIGraphicsGetImageFromCurrentImageContext()
-
+        card.edited = true
         if(drawFront) {
             card.frontImg = image
             card.frontIsImg = true
@@ -182,7 +183,7 @@ class DrawViewController: UIViewController {
             destination.imgToSave = image
             
             print(image)
-            
+
             destination.setId = setId
             destination.setName = setName
             destination.listOfCards = listOfCards

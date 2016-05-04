@@ -132,13 +132,26 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
             cell.front.accessibilityLabel = "\(indexPath.row)"
         }
         
+
         if(cell.frontIsImg) {
             cell.frontImgView!.userInteractionEnabled = true
-            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(drawCardBtn(_:)))
+            let tapRecognizer = MyTapGestureRecognizer(target: self, action: "editFront:")
+            tapRecognizer.cardToEdit = card
             cell.frontImgView!.addGestureRecognizer(tapRecognizer)
+        }
+        
+        if(cell.backIsImg) {
+            cell.backImgView!.userInteractionEnabled = true
+            let tapRecognizer2 = MyTapGestureRecognizer(target: self, action: "editBack:")
+            tapRecognizer2.cardToEdit = card
+            cell.backImgView!.addGestureRecognizer(tapRecognizer2)
         }
 
         return cell
+    }
+    
+    class MyTapGestureRecognizer: UITapGestureRecognizer {
+        var cardToEdit: Card?
     }
     
     func attatchKeyboardToolbar(textField : UITextField) {
@@ -172,10 +185,71 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
         performSegueWithIdentifier("editToDrawSegue", sender: nil)
     }
     
-    func editCard(theCard: Card) {
-        editDrawing = true
-        cardToDraw = theCard
-        performSegueWithIdentifier("editToDrawSegue", sender: nil)
+    func editFront(gestureRecognizer: MyTapGestureRecognizer) {
+
+        let alertController = UIAlertController(title: "UIActionSheet", message: "UIActionSheet", preferredStyle: .ActionSheet)
+        let edit = UIAlertAction(title: "Edit Term", style: .Default, handler: { (action) -> Void in
+            print("Ok Button Pressed")
+            self.cardToDraw = gestureRecognizer.cardToEdit!
+            self.cardToDraw.drawFront = true
+            self.editDrawing = true
+            self.performSegueWithIdentifier("editToDrawSegue", sender: nil)
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+            print("Cancel Button Pressed")
+        })
+        
+        let  keyboard = UIAlertAction(title: "Keyboard", style: .Destructive) { (action) -> Void in
+            if((gestureRecognizer.cardToEdit?.drawFront) != nil){
+                print("Delete Button Pressed")
+                gestureRecognizer.cardToEdit?.frontImg = UIImage()
+                gestureRecognizer.cardToEdit?.frontIsImg = false
+                gestureRecognizer.cardToEdit?.edited = true
+                self.tableView.reloadData()
+            } else {
+                print("Delete Button Pressed")
+                gestureRecognizer.cardToEdit?.backImg = UIImage()
+                gestureRecognizer.cardToEdit?.backIsImg = false
+                gestureRecognizer.cardToEdit?.edited = true
+                self.tableView.reloadData()
+            }
+        }
+        
+        alertController.addAction(edit)
+        alertController.addAction(cancel)
+        alertController.addAction(keyboard)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func editBack(gestureRecognizer: MyTapGestureRecognizer) {
+        
+        let alertController = UIAlertController(title: "UIActionSheet", message: "UIActionSheet", preferredStyle: .ActionSheet)
+        let edit = UIAlertAction(title: "Edit Term", style: .Default, handler: { (action) -> Void in
+            print("Ok Button Pressed")
+
+            self.cardToDraw = gestureRecognizer.cardToEdit!
+            self.cardToDraw.drawFront = false
+            self.editDrawing = true
+            self.performSegueWithIdentifier("editToDrawSegue", sender: nil)
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+            print("Cancel Button Pressed")
+        })
+        
+        let  keyboard = UIAlertAction(title: "Keyboard", style: .Destructive) { (action) -> Void in
+                print("Delete Button Pressed")
+                gestureRecognizer.cardToEdit?.backImg = UIImage()
+                gestureRecognizer.cardToEdit?.backIsImg = false
+                gestureRecognizer.cardToEdit?.edited = true
+                self.tableView.reloadData()
+        }
+        
+        alertController.addAction(edit)
+        alertController.addAction(cancel)
+        alertController.addAction(keyboard)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func saveNewCards() {
@@ -206,9 +280,10 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
                         let card = results[0]
                         
                         // Save or delete card
-                        if(cardToSave.front == "" && cardToSave.back == "") {
+                        if( (cardToSave.front == "" && cardToSave.back == "") && (!cardToSave.frontIsImg && !cardToSave.backIsImg)) {
                             managedContext.deleteObject(card)
                         } else {
+                            print("saving yo")
                             card.setValue(cardToSave.front, forKey: "front")
                             card.setValue(cardToSave.back, forKey: "back")
                             card.setValue(cardToSave.frontIsImg, forKey: "frontIsImg")
@@ -266,11 +341,14 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
             destination.listOfCards = listOfCards
             if (editDrawing) {
                 destination.card = cardToDraw
+                destination.drawFront = cardToDraw.drawFront
+                print("SEGUE")
+                print(destination.drawFront)
             } else {
                 destination.card = listOfCards[(self.tableView?.indexPathForSelectedRow!.row)!]
+                destination.drawFront = listOfCards[(self.tableView?.indexPathForSelectedRow!.row)!].drawFront
             }
             print(drawFront)
-            destination.drawFront = listOfCards[(self.tableView?.indexPathForSelectedRow!.row)!].drawFront
         }
         
         navigationController?.setToolbarHidden(true, animated: false)
