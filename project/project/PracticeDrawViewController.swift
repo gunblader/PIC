@@ -221,6 +221,15 @@ class PracticeDrawViewController: UIViewController {
         
     }
     
+    func moveToHome ()
+    {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let vc: MySetsTableViewController  = storyboard.instantiateViewControllerWithIdentifier("homeView") as! MySetsTableViewController
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     
     /*
