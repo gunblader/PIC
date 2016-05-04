@@ -116,7 +116,7 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! EditSetTableViewCell
         let card = listOfCards[indexPath.row]
         cell.listItems = card
-        cell.selectionStyle = UITableViewCellSelectionStyle.Blue
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
 
         attatchKeyboardToolbar(cell.front)
         attatchKeyboardToolbar(cell.back)
@@ -165,6 +165,7 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
         addCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
         
         let drawCard = UIBarButtonItem(title: "Draw", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditSetTableViewController.drawCardBtn(_:)))
+        drawCard.image = UIImage(named: "draw.png")
         drawCard.setTitleTextAttributes([NSFontAttributeName: font!], forState: UIControlState.Normal)
         drawCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
         toolbar.items = [flexSpace, addCard, flexSpace, drawCard]
@@ -188,7 +189,7 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
     
     func editFront(gestureRecognizer: MyTapGestureRecognizer) {
 
-        let alertController = UIAlertController(title: "UIActionSheet", message: "UIActionSheet", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: "Edit Term", message: "", preferredStyle: .ActionSheet)
         let edit = UIAlertAction(title: "Edit Term", style: .Default, handler: { (action) -> Void in
             print("Ok Button Pressed")
             self.cardToDraw = gestureRecognizer.cardToEdit!
@@ -225,7 +226,7 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
     
     func editBack(gestureRecognizer: MyTapGestureRecognizer) {
         
-        let alertController = UIAlertController(title: "UIActionSheet", message: "UIActionSheet", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: .ActionSheet)
         let edit = UIAlertAction(title: "Edit Term", style: .Default, handler: { (action) -> Void in
             print("Ok Button Pressed")
 
@@ -326,6 +327,63 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
         }
     }
     
+    func getSet() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName:"CardSet")
+        
+        var fetchedResults:[NSManagedObject]? = nil
+        
+        do {
+            fetchRequest.predicate = NSPredicate(format: "id == %d", setId)
+            try fetchedResults = managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+        } catch {
+            // what to do if an error occurs?
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+        
+        if let results = fetchedResults {
+            set = results[0]
+        } else {
+            print("Could not fetch")
+        }
+    }
+    
+    func saveCardSet() {
+        print("SAVE CARD SET")
+        print(set)
+        getSet()
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        // Create the entity we want to save
+        let entity =  NSEntityDescription.entityForName("CardSet", inManagedObjectContext: managedContext)
+        
+        // Set the attribute values
+        set!.setValue(setNameTextField.text!, forKey: "name")
+        let date = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        set!.setValue(dateFormatter.stringFromDate(date), forKey: "date")
+        set!.setValue(setId, forKey: "id")
+
+        // Commit the changes.
+        do {
+            try managedContext.save()
+        } catch {
+            // what to do if an error occurs?
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? SetTableViewController {
@@ -334,6 +392,7 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
             self.view.endEditing(true)
             
             saveNewCards()
+            saveCardSet()
         }
         
         if let destination = segue.destinationViewController as? DrawViewController {

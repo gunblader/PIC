@@ -82,6 +82,8 @@ class MySetsTableViewController: UITableViewController, UISearchBarDelegate, UIS
         cardSets = []
         
         for set in sets {
+            print(set.valueForKey("name") as! String)
+            print(set.valueForKey("date") as! String)
             cardSets.append(CardSet(name: set.valueForKey("name") as! String, date: set.valueForKey("date") as! String, id: set.valueForKey("id") as! Int))
         }
     }

@@ -150,27 +150,25 @@ class TestSetCollectionViewController: UICollectionViewController {
             destination.wrong = self.wrongCount
             self.view.endEditing(true)
         }
-        
+        if let destination = segue.destinationViewController as? TestSetCollectionViewController {
+            print("return to test mode")
+            destination.returningFromDraw = true
+            
+//            UIGraphicsBeginImageContext(mainImageView.bounds.size)
+//            mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
+//                width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            destination.returnedDrawImage = image
+            
+            print(image)
+            
+            destination.testSetCount = self.testSetCount
+            destination.setName = setName
+//            destination.correctCount = self.correct
+//            destination.wrongCount = self.wrong
+        }
         navigationController?.setToolbarHidden(true, animated: false)
-    }
-    
-    if let destination = segue.destinationViewController as? TestSetCollectionViewController {
-        print("return to test mode")
-        destination.returningFromDraw = true
-        
-        UIGraphicsBeginImageContext(mainImageView.bounds.size)
-        mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
-            width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        destination.returnedDrawImage = image
-        
-        print(image)
-        
-        destination.testSetCount = self.testSetCount
-        destination.setName = setName
-        destination.correctCount = self.correct
-        destination.wrongCount = self.wrong
     }
 
     

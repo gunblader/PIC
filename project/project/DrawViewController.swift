@@ -21,6 +21,10 @@ class DrawViewController: UIViewController {
     var listOfCards = [Card]()
     var drawFront = true
     var card = Card()
+    
+    var testSetCount = 0
+    var correct = 0
+    var wrong = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -90,6 +90,11 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
 
         frontImgView?.contentMode = UIViewContentMode.ScaleAspectFit
         backImgView?.contentMode = UIViewContentMode.ScaleAspectFit
+        
+        frontImgView?.layer.borderColor = UIColor.lightGrayColor().CGColor
+        frontImgView?.layer.borderWidth = 0.5
+        backImgView?.layer.borderColor = UIColor.lightGrayColor().CGColor
+        backImgView?.layer.borderWidth = 0.5
 
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -111,17 +116,19 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
         back.placeholder = "Back"
     }
     
-    let leftMarginForLabel: CGFloat = 15.0
+    let leftMarginForLabel: CGFloat = 20.0
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        let imgSize = bounds.size.height - leftMarginForLabel
 
         front.frame = CGRect(x: leftMarginForLabel, y: 0, width: bounds.size.width - leftMarginForLabel, height: bounds.size.height)
-        frontImgView!.frame = CGRect(x: leftMarginForLabel, y: 0, width: bounds.size.width/2 - leftMarginForLabel, height: bounds.size.height)
+        frontImgView!.frame = CGRect(x: leftMarginForLabel, y: leftMarginForLabel/2, width: bounds.size.width/2 - leftMarginForLabel*2, height: imgSize)
 
         
         back.frame = CGRect(x: leftMarginForLabel + bounds.size.width/2, y: 0, width: bounds.size.width - leftMarginForLabel, height: bounds.size.height)
-        backImgView!.frame =  CGRect(x: leftMarginForLabel + bounds.size.width/2, y: 0, width: bounds.size.width/2 - leftMarginForLabel, height: bounds.size.height)
+        backImgView!.frame = CGRect(x: leftMarginForLabel + bounds.size.width/2, y: leftMarginForLabel/2, width: bounds.size.width/2 - leftMarginForLabel*2, height: imgSize)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {

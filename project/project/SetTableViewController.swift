@@ -32,6 +32,9 @@ class SetTableViewController: UITableViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
         getCards()
         listOfCards = [Card]()
+        tableView.registerClass(SetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        self.tableView.rowHeight = 100.0
+
         tableView.reloadData()
     }
     
@@ -84,7 +87,7 @@ class SetTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SetTableViewCell
-
+        
         // Get the data from Core Data
         let card = cards[indexPath.row]
         let front = "\(card.valueForKey("front") as! String)"
@@ -94,24 +97,29 @@ class SetTableViewController: UITableViewController {
         var frontImg = UIImage()
         var backImg = UIImage()
         
+        
         if(frontIsImg) {
             frontImg = UIImage(data: card.valueForKey("frontImg") as! NSData)!
-            cell.frontImg.image = frontImg
+            cell.frontImgView!.image = frontImg
             
         } else {
-            cell.frontLabel!.text = front
+            cell.front!.text = front
         }
         
         if(backIsImg) {
             backImg = UIImage(data: card.valueForKey("backImg") as! NSData)!
-            cell.backImg.image = backImg
+            cell.backImgView!.image = backImg
         } else {
-            cell.backLabel!.text = back
+            cell.back!.text = back
         }
 
         let id = card.valueForKey("id") as! Int
 
         let selectedCard = Card(front: front, back: back, frontIsImg: frontIsImg, backIsImg: backIsImg, frontImg: frontImg, backImg: backImg, id: id, setId: setId, edited: false, newCard: false, drawFront: true)
+        cell.listItems = selectedCard
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.card = selectedCard
+
         listOfCards += [selectedCard]
 
         return cell
