@@ -85,6 +85,7 @@ class TestCollectionViewCell: UICollectionViewCell {
         self.correct = true
         self.correctBtn.hidden = true
         self.wrongBtn.hidden = true
+        self.answerImageView.hidden = true
         self.testController?.testStep(self.correct)
     }
     
@@ -92,6 +93,7 @@ class TestCollectionViewCell: UICollectionViewCell {
         self.correct = false
         self.correctBtn.hidden = true
         self.wrongBtn.hidden = true
+        self.answerImageView.hidden = true
         self.testController?.testStep(self.correct)
     }
     

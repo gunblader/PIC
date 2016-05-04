@@ -89,6 +89,7 @@ class TestSetCollectionViewController: UICollectionViewController {
         }
         if self.returningFromDraw {
             //configure cell for Returned Draw Answer
+            self.returningFromDraw = false
             cell.answerTextField.hidden = true
             cell.answerLabel.hidden = true
             cell.messageLabel.hidden = true
