@@ -37,7 +37,7 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         navigationController?.setToolbarHidden(false, animated: false)
         navigationController?.setNavigationBarHidden(false, animated: false)
-        
+        self.editDrawing = false
         self.title = "Edit Set"
         self.tableView.rowHeight = 100.0
 
@@ -124,7 +124,7 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
         cell.card = card
         cell.nsindex = indexPath
         cell.tableView = self
-        
+        print(card.backIsImg)
         drawFront = cell.drawFront
         print(drawFront)
         if(card.newCard) {
@@ -182,6 +182,7 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
     }
     
     @IBAction func drawCardBtn(sender: AnyObject) {
+        editDrawing = false
         performSegueWithIdentifier("editToDrawSegue", sender: nil)
     }
     
@@ -342,11 +343,13 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
             if (editDrawing) {
                 destination.card = cardToDraw
                 destination.drawFront = cardToDraw.drawFront
-                print("SEGUE")
+                print("Edit a drawing")
                 print(destination.drawFront)
             } else {
+                print("Drawing a new drawing")
                 destination.card = listOfCards[(self.tableView?.indexPathForSelectedRow!.row)!]
                 destination.drawFront = listOfCards[(self.tableView?.indexPathForSelectedRow!.row)!].drawFront
+                destination.mainImageView = nil
             }
             print(drawFront)
         }

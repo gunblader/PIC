@@ -27,6 +27,10 @@ class DrawViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        navigationController?.setToolbarHidden(false, animated: false)
+        navigationController?.interactivePopGestureRecognizer?.enabled = false
+        print(navigationController?.navigationBar.backItem?.backBarButtonItem?.action.description)
+        
         // If editing an image, load it
         if(drawFront && card.frontIsImg) {
             mainImageView.image = card.frontImg
@@ -48,19 +52,8 @@ class DrawViewController: UIViewController {
     var brushWidth: CGFloat = 5
     var swiped = false
     
-    let colors: [(CGFloat, CGFloat, CGFloat)] = [
-        (0, 0, 0),
-        (105.0 / 255.0, 105.0 / 255.0, 105.0 / 255.0),
-        (1.0, 0, 0),
-        (0, 0, 1.0),
-        (51.0 / 255.0, 204.0 / 255.0, 1.0),
-        (102.0 / 255.0, 204.0 / 255.0, 0),
-        (102.0 / 255.0, 1.0, 0),
-        (160.0 / 255.0, 82.0 / 255.0, 45.0 / 255.0),
-        (1.0, 102.0 / 255.0, 0),
-        (1.0, 1.0, 0),
-        (1.0, 1.0, 1.0),
-        ]
+    //(102.0 / 255.0, 204.0 / 255.0, 0), //green
+
     
     // MARK: - Actions
     
@@ -68,21 +61,11 @@ class DrawViewController: UIViewController {
         mainImageView.image = nil
     }
     
-    @IBAction func share(sender: AnyObject) {
+    func saveDrawing() {
+        print("SAVING")
         UIGraphicsBeginImageContext(mainImageView.bounds.size)
         mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
-            width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        let activity = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        presentViewController(activity, animated: true, completion: nil)
-    }
-    
-    @IBAction func saveDrawingBtn(sender: AnyObject) {
-        UIGraphicsBeginImageContext(mainImageView.bounds.size)
-        mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
-            width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
+            width: mainImageView.frame.size.width, height: mainImageView.frame.size.height - (self.navigationController?.toolbar.frame.size.height)!))
         let image = UIGraphicsGetImageFromCurrentImageContext()
         card.edited = true
         if(drawFront) {
@@ -92,26 +75,50 @@ class DrawViewController: UIViewController {
             card.backImg = image
             card.backIsImg = true
         }
+
     }
     
-    @IBAction func pencilPressed(sender: AnyObject) {
-        
-        var index = sender.tag ?? 0
-        if index < 0 || index >= colors.count {
-            index = 0
-        }
-        
-        (red, green, blue) = colors[index]
-        
-        if index == colors.count - 1 {
-            opacity = 1.0
-        }
+    @IBAction func blackBtn(sender: AnyObject) {
+        brushWidth = 5.0
+        red = 0.0
+        green = 0.0
+        blue = 0.0
+    }
+    @IBAction func redBtn(sender: AnyObject) {
+        brushWidth = 5.0
+        red = 1.0
+        green = 0.0
+        blue = 0.0
+    }
+    @IBAction func greenBtn(sender: AnyObject) {
+        brushWidth = 5.0
+        red = 102.0 / 255.0
+        green = 204.0 / 255.0
+        blue = 0.0
+    }
+    
+    @IBAction func blueBtn(sender: AnyObject) {
+        brushWidth = 5.0
+        red = 0.0
+        green = 0.0
+        blue = 1.0
+    }
+    
+    @IBAction func eraseBtn(sender: AnyObject) {
+        brushWidth = 50.0
+        red = 1.0
+        green = 1.0
+        blue = 1.0
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         swiped = false
         if let touch = touches.first{
             lastPoint = touch.locationInView(self.view)
+            let frameH = view.frame.size.height
+            let navH = (self.navigationController?.toolbar.frame.size.height)!
+            let newH = frameH - navH
+            lastPoint.y += lastPoint.y - (lastPoint.y/frameH) * newH;
         }
     }
     
@@ -145,8 +152,15 @@ class DrawViewController: UIViewController {
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // 6
         swiped = true
+
         if let touch = touches.first {
-            let currentPoint = touch.locationInView(view)
+            var currentPoint = touch.locationInView(view)
+            let frameH = view.frame.size.height
+            let navH = (self.navigationController?.toolbar.frame.size.height)!
+            let newH = frameH - navH
+            currentPoint.y += currentPoint.y - (currentPoint.y/frameH) * newH;
+
+            
             drawLineFrom(lastPoint, toPoint: currentPoint)
             
             // 7
@@ -163,8 +177,8 @@ class DrawViewController: UIViewController {
         
         // Merge tempImageView into mainImageView
         UIGraphicsBeginImageContext(mainImageView.frame.size)
-        mainImageView.image?.drawInRect(CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: CGBlendMode.Normal, alpha: 1.0)
-        tempImageView.image?.drawInRect(CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: CGBlendMode.Normal, alpha: opacity)
+        mainImageView.image?.drawInRect(CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height - (self.navigationController?.toolbar.frame.size.height)!), blendMode: CGBlendMode.Normal, alpha: 1.0)
+        tempImageView.image?.drawInRect(CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height - (self.navigationController?.toolbar.frame.size.height)!), blendMode: CGBlendMode.Normal, alpha: opacity)
         mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -174,10 +188,13 @@ class DrawViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? EditSetTableViewController {
             destination.returningFromDraw = true
+            if segue.identifier == "saveSeg" {
+                self.saveDrawing()
+            }
             
             UIGraphicsBeginImageContext(mainImageView.bounds.size)
             mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
-                width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
+                width: mainImageView.frame.size.width, height: mainImageView.frame.size.height - (self.navigationController?.toolbar.frame.size.height)!))
             let image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             destination.imgToSave = image
