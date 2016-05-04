@@ -48,6 +48,11 @@ class PracticeController: UICollectionViewController {
         //        testSetCount = cards.count
     }
     
+    override func viewWillAppear(animated: Bool) {
+        let path: NSIndexPath = NSIndexPath(forRow: indexDrawing, inSection: 0)
+        self.collectionView?.scrollToItemAtIndexPath(path, atScrollPosition: UICollectionViewScrollPosition.CenteredVertically, animated: false)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -83,6 +88,7 @@ class PracticeController: UICollectionViewController {
         cell.controller = self
         cell.index = index
         cell.practiceView = self
+        cell.cardAnswers = self.cardAnswers
         
         // Set the cell to display the info
         
@@ -100,7 +106,16 @@ class PracticeController: UICollectionViewController {
             cell.answerImageView.image = self.imgToSave
             cell.tapForAnswer.hidden = true
             
-        } else if card.backIsImg {
+        }
+        else if self.returningFromDraw && cardAnswers[index] != nil{
+            cell.answerTextField.hidden = true
+            cell.answerLabel.hidden = true
+            cell.drawAnswerBtn.hidden = true
+            cell.answerImageView.hidden = false
+            cell.answerImageView.image = cardAnswers[index]
+            cell.tapForAnswer.hidden = true
+        }
+        else if card.backIsImg {
             //configure cell for Draw Answer
             cell.answerTextField.hidden = true
             cell.tapForAnswer.hidden = true

@@ -14,6 +14,7 @@ class PracticeCell: UICollectionViewCell {
     var currentCard: Card? = nil
     var doneDrawing: Bool = false
     var controller: PracticeController? = nil
+    var cardAnswers = [UIImage?]()
     
 //    @IBOutlet weak var testCountLabel: UILabel!
     
@@ -93,6 +94,7 @@ class PracticeCell: UICollectionViewCell {
         vc.cards = practiceView!.cards
         vc.setName = practiceView!.setName
         vc.indexDrawingAt = self.index
+        vc.cardAnswers = self.cardAnswers
         
         self.practiceView!.navigationController?.pushViewController(vc, animated: true)
     }
