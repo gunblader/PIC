@@ -144,6 +144,16 @@ class SetTableViewController: UITableViewController {
             destination.setName = setName
             destination.cards = self.cards
         }
+        
+        if let destination = segue.destinationViewController as? PracticeController {
+            destination.setName = setName
+            destination.cards = listOfCards
+        }
+        
+        if let destination = segue.destinationViewController as? TestSetCollectionViewController {
+            destination.setName = setName
+            destination.cards = listOfCards
+        }
     }
     
     

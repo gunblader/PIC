@@ -1,25 +1,29 @@
 //
-//  TestSetCollectionViewController.swift
+//  PracticeController.swift
 //  project
 //
-//  Created by Paul Bass on 5/4/16.
+//  Created by Christopher Komplin on 5/4/16.
 //  Copyright © 2016 cs378. All rights reserved.
 //
+
 import Foundation
 
 import UIKit
 import CoreData
 
-class TestSetCollectionViewController: UICollectionViewController {
+class PracticeController: UICollectionViewController {
     
     var cards = [Card]()
-    let reuseIdentifier = "testCollection"
+    let reuseIdentifier = "PracticeCell"
     var setName =  ""
     var testSetCount = 0
     var correctCount = 0
     var wrongCount = 0
-    var returnedDrawImage:UIImage? = nil
+    var cardAnswers = [UIImage?]()
     var returningFromDraw: Bool = false
+    var indexDrawing = 0
+    
+    var imgToSave:UIImage? = nil
     
     
     @IBOutlet weak var noCardsLabel: UILabel!
@@ -35,6 +39,11 @@ class TestSetCollectionViewController: UICollectionViewController {
             label.textAlignment = NSTextAlignment.Center
             label.text = "No cards to display."
             self.view.addSubview(label)
+        }
+        else {
+            for _ in cards {
+                cardAnswers.append(nil)
+            }
         }
         //        testSetCount = cards.count
     }
@@ -62,16 +71,18 @@ class TestSetCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return cards.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! TestCollectionViewCell
-        
-        let card = cards[testSetCount]
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PracticeCell
+        let index:Int = indexPath.row
+        let card = self.cards[index]
         cell.currentCard = card
-        cell.testController = self
+        cell.controller = self
+        cell.index = index
+        cell.practiceView = self
         
         // Set the cell to display the info
         
@@ -80,29 +91,30 @@ class TestSetCollectionViewController: UICollectionViewController {
         } else {
             cell.currentCardLabel.text = card.front
         }
-//        if self.returningFromDraw {
-//            //configure cell for Returned Draw Answer
-//            cell.answerTextField.hidden = true
-//            cell.answerLabel.hidden = true
-//            cell.messageLabel.hidden = true
-//            cell.textAnswerBtn.hidden = true
-//            cell.drawAnswerBtn.hidden = true
-//            cell.answerImageView.hidden = true
-//            cell.messageLabel.text = ""
-//            
-//        } else if !card.backIsImg {
-//            //configure cell for Draw Answer
-//            cell.answerTextField.hidden = true
-//            cell.answerLabel.hidden = true
-//            cell.messageLabel.hidden = true
-//            cell.textAnswerBtn.hidden = true
-//            
-//        } else {
-//            //configure cell for Text Answer
-//            cell.drawAnswerBtn.hidden = true
-//            cell.answerImageView.hidden = true
-//            cell.messageLabel.text = ""
-//        }
+        if self.returningFromDraw && index == indexDrawing {
+            //configure cell for Returned Draw Answer
+            cell.answerTextField.hidden = true
+            cell.answerLabel.hidden = true
+            cell.drawAnswerBtn.hidden = true
+            cell.answerImageView.hidden = false
+            cell.answerImageView.image = self.imgToSave
+            cell.tapForAnswer.hidden = true
+            
+        } else if card.backIsImg {
+            //configure cell for Draw Answer
+            cell.answerTextField.hidden = true
+            cell.tapForAnswer.hidden = true
+            cell.answerLabel.hidden = true
+            cell.drawAnswerBtn.hidden = false
+            
+        } else {
+            //configure cell for Text Answer
+            cell.drawAnswerBtn.hidden = true
+            cell.answerImageView.hidden = true
+            cell.answerTextField.hidden = false
+            cell.answerLabel.hidden = false
+            cell.tapForAnswer.hidden = false
+        }
 //        cell.testCountLabel.text = "\(self.testSetCount + 1)/\(self.cards.count)"
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = UIColor(red:0.87, green:0.91, blue:0.96, alpha:1.0).CGColor
@@ -112,8 +124,8 @@ class TestSetCollectionViewController: UICollectionViewController {
     
     //    function to implement for touch events
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! TestCollectionViewCell
-        //        cell.tapped()
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PracticeCell
+                cell.tapped()
         
     }
     
@@ -122,41 +134,24 @@ class TestSetCollectionViewController: UICollectionViewController {
         self.correctCount = correct
         self.wrongCount = wrong
     }
-    
-    func testStep (score:Bool){
-        if (self.testSetCount + 1) != cards.count {
-            self.testSetCount += 1
-            if score {
-                self.correctCount += 1
-            } else {
-                self.wrongCount += 1
-            }
-            self.collectionView?.reloadData()
-            
-        } else {
-            // Segue to Results View Controller
-            print("done with test")
-        }
-        
-    }
+
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print("draw seg")
-        if let destination = segue.destinationViewController as? DrawViewController {
+        if let destination = segue.destinationViewController as? PracticeDrawViewController {
             print("segue to draw")
-            destination.testSetCount = self.testSetCount
-            destination.correct = self.correctCount
-            destination.wrong = self.wrongCount
+            destination.cards = self.cards
+            destination.setName = self.setName
             self.view.endEditing(true)
         }
         if let destination = segue.destinationViewController as? TestSetCollectionViewController {
             print("return to test mode")
             destination.returningFromDraw = true
             
-//            UIGraphicsBeginImageContext(mainImageView.bounds.size)
-//            mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
-//                width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
+            //            UIGraphicsBeginImageContext(mainImageView.bounds.size)
+            //            mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
+            //                width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
             let image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             destination.returnedDrawImage = image
@@ -165,11 +160,11 @@ class TestSetCollectionViewController: UICollectionViewController {
             
             destination.testSetCount = self.testSetCount
             destination.setName = setName
-//            destination.correctCount = self.correct
-//            destination.wrongCount = self.wrong
+            //            destination.correctCount = self.correct
+            //            destination.wrongCount = self.wrong
         }
         navigationController?.setToolbarHidden(true, animated: false)
     }
-
+    
     
 }

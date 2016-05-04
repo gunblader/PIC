@@ -1,35 +1,38 @@
 //
-//  DrawViewController.swift
+//  PracticeDrawViewController.swift
 //  project
 //
-//  Created by Erica Halpern on 5/2/16.
+//  Created by Christopher Komplin on 5/4/16.
 //  Copyright © 2016 cs378. All rights reserved.
 //
-
 import UIKit
 import CoreData
 
-class DrawViewController: UIViewController {
+class PracticeDrawViewController: UIViewController {
+    
+    var cards = [Card]()
+    var setName =  ""
+    
     var brush: CGFloat = 10.0
     var opacity: CGFloat = 1.0
     var red: CGFloat = 0.0
     var green: CGFloat = 0.0
     var blue: CGFloat = 0.0
-    var setName =  ""
     var setId = -1
     var set:NSManagedObject? = nil
     var listOfCards = [Card]()
     var drawFront = true
     var card = Card()
+    var indexDrawingAt: Int = 0
     
     var testSetCount = 0
     var correct = 0
     var wrong = 0
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         navigationController?.setToolbarHidden(false, animated: false)
@@ -44,7 +47,7 @@ class DrawViewController: UIViewController {
             mainImageView.image = card.backImg
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -58,7 +61,7 @@ class DrawViewController: UIViewController {
     var swiped = false
     
     //(102.0 / 255.0, 204.0 / 255.0, 0), //green
-
+    
     
     // MARK: - Actions
     
@@ -80,7 +83,7 @@ class DrawViewController: UIViewController {
             card.backImg = image
             card.backIsImg = true
         }
-
+        
     }
     
     @IBAction func blackBtn(sender: AnyObject) {
@@ -157,14 +160,14 @@ class DrawViewController: UIViewController {
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // 6
         swiped = true
-
+        
         if let touch = touches.first {
             var currentPoint = touch.locationInView(view)
             let frameH = view.frame.size.height
             let navH = (self.navigationController?.toolbar.frame.size.height)!
             let newH = frameH - navH
             currentPoint.y += currentPoint.y - (currentPoint.y/frameH) * newH;
-
+            
             
             drawLineFrom(lastPoint, toPoint: currentPoint)
             
@@ -192,7 +195,7 @@ class DrawViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if let destination = segue.destinationViewController as? EditSetTableViewController {
+        if let destination = segue.destinationViewController as? PracticeController {
             destination.returningFromDraw = true
             if segue.identifier == "saveSeg" {
                 self.saveDrawing()
@@ -206,24 +209,25 @@ class DrawViewController: UIViewController {
             destination.imgToSave = image
             
             print(image)
-
-            destination.setId = setId
-            destination.setName = setName
-            destination.listOfCards = listOfCards
+            print("Index drawing at \(indexDrawingAt)")
+            destination.indexDrawing = self.indexDrawingAt
+            
+            destination.setName = self.setName
+            destination.cards = self.cards
         }
         
     }
-
-
+    
+    
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
