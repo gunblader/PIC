@@ -152,7 +152,7 @@ class SetTableViewController: UITableViewController {
         
         if let destination = segue.destinationViewController as? TestSetCollectionViewController {
             destination.setName = setName
-            destination.cards = listOfCards
+            destination.cards = self.listOfCards
         }
     }
     

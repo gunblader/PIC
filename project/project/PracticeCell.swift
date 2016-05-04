@@ -31,7 +31,6 @@ class PracticeCell: UICollectionViewCell {
 //    @IBOutlet weak var correctBtn: UIButton!
 //    @IBOutlet weak var wrongBtn: UIButton!
     
-    @IBOutlet weak var messageLabel: UILabel!
     
     var practiceView:PracticeController? = nil
     var index: Int = 0
@@ -64,26 +63,26 @@ class PracticeCell: UICollectionViewCell {
         draw()
     }
     
-    func checkTextAnswer() {
-        
-        if currentCard!.back.lowercaseString == answerTextField.text?.lowercaseString  {
-            //Answer was correct
-            self.messageLabel.numberOfLines = 0
-            self.messageLabel.text = self.messageLabel.text! + "\n" + "Correct!"
-        }
-        else {
-            //Answer was wrong
-            self.messageLabel.numberOfLines = 0
-            var stringHistory = [String]()
-            stringHistory.append("Wrong!")
-            stringHistory.append("Answer was: ")
-            stringHistory.append("\(self.currentCard!.back)")
-            self.messageLabel.text = stringHistory.joinWithSeparator("\n")
-            //            self.messageLabel.text = self.messageLabel.text! + "\n" + "Wrong!"
-            //            self.messageLabel.text = self.messageLabel.text! + "\n" + "Answer was \(self.currentCard!.back)"
-        }
-        currentSideIsFront = !currentSideIsFront
-    }
+//    func checkTextAnswer() {
+//        
+//        if currentCard!.back.lowercaseString == answerTextField.text?.lowercaseString  {
+//            //Answer was correct
+//            self.messageLabel.numberOfLines = 0
+//            self.messageLabel.text = self.messageLabel.text! + "\n" + "Correct!"
+//        }
+//        else {
+//            //Answer was wrong
+//            self.messageLabel.numberOfLines = 0
+//            var stringHistory = [String]()
+//            stringHistory.append("Wrong!")
+//            stringHistory.append("Answer was: ")
+//            stringHistory.append("\(self.currentCard!.back)")
+//            self.messageLabel.text = stringHistory.joinWithSeparator("\n")
+//            //            self.messageLabel.text = self.messageLabel.text! + "\n" + "Wrong!"
+//            //            self.messageLabel.text = self.messageLabel.text! + "\n" + "Answer was \(self.currentCard!.back)"
+//        }
+//        currentSideIsFront = !currentSideIsFront
+//    }
     
     func draw() {
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

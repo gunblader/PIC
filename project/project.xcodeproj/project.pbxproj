@@ -37,11 +37,12 @@
 		4D25C7B81CDA69B10003CB70 /* PracticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D25C7B71CDA69B10003CB70 /* PracticeController.swift */; };
 		4D25C7BA1CDA69BD0003CB70 /* PracticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D25C7B91CDA69BD0003CB70 /* PracticeCell.swift */; };
 		4D25C7BC1CDA8EA70003CB70 /* PracticeDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D25C7BB1CDA8EA70003CB70 /* PracticeDrawViewController.swift */; };
-		4DE20C101CDA618800279FCF /* erase.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DE20C0F1CDA618800279FCF /* erase.png */; };
 		6050C2B01CD9DBEE0076BA36 /* TestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6050C2AF1CD9DBEE0076BA36 /* TestCollectionViewCell.swift */; };
 		6050C2B21CD9DC0A0076BA36 /* TestSetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6050C2B11CD9DC0A0076BA36 /* TestSetCollectionViewController.swift */; };
 		6068AF9C1CA355FF00BD1631 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068AF9B1CA355FF00BD1631 /* SettingsViewController.swift */; };
 		6068AF9E1CA358E800BD1631 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068AF9D1CA358E800BD1631 /* ProfileViewController.swift */; };
+		60B8EB8D1CDAA3160051E413 /* TestDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8EB8C1CDAA3160051E413 /* TestDrawViewController.swift */; };
+		60B8EB8F1CDAAB170051E413 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B8EB8E1CDAAB170051E413 /* ResultsViewController.swift */; };
 		7E9192232B748AF4DD00BB7D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7C43203D6F0E2F2ED33842 /* Pods.framework */; };
 		B5B17F451C8CE15100DAF08B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F441C8CE15100DAF08B /* AppDelegate.swift */; };
 		B5B17F471C8CE15100DAF08B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B17F461C8CE15100DAF08B /* ViewController.swift */; };
@@ -84,11 +85,12 @@
 		4D25C7B71CDA69B10003CB70 /* PracticeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeController.swift; sourceTree = "<group>"; };
 		4D25C7B91CDA69BD0003CB70 /* PracticeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeCell.swift; sourceTree = "<group>"; };
 		4D25C7BB1CDA8EA70003CB70 /* PracticeDrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeDrawViewController.swift; sourceTree = "<group>"; };
-		4DE20C0F1CDA618800279FCF /* erase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = erase.png; path = ../../../../../Desktop/erase.png; sourceTree = "<group>"; };
 		6050C2AF1CD9DBEE0076BA36 /* TestCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCollectionViewCell.swift; sourceTree = "<group>"; };
 		6050C2B11CD9DC0A0076BA36 /* TestSetCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSetCollectionViewController.swift; sourceTree = "<group>"; };
 		6068AF9B1CA355FF00BD1631 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6068AF9D1CA358E800BD1631 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		60B8EB8C1CDAA3160051E413 /* TestDrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDrawViewController.swift; sourceTree = "<group>"; };
+		60B8EB8E1CDAAB170051E413 /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		9F7C43203D6F0E2F2ED33842 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B17F411C8CE15100DAF08B /* project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B17F441C8CE15100DAF08B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,7 +121,6 @@
 		077D994B1CA3694E0052A853 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				4DE20C0F1CDA618800279FCF /* erase.png */,
 				071DEC0A1CDA52DB00B49791 /* add.png */,
 				071DEC0B1CDA52DB00B49791 /* add_blk.png */,
 				071DEC081CDA51DE00B49791 /* pattern-16.png */,
@@ -180,6 +181,7 @@
 				07D7D91B1CAA064700C2FF13 /* EditSetTableViewCell.swift */,
 				07B624D91CD83CC3006AD3B9 /* DrawViewController.swift */,
 				4D25C7BB1CDA8EA70003CB70 /* PracticeDrawViewController.swift */,
+				60B8EB8C1CDAA3160051E413 /* TestDrawViewController.swift */,
 				07B8E8111CB41F7F00ACEC65 /* ReviewSetCollectionViewController.swift */,
 				07B8E8131CB4275E00ACEC65 /* ReviewCollectionViewCell.swift */,
 				07D7D91D1CADA31400C2FF13 /* NewSetTableViewController.swift */,
@@ -189,6 +191,7 @@
 				6050C2AF1CD9DBEE0076BA36 /* TestCollectionViewCell.swift */,
 				4D25C7B71CDA69B10003CB70 /* PracticeController.swift */,
 				4D25C7B91CDA69BD0003CB70 /* PracticeCell.swift */,
+				60B8EB8E1CDAAB170051E413 /* ResultsViewController.swift */,
 			);
 			path = project;
 			sourceTree = "<group>";
@@ -274,7 +277,6 @@
 			files = (
 				071DEC011CDA472D00B49791 /* pioc-11.png in Resources */,
 				07A82E171CA377DD00D2804B /* pic-04.png in Resources */,
-				4DE20C101CDA618800279FCF /* erase.png in Resources */,
 				071DEC001CDA472D00B49791 /* black.png in Resources */,
 				071DEC0D1CDA52DB00B49791 /* add_blk.png in Resources */,
 				071DEC091CDA51DE00B49791 /* pattern-16.png in Resources */,
@@ -357,6 +359,7 @@
 				07D7D91E1CADA31400C2FF13 /* NewSetTableViewController.swift in Sources */,
 				07B8E8141CB4275E00ACEC65 /* ReviewCollectionViewCell.swift in Sources */,
 				6068AF9E1CA358E800BD1631 /* ProfileViewController.swift in Sources */,
+				60B8EB8D1CDAA3160051E413 /* TestDrawViewController.swift in Sources */,
 				070F4FB61CA0FBC7004F77C1 /* User.swift in Sources */,
 				07A82E151CA36F3B00D2804B /* NavigationViewController.swift in Sources */,
 				07B624DE1CD97949006AD3B9 /* EditImageViewController.swift in Sources */,
@@ -367,6 +370,7 @@
 				07B8E8121CB41F7F00ACEC65 /* ReviewSetCollectionViewController.swift in Sources */,
 				07B8E8181CB5920400ACEC65 /* NewSetTableViewCell.swift in Sources */,
 				B5B17F5A1C8CE43C00DAF08B /* HomeViewController.swift in Sources */,
+				60B8EB8F1CDAAB170051E413 /* ResultsViewController.swift in Sources */,
 				070F4FC21CA10E50004F77C1 /* EditSetTableViewController.swift in Sources */,
 				6050C2B21CD9DC0A0076BA36 /* TestSetCollectionViewController.swift in Sources */,
 				4D25C7BA1CDA69BD0003CB70 /* PracticeCell.swift in Sources */,

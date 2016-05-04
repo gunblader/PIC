@@ -21,6 +21,9 @@ class TestSetCollectionViewController: UICollectionViewController {
     var returnedDrawImage:UIImage? = nil
     var returningFromDraw: Bool = false
     
+    var correct = 0
+    var wrong = 0
+    
     
     @IBOutlet weak var noCardsLabel: UILabel!
     
@@ -76,34 +79,47 @@ class TestSetCollectionViewController: UICollectionViewController {
         // Set the cell to display the info
         
         if card.frontIsImg {
+            cell.currentCardImage.hidden = false
+            cell.currentCardLabel.text = ""
             cell.currentCardImage.image = card.frontImg
         } else {
+            cell.currentCardLabel.hidden = false
             cell.currentCardLabel.text = card.front
+            cell.currentCardImage.hidden = true
         }
-//        if self.returningFromDraw {
-//            //configure cell for Returned Draw Answer
-//            cell.answerTextField.hidden = true
-//            cell.answerLabel.hidden = true
-//            cell.messageLabel.hidden = true
-//            cell.textAnswerBtn.hidden = true
-//            cell.drawAnswerBtn.hidden = true
-//            cell.answerImageView.hidden = true
-//            cell.messageLabel.text = ""
-//            
-//        } else if !card.backIsImg {
-//            //configure cell for Draw Answer
-//            cell.answerTextField.hidden = true
-//            cell.answerLabel.hidden = true
-//            cell.messageLabel.hidden = true
-//            cell.textAnswerBtn.hidden = true
-//            
-//        } else {
-//            //configure cell for Text Answer
-//            cell.drawAnswerBtn.hidden = true
-//            cell.answerImageView.hidden = true
-//            cell.messageLabel.text = ""
-//        }
-//        cell.testCountLabel.text = "\(self.testSetCount + 1)/\(self.cards.count)"
+        if self.returningFromDraw {
+            //configure cell for Returned Draw Answer
+            cell.answerTextField.hidden = true
+            cell.answerLabel.hidden = true
+            cell.messageLabel.hidden = true
+            cell.textAnswerBtn.hidden = true
+            cell.drawAnswerBtn.hidden = true
+            cell.nextBtn.hidden = true
+            cell.answerImageView.hidden = false
+            cell.answerImageView.image = self.returnedDrawImage
+            cell.messageLabel.text = ""
+            cell.correctBtn.hidden = false
+            cell.wrongBtn.hidden = false
+            
+        } else if card.backIsImg {
+            //configure cell for Draw Answer
+            cell.answerTextField.hidden = true
+            cell.answerLabel.hidden = true
+            cell.messageLabel.hidden = true
+            cell.textAnswerBtn.hidden = true
+            cell.correctBtn.hidden = true
+            cell.wrongBtn.hidden = true
+            cell.drawAnswerBtn.hidden = false
+            
+        } else {
+            //configure cell for Text Answer
+            cell.drawAnswerBtn.hidden = true
+            cell.answerImageView.hidden = true
+            cell.messageLabel.text = ""
+            cell.correctBtn.hidden = true
+            cell.wrongBtn.hidden = true
+        }
+        cell.testCountLabel.text = "\(self.testSetCount + 1)/\(self.cards.count)"
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = UIColor(red:0.87, green:0.91, blue:0.96, alpha:1.0).CGColor
         
@@ -136,8 +152,19 @@ class TestSetCollectionViewController: UICollectionViewController {
         } else {
             // Segue to Results View Controller
             print("done with test")
+            self.showResults()
         }
         
+    }
+    
+    func showResults() {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let vc: ResultsViewController  = storyboard.instantiateViewControllerWithIdentifier("resultsView") as! ResultsViewController
+        
+        vc.results = "\(self.correctCount)/\(self.cards.count)"
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -149,24 +176,6 @@ class TestSetCollectionViewController: UICollectionViewController {
             destination.correct = self.correctCount
             destination.wrong = self.wrongCount
             self.view.endEditing(true)
-        }
-        if let destination = segue.destinationViewController as? TestSetCollectionViewController {
-            print("return to test mode")
-            destination.returningFromDraw = true
-            
-//            UIGraphicsBeginImageContext(mainImageView.bounds.size)
-//            mainImageView.image?.drawInRect(CGRect(x: 0, y: 0,
-//                width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            UIGraphicsEndImageContext()
-            destination.returnedDrawImage = image
-            
-            print(image)
-            
-            destination.testSetCount = self.testSetCount
-            destination.setName = setName
-//            destination.correctCount = self.correct
-//            destination.wrongCount = self.wrong
         }
         navigationController?.setToolbarHidden(true, animated: false)
     }

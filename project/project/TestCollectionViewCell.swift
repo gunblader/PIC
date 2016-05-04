@@ -30,9 +30,12 @@ class TestCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var textAnswerBtn: UIButton!
     @IBOutlet weak var drawAnswerBtn: UIButton!
+    
     @IBOutlet weak var correctBtn: UIButton!
     @IBOutlet weak var wrongBtn: UIButton!
+
     
+    @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var messageLabel: UILabel!
     
     //    func tapped() {
@@ -62,8 +65,6 @@ class TestCollectionViewCell: UICollectionViewCell {
             stringHistory.append("Answer was: ")
             stringHistory.append("\(self.currentCard!.back)")
             self.messageLabel.text = stringHistory.joinWithSeparator("\n")
-            //            self.messageLabel.text = self.messageLabel.text! + "\n" + "Wrong!"
-            //            self.messageLabel.text = self.messageLabel.text! + "\n" + "Answer was \(self.currentCard!.back)"
         }
         currentSideIsFront = !currentSideIsFront
     }
@@ -77,18 +78,21 @@ class TestCollectionViewCell: UICollectionViewCell {
     
     @IBAction func answerDrawBtn(sender: AnyObject) {
         print("Draw clicked")
+        self.draw()
     }
     
     @IBAction func pickCorrectBtn(sender: AnyObject) {
         self.correct = true
         self.correctBtn.hidden = true
         self.wrongBtn.hidden = true
+        self.testController?.testStep(self.correct)
     }
     
     @IBAction func pickWrongBtn(sender: AnyObject) {
         self.correct = false
         self.correctBtn.hidden = true
         self.wrongBtn.hidden = true
+        self.testController?.testStep(self.correct)
     }
     
     @IBAction func answerTextBtn(sender: AnyObject) {
@@ -96,4 +100,17 @@ class TestCollectionViewCell: UICollectionViewCell {
         self.checkTextAnswer()
     }
 
+    func draw() {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let vc: TestDrawViewController  = storyboard.instantiateViewControllerWithIdentifier("testDraw") as! TestDrawViewController
+        
+        vc.cards = self.testController!.cards
+        vc.setName = self.testController!.setName
+        vc.testSetCount = self.testController!.testSetCount
+        vc.correct = self.testController!.correctCount
+        vc.wrong = self.testController!.wrongCount
+        
+        self.testController!.navigationController?.pushViewController(vc, animated: true)
+    }
 }
