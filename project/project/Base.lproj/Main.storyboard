@@ -818,6 +818,7 @@
                                     <outlet property="currentCardImage" destination="aFF-1x-Egg" id="wFZ-qw-mkT"/>
                                     <outlet property="currentCardLabel" destination="g5X-ia-Poz" id="2EX-pf-ZNH"/>
                                     <outlet property="drawAnswerBtn" destination="ENN-6J-itX" id="Fuy-jm-FAG"/>
+                                    <outlet property="redrawBtn" destination="fvH-l7-5RJ" id="trk-cS-rqm"/>
                                     <outlet property="tapForAnswer" destination="fPq-J3-osg" id="v2G-05-EJN"/>
                                 </connections>
                             </collectionViewCell>

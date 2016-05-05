@@ -27,6 +27,7 @@ class PracticeCell: UICollectionViewCell {
     
 //    @IBOutlet weak var textAnswerBtn: UIButton!
     
+    @IBOutlet weak var redrawBtn: UIButton!
     @IBOutlet weak var drawAnswerBtn: UIButton!
 //    @IBOutlet weak var correctBtn: UIButton!
 //    @IBOutlet weak var wrongBtn: UIButton!

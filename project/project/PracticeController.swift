@@ -102,18 +102,16 @@ class PracticeController: UICollectionViewController {
             //configure cell for Returned Draw Answer
             cell.answerTextField.hidden = true
             cell.drawAnswerBtn.hidden = true
+            cell.redrawBtn.hidden = false
             cell.answerImageView.hidden = false
             cell.answerImageView.image = self.imgToSave
             cell.tapForAnswer.hidden = true
-            
-//            cell.answerImageView.userInteractionEnabled = true
-//            let tapRecognizer = UITapGestureRecognizer(target: self, action: "editFront:")
-//            cell.answerImageView!.addGestureRecognizer(tapRecognizer)
         }
             
         else if self.returningFromDraw && cardAnswers[index] != nil{
             cell.answerTextField.hidden = true
             cell.drawAnswerBtn.hidden = true
+            cell.redrawBtn.hidden = false
             cell.answerImageView.hidden = false
             cell.answerImageView.image = cardAnswers[index]
             cell.tapForAnswer.hidden = true
@@ -124,10 +122,11 @@ class PracticeController: UICollectionViewController {
             cell.answerTextField.hidden = true
             cell.tapForAnswer.hidden = true
             cell.drawAnswerBtn.hidden = false
-            
+            cell.redrawBtn.hidden = true
         } else {
             //configure cell for Text Answer
             cell.drawAnswerBtn.hidden = true
+            cell.redrawBtn.hidden = true
             cell.answerImageView.hidden = true
             cell.answerTextField.hidden = false
             cell.tapForAnswer.hidden = false
