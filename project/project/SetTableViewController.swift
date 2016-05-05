@@ -153,6 +153,9 @@ class SetTableViewController: UITableViewController {
         if let destination = segue.destinationViewController as? TestSetCollectionViewController {
             destination.setName = setName
             destination.cards = self.listOfCards
+            
+            destination.setId = setId
+            destination.selectedSet = selectedSet
         }
     }
     

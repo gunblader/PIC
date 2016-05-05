@@ -45,7 +45,8 @@ class PracticeController: UICollectionViewController {
                 cardAnswers.append(nil)
             }
         }
-        //        testSetCount = cards.count
+        
+        navigationController?.setToolbarHidden(true, animated: false)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -100,26 +101,28 @@ class PracticeController: UICollectionViewController {
         if self.returningFromDraw && index == indexDrawing {
             //configure cell for Returned Draw Answer
             cell.answerTextField.hidden = true
-            cell.answerLabel.hidden = true
             cell.drawAnswerBtn.hidden = true
             cell.answerImageView.hidden = false
             cell.answerImageView.image = self.imgToSave
             cell.tapForAnswer.hidden = true
             
+//            cell.answerImageView.userInteractionEnabled = true
+//            let tapRecognizer = UITapGestureRecognizer(target: self, action: "editFront:")
+//            cell.answerImageView!.addGestureRecognizer(tapRecognizer)
         }
+            
         else if self.returningFromDraw && cardAnswers[index] != nil{
             cell.answerTextField.hidden = true
-            cell.answerLabel.hidden = true
             cell.drawAnswerBtn.hidden = true
             cell.answerImageView.hidden = false
             cell.answerImageView.image = cardAnswers[index]
             cell.tapForAnswer.hidden = true
         }
+        
         else if card.backIsImg {
             //configure cell for Draw Answer
             cell.answerTextField.hidden = true
             cell.tapForAnswer.hidden = true
-            cell.answerLabel.hidden = true
             cell.drawAnswerBtn.hidden = false
             
         } else {
@@ -127,7 +130,6 @@ class PracticeController: UICollectionViewController {
             cell.drawAnswerBtn.hidden = true
             cell.answerImageView.hidden = true
             cell.answerTextField.hidden = false
-            cell.answerLabel.hidden = false
             cell.tapForAnswer.hidden = false
         }
 //        cell.testCountLabel.text = "\(self.testSetCount + 1)/\(self.cards.count)"

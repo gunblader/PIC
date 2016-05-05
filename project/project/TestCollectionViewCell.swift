@@ -19,12 +19,9 @@ class TestCollectionViewCell: UICollectionViewCell {
     var correct: Bool = false
     var testController: TestSetCollectionViewController? = nil
     
-    @IBOutlet weak var testCountLabel: UILabel!
-    
     @IBOutlet weak var currentCardLabel: UILabel!
     @IBOutlet weak var currentCardImage: UIImageView!
     
-    @IBOutlet weak var answerLabel: UILabel!
     @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var answerImageView: UIImageView!
     
@@ -65,6 +62,7 @@ class TestCollectionViewCell: UICollectionViewCell {
             stringHistory.append("Answer was: ")
             stringHistory.append("\(self.currentCard!.back)")
             self.messageLabel.text = stringHistory.joinWithSeparator("\n")
+            self.textAnswerBtn.hidden = true
         }
         currentSideIsFront = !currentSideIsFront
     }

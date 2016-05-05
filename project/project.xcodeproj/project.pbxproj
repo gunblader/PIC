@@ -23,6 +23,8 @@
 		071DEC091CDA51DE00B49791 /* pattern-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 071DEC081CDA51DE00B49791 /* pattern-16.png */; };
 		071DEC0C1CDA52DB00B49791 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 071DEC0A1CDA52DB00B49791 /* add.png */; };
 		071DEC0D1CDA52DB00B49791 /* add_blk.png in Resources */ = {isa = PBXBuildFile; fileRef = 071DEC0B1CDA52DB00B49791 /* add_blk.png */; };
+		072DB80C1CDBE2C700023DC4 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 072DB80A1CDBE2C700023DC4 /* check.png */; };
+		072DB80D1CDBE2C700023DC4 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = 072DB80B1CDBE2C700023DC4 /* x.png */; };
 		076A40701CC6BD1E00BF936B /* SetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A406F1CC6BD1E00BF936B /* SetTableViewCell.swift */; };
 		077D994D1CA3694E0052A853 /* turtle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 077D994C1CA3694E0052A853 /* turtle.jpg */; };
 		07A82E151CA36F3B00D2804B /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A82E141CA36F3B00D2804B /* NavigationViewController.swift */; };
@@ -71,6 +73,8 @@
 		071DEC081CDA51DE00B49791 /* pattern-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pattern-16.png"; sourceTree = "<group>"; };
 		071DEC0A1CDA52DB00B49791 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		071DEC0B1CDA52DB00B49791 /* add_blk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_blk.png; sourceTree = "<group>"; };
+		072DB80A1CDBE2C700023DC4 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
+		072DB80B1CDBE2C700023DC4 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
 		076A406F1CC6BD1E00BF936B /* SetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTableViewCell.swift; sourceTree = "<group>"; };
 		077D994C1CA3694E0052A853 /* turtle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turtle.jpg; sourceTree = "<group>"; };
 		07A82E141CA36F3B00D2804B /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 		077D994B1CA3694E0052A853 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				072DB80A1CDBE2C700023DC4 /* check.png */,
+				072DB80B1CDBE2C700023DC4 /* x.png */,
 				071DEC0A1CDA52DB00B49791 /* add.png */,
 				071DEC0B1CDA52DB00B49791 /* add_blk.png */,
 				071DEC081CDA51DE00B49791 /* pattern-16.png */,
@@ -248,7 +254,7 @@
 				TargetAttributes = {
 					B5B17F401C8CE15100DAF08B = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 7H8RK7876D;
+						DevelopmentTeam = D6XGWUM72S;
 					};
 				};
 			};
@@ -275,12 +281,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				072DB80D1CDBE2C700023DC4 /* x.png in Resources */,
 				071DEC011CDA472D00B49791 /* pioc-11.png in Resources */,
 				07A82E171CA377DD00D2804B /* pic-04.png in Resources */,
 				071DEC001CDA472D00B49791 /* black.png in Resources */,
 				071DEC0D1CDA52DB00B49791 /* add_blk.png in Resources */,
 				071DEC091CDA51DE00B49791 /* pattern-16.png in Resources */,
 				071DEC021CDA472D00B49791 /* red.png in Resources */,
+				072DB80C1CDBE2C700023DC4 /* check.png in Resources */,
 				B5B17F521C8CE15100DAF08B /* LaunchScreen.storyboard in Resources */,
 				077D994D1CA3694E0052A853 /* turtle.jpg in Resources */,
 				B5B17F4F1C8CE15100DAF08B /* Assets.xcassets in Resources */,
@@ -494,7 +502,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cs378.projectChris;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cs378.project;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -509,7 +517,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = project/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cs378.projectChris;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cs378.project;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

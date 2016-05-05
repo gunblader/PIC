@@ -25,7 +25,6 @@ class PracticeCell: UICollectionViewCell {
     @IBOutlet weak var answerTextField: UITextField!
     @IBOutlet weak var answerImageView: UIImageView!
     
-    @IBOutlet weak var answerLabel: UILabel!
 //    @IBOutlet weak var textAnswerBtn: UIButton!
     
     @IBOutlet weak var drawAnswerBtn: UIButton!

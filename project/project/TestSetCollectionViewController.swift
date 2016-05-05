@@ -20,7 +20,8 @@ class TestSetCollectionViewController: UICollectionViewController {
     var wrongCount = 0
     var returnedDrawImage:UIImage? = nil
     var returningFromDraw: Bool = false
-    
+    var setId = 0
+    var selectedSet:NSManagedObject? = nil
     var correct = 0
     var wrong = 0
     
@@ -91,7 +92,6 @@ class TestSetCollectionViewController: UICollectionViewController {
             //configure cell for Returned Draw Answer
             self.returningFromDraw = false
             cell.answerTextField.hidden = true
-            cell.answerLabel.hidden = true
             cell.messageLabel.hidden = true
             cell.textAnswerBtn.hidden = true
             cell.drawAnswerBtn.hidden = true
@@ -108,7 +108,6 @@ class TestSetCollectionViewController: UICollectionViewController {
         } else if card.backIsImg {
             //configure cell for Draw Answer
             cell.answerTextField.hidden = true
-            cell.answerLabel.hidden = true
             cell.messageLabel.hidden = true
             cell.textAnswerBtn.hidden = true
             cell.correctBtn.hidden = true
@@ -120,10 +119,11 @@ class TestSetCollectionViewController: UICollectionViewController {
             cell.drawAnswerBtn.hidden = true
             cell.answerImageView.hidden = true
             cell.messageLabel.text = ""
+            cell.textAnswerBtn.hidden = false
             cell.correctBtn.hidden = true
             cell.wrongBtn.hidden = true
         }
-        cell.testCountLabel.text = "\(self.testSetCount + 1)/\(self.cards.count)"
+        self.title = "\(self.testSetCount + 1)/\(self.cards.count)"
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = UIColor(red:0.87, green:0.91, blue:0.96, alpha:1.0).CGColor
         
@@ -167,7 +167,9 @@ class TestSetCollectionViewController: UICollectionViewController {
         let vc: ResultsViewController  = storyboard.instantiateViewControllerWithIdentifier("resultsView") as! ResultsViewController
         
         vc.results = "\(self.correctCount)/\(self.cards.count)"
-        
+        vc.setName = setName
+        vc.setId = setId
+        vc.selectedSet = selectedSet
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -180,7 +182,18 @@ class TestSetCollectionViewController: UICollectionViewController {
             destination.correct = self.correctCount
             destination.wrong = self.wrongCount
             self.view.endEditing(true)
+            
+            destination.setId = setId
+            destination.setName = setName
+            destination.set = selectedSet
         }
+        
+        if let destination = segue.destinationViewController as? DrawViewController {
+            destination.setId = setId
+            destination.setName = setName
+            destination.set = selectedSet
+        }
+        
         navigationController?.setToolbarHidden(true, animated: false)
     }
 
