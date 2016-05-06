@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestCollectionViewCell: UICollectionViewCell {
+class TestCollectionViewCell: UICollectionViewCell, UITextFieldDelegate {
     
     var frontString: String = ""
     var frontImage: UIImage? = nil
@@ -35,6 +35,7 @@ class TestCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var messageLabel: UILabel!
     
+
     //    func tapped() {
     //        if currentSideIsFront {
     //            currentCardLabel.text = back
@@ -46,16 +47,19 @@ class TestCollectionViewCell: UICollectionViewCell {
     //    }
     
     func checkTextAnswer() {
-        
+        print("check")
         if currentCard!.back == answerTextField.text {
             //Answer was correct
             self.correct = true
+            self.messageLabel.hidden = false
+            self.textAnswerBtn.hidden = true
             self.messageLabel.numberOfLines = 0
             self.messageLabel.text = self.messageLabel.text! + "\n" + "Correct!"
         }
         else {
             //Answer was wrong
             self.correct = false
+            self.messageLabel.hidden = false
             self.messageLabel.numberOfLines = 0
             var stringHistory = [String]()
             stringHistory.append("Wrong!")
@@ -113,4 +117,21 @@ class TestCollectionViewCell: UICollectionViewCell {
         
         self.testController!.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+ 
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return false
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+
 }

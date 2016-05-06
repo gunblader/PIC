@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PracticeCell: UICollectionViewCell {
+class PracticeCell: UICollectionViewCell, UITextFieldDelegate {
     
     var currentSideIsFront: Bool = true
     var currentCard: Card? = nil
@@ -97,5 +97,21 @@ class PracticeCell: UICollectionViewCell {
         vc.cardAnswers = self.cardAnswers
         
         self.practiceView!.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return false
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
     }
 }

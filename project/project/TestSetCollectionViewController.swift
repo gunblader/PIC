@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class TestSetCollectionViewController: UICollectionViewController {
+class TestSetCollectionViewController: UICollectionViewController, UITextFieldDelegate {
     
     var cards = [Card]()
     let reuseIdentifier = "testCollection"
@@ -76,6 +76,7 @@ class TestSetCollectionViewController: UICollectionViewController {
         let card = cards[testSetCount]
         cell.currentCard = card
         cell.testController = self
+        cell.answerTextField.delegate = cell
         
         // Set the cell to display the info
         
@@ -120,6 +121,7 @@ class TestSetCollectionViewController: UICollectionViewController {
             cell.answerImageView.hidden = true
             cell.messageLabel.text = ""
             cell.textAnswerBtn.hidden = false
+            cell.answerTextField.hidden = false
             cell.correctBtn.hidden = true
             cell.wrongBtn.hidden = true
         }
@@ -144,6 +146,7 @@ class TestSetCollectionViewController: UICollectionViewController {
     }
     
     func testStep (score:Bool){
+        print("step")
         if (self.testSetCount + 1) != cards.count {
             self.testSetCount += 1
             if score {

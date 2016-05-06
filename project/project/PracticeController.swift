@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class PracticeController: UICollectionViewController {
+class PracticeController: UICollectionViewController, UITextFieldDelegate {
     
     var cards = [Card]()
     let reuseIdentifier = "PracticeCell"
@@ -93,6 +93,7 @@ class PracticeController: UICollectionViewController {
         cell.index = index
         cell.practiceView = self
         cell.cardAnswers = self.cardAnswers
+        cell.answerTextField.delegate = cell
         
         // Set the cell to display the info
         
