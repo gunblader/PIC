@@ -22,7 +22,8 @@ class PracticeController: UICollectionViewController {
     var cardAnswers = [UIImage?]()
     var returningFromDraw: Bool = false
     var indexDrawing = 0
-    
+    let leftHandModeDef = NSUserDefaults.standardUserDefaults()
+    var leftHandMode = false
     var imgToSave:UIImage? = nil
     
     
@@ -46,6 +47,8 @@ class PracticeController: UICollectionViewController {
             }
         }
         
+        leftHandMode = (leftHandModeDef.objectForKey("lefty") as? Bool)!
+
         navigationController?.setToolbarHidden(true, animated: false)
     }
     
@@ -95,6 +98,7 @@ class PracticeController: UICollectionViewController {
         
         if card.frontIsImg {
             cell.currentCardImage.image = card.frontImg
+            cell.currentCardLabel.text = ""
         } else {
             cell.currentCardLabel.text = card.front
         }
@@ -102,19 +106,34 @@ class PracticeController: UICollectionViewController {
             //configure cell for Returned Draw Answer
             cell.answerTextField.hidden = true
             cell.drawAnswerBtn.hidden = true
-            cell.redrawBtn.hidden = false
+
             cell.answerImageView.hidden = false
             cell.answerImageView.image = self.imgToSave
             cell.tapForAnswer.hidden = true
+            
+            if (leftHandMode) {
+                cell.redrawBtnLeft.hidden = false
+                cell.redrawBtn.hidden = true
+            } else {
+                cell.redrawBtnLeft.hidden = true
+                cell.redrawBtn.hidden = false
+            }
         }
             
         else if self.returningFromDraw && cardAnswers[index] != nil{
             cell.answerTextField.hidden = true
             cell.drawAnswerBtn.hidden = true
-            cell.redrawBtn.hidden = false
             cell.answerImageView.hidden = false
             cell.answerImageView.image = cardAnswers[index]
             cell.tapForAnswer.hidden = true
+            
+            if (leftHandMode) {
+                cell.redrawBtnLeft.hidden = false
+                cell.redrawBtn.hidden = true
+            } else {
+                cell.redrawBtnLeft.hidden = true
+                cell.redrawBtn.hidden = false
+            }
         }
         
         else if card.backIsImg {
@@ -123,10 +142,13 @@ class PracticeController: UICollectionViewController {
             cell.tapForAnswer.hidden = true
             cell.drawAnswerBtn.hidden = false
             cell.redrawBtn.hidden = true
+            cell.redrawBtnLeft.hidden = true
+
         } else {
             //configure cell for Text Answer
             cell.drawAnswerBtn.hidden = true
             cell.redrawBtn.hidden = true
+            cell.redrawBtnLeft.hidden = true
             cell.answerImageView.hidden = true
             cell.answerTextField.hidden = false
             cell.tapForAnswer.hidden = false
@@ -142,7 +164,6 @@ class PracticeController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! PracticeCell
                 cell.tapped()
-        
     }
     
     func backFromDraw(testSetCount:Int, correct:Int, wrong:Int){

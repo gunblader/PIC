@@ -30,24 +30,21 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         navigationController?.setToolbarHidden(false, animated: false)
         navigationController?.setNavigationBarHidden(false, animated: false)
+       
         self.editDrawing = false
         self.title = "Edit Set"
         self.tableView.rowHeight = 100.0
 
         setNameTextField.text = setName
-        tableView.alwaysBounceVertical = false
-        attatchKeyboardToolbar(setNameTextField)
         setNameTextField.delegate = self
+
+        tableView.alwaysBounceVertical = false
         tableView.registerClass(EditSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         getCards()
 
+        attatchKeyboardToolbarName(setNameTextField)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -118,8 +115,8 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
         cell.listItems = card
         cell.selectionStyle = UITableViewCellSelectionStyle.None
 
-        attatchKeyboardToolbar(cell.front)
-        attatchKeyboardToolbar(cell.back)
+        attatchKeyboardToolbarCards(cell.front)
+        attatchKeyboardToolbarCards(cell.back)
         
         cell.card = card
         cell.nsindex = indexPath
@@ -131,7 +128,6 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
             cell.front.becomeFirstResponder()
             cell.front.accessibilityLabel = "\(indexPath.row)"
         }
-        
 
         if(cell.frontIsImg) {
             cell.frontImgView!.userInteractionEnabled = true
@@ -154,7 +150,20 @@ class EditSetTableViewController: UITableViewController, UITextFieldDelegate{
         var cardToEdit: Card?
     }
     
-    func attatchKeyboardToolbar(textField : UITextField) {
+    func attatchKeyboardToolbarName(textField : UITextField) {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = UIBarStyle.Default
+        toolbar.sizeToFit()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let addCard = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(EditSetTableViewController.addCardBtn(_:)))
+        let font = UIFont(name: "Helvetica", size: 35)
+        addCard.setTitleTextAttributes([NSFontAttributeName: font!], forState: UIControlState.Normal)
+        addCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
+        toolbar.items = [flexSpace, addCard, flexSpace]
+        textField.inputAccessoryView = toolbar
+    }
+    
+    func attatchKeyboardToolbarCards(textField : UITextField) {
         let toolbar = UIToolbar()
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()

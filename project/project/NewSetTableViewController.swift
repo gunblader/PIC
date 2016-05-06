@@ -18,7 +18,12 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     var setName =  ""
     var setId = -1
     var listOfCards = [Card]()
-    
+    var editDrawing = false
+    var drawFront = true
+    var cardToDraw:Card = Card()
+    var imgToSave:UIImage = UIImage()
+    var returningFromDraw:Bool = false
+
     let idCounter = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var cardSetName: UITextField!
@@ -26,18 +31,22 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         navigationController?.setToolbarHidden(false, animated: false)
-        self.title = "New Set"
-        cardSetName.delegate = self
-        tableView.registerClass(NewSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        setId = idCounter.integerForKey("numSets")
-        attatchKeyboardToolbar(cardSetName)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         
+        self.title = "New Set"
+        self.editDrawing = false
         self.cardSetName.delegate = self;
+        self.cardSetName.text = setName
+        
+        cardSetName.delegate = self
+        setId = idCounter.integerForKey("numSets")
+        self.tableView.rowHeight = 100.0
+
+        tableView.alwaysBounceVertical = false
+        tableView.registerClass(NewSetTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        
+        attatchKeyboardToolbarName(cardSetName)
     }
 
 
@@ -88,7 +97,7 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         let managedContext = appDelegate.managedObjectContext
         
         for cardToSave in listOfCards {
-            if(cardToSave.front == "" && cardToSave.back == "") {
+            if((cardToSave.front == "" && cardToSave.back == "") && (!cardToSave.frontIsImg && !cardToSave.backIsImg)) {
                 if(!cardToSave.newCard) {
                     managedContext.deleteObject(cards[cardToSave.id])
                 }
@@ -184,17 +193,38 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         let card = listOfCards[indexPath.row]
         cell.listItems = card
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        attatchKeyboardToolbar(cell.front)
-        attatchKeyboardToolbar(cell.back)
+        
+        attatchKeyboardToolbarCards(cell.front)
+        attatchKeyboardToolbarCards(cell.back)
+        
+        cell.card = card
+        cell.nsindex = indexPath
+        cell.tableView = self
+        print(card.backIsImg)
+        drawFront = cell.drawFront
         
         if(card.newCard) {
             cell.front.becomeFirstResponder()
         }
         
+        if(cell.frontIsImg) {
+            cell.frontImgView!.userInteractionEnabled = true
+            let tapRecognizer = MyTapGestureRecognizer(target: self, action: "editFront:")
+            tapRecognizer.cardToEdit = card
+            cell.frontImgView!.addGestureRecognizer(tapRecognizer)
+        }
+        
+        if(cell.backIsImg) {
+            cell.backImgView!.userInteractionEnabled = true
+            let tapRecognizer2 = MyTapGestureRecognizer(target: self, action: "editBack:")
+            tapRecognizer2.cardToEdit = card
+            cell.backImgView!.addGestureRecognizer(tapRecognizer2)
+        }
+        
         return cell
     }
     
-    func attatchKeyboardToolbar(textField : UITextField) {
+    func attatchKeyboardToolbarName(textField : UITextField) {
         let toolbar = UIToolbar()
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
@@ -207,6 +237,102 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
         textField.inputAccessoryView = toolbar
     }
     
+    func attatchKeyboardToolbarCards(textField : UITextField) {
+        let toolbar = UIToolbar()
+        toolbar.barStyle = UIBarStyle.Default
+        toolbar.sizeToFit()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let addCard = UIBarButtonItem(title: "+", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NewSetTableViewController.addCardBtn(_:)))
+        let font = UIFont(name: "Helvetica", size: 35)
+        addCard.setTitleTextAttributes([NSFontAttributeName: font!], forState: UIControlState.Normal)
+        addCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
+        toolbar.items = [flexSpace, addCard, flexSpace]
+        textField.inputAccessoryView = toolbar
+        
+        let drawCard = UIBarButtonItem(title: "Draw", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(NewSetTableViewController.drawCardBtn(_:)))
+        drawCard.image = UIImage(named: "draw.png")
+        drawCard.setTitleTextAttributes([NSFontAttributeName: font!], forState: UIControlState.Normal)
+        drawCard.tintColor = UIColor(colorLiteralRed: 228/255, green: 86/255, blue: 99/255, alpha: 1)
+        toolbar.items = [flexSpace, addCard, flexSpace, drawCard]
+        textField.inputAccessoryView = toolbar
+    }
+    
+    class MyTapGestureRecognizer: UITapGestureRecognizer {
+        var cardToEdit: Card?
+    }
+    
+    @IBAction func drawCardBtn(sender: AnyObject) {
+        editDrawing = false
+        performSegueWithIdentifier("newDrawSegue", sender: nil)
+    }
+    
+    func editFront(gestureRecognizer: MyTapGestureRecognizer) {
+        
+        let alertController = UIAlertController(title: "Edit Term", message: "", preferredStyle: .ActionSheet)
+        let edit = UIAlertAction(title: "Edit Term", style: .Default, handler: { (action) -> Void in
+            print("Ok Button Pressed")
+            self.cardToDraw = gestureRecognizer.cardToEdit!
+            self.cardToDraw.drawFront = true
+            self.editDrawing = true
+            self.performSegueWithIdentifier("newDrawSegue", sender: nil)
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+            print("Cancel Button Pressed")
+        })
+        
+        let  keyboard = UIAlertAction(title: "Keyboard", style: .Destructive) { (action) -> Void in
+            if((gestureRecognizer.cardToEdit?.drawFront) != nil){
+                print("Delete Button Pressed")
+                gestureRecognizer.cardToEdit?.frontImg = UIImage()
+                gestureRecognizer.cardToEdit?.frontIsImg = false
+                gestureRecognizer.cardToEdit?.edited = true
+                self.tableView.reloadData()
+            } else {
+                print("Delete Button Pressed")
+                gestureRecognizer.cardToEdit?.backImg = UIImage()
+                gestureRecognizer.cardToEdit?.backIsImg = false
+                gestureRecognizer.cardToEdit?.edited = true
+                self.tableView.reloadData()
+            }
+        }
+        
+        alertController.addAction(edit)
+        alertController.addAction(cancel)
+        alertController.addAction(keyboard)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func editBack(gestureRecognizer: MyTapGestureRecognizer) {
+        
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: .ActionSheet)
+        let edit = UIAlertAction(title: "Edit Term", style: .Default, handler: { (action) -> Void in
+            print("Ok Button Pressed")
+            
+            self.cardToDraw = gestureRecognizer.cardToEdit!
+            self.cardToDraw.drawFront = false
+            self.editDrawing = true
+            self.performSegueWithIdentifier("newDrawSegue", sender: nil)
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+            print("Cancel Button Pressed")
+        })
+        
+        let  keyboard = UIAlertAction(title: "Keyboard", style: .Destructive) { (action) -> Void in
+            print("Delete Button Pressed")
+            gestureRecognizer.cardToEdit?.backImg = UIImage()
+            gestureRecognizer.cardToEdit?.backIsImg = false
+            gestureRecognizer.cardToEdit?.edited = true
+            self.tableView.reloadData()
+        }
+        
+        alertController.addAction(edit)
+        alertController.addAction(cancel)
+        alertController.addAction(keyboard)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         navigationController?.setNavigationBarHidden(false, animated: false)
@@ -216,6 +342,25 @@ class NewSetTableViewController: UITableViewController, UITextFieldDelegate {
             saveCardsSegue()
         }
         
+        if let destination = segue.destinationViewController as? NewDrawViewController {
+            destination.setId = setId
+            destination.setName = cardSetName.text!
+            print(cardSetName.text!)
+            destination.listOfCards = listOfCards
+            if (editDrawing) {
+                destination.card = cardToDraw
+                destination.drawFront = cardToDraw.drawFront
+                print("Edit a drawing")
+                print(destination.drawFront)
+            } else {
+                print("Drawing a new drawing")
+                destination.card = listOfCards[(self.tableView?.indexPathForSelectedRow!.row)!]
+                destination.drawFront = listOfCards[(self.tableView?.indexPathForSelectedRow!.row)!].drawFront
+                destination.mainImageView = nil
+            }
+            print(drawFront)
+        }
+
     }
 
 }

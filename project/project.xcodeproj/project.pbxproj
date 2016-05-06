@@ -25,6 +25,10 @@
 		071DEC0D1CDA52DB00B49791 /* add_blk.png in Resources */ = {isa = PBXBuildFile; fileRef = 071DEC0B1CDA52DB00B49791 /* add_blk.png */; };
 		072DB80C1CDBE2C700023DC4 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 072DB80A1CDBE2C700023DC4 /* check.png */; };
 		072DB80D1CDBE2C700023DC4 /* x.png in Resources */ = {isa = PBXBuildFile; fileRef = 072DB80B1CDBE2C700023DC4 /* x.png */; };
+		072DB80F1CDBF80D00023DC4 /* NewDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072DB80E1CDBF80D00023DC4 /* NewDrawViewController.swift */; };
+		072DB8141CDC15A900023DC4 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 072DB8121CDC15A900023DC4 /* iTunesArtwork.png */; };
+		072DB8151CDC15A900023DC4 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 072DB8131CDC15A900023DC4 /* iTunesArtwork@2x.png */; };
+		072DB8171CDC15EC00023DC4 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 072DB8161CDC15EC00023DC4 /* icon.png */; };
 		076A40701CC6BD1E00BF936B /* SetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A406F1CC6BD1E00BF936B /* SetTableViewCell.swift */; };
 		077D994D1CA3694E0052A853 /* turtle.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 077D994C1CA3694E0052A853 /* turtle.jpg */; };
 		07A82E151CA36F3B00D2804B /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A82E141CA36F3B00D2804B /* NavigationViewController.swift */; };
@@ -75,6 +79,10 @@
 		071DEC0B1CDA52DB00B49791 /* add_blk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_blk.png; sourceTree = "<group>"; };
 		072DB80A1CDBE2C700023DC4 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		072DB80B1CDBE2C700023DC4 /* x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = x.png; sourceTree = "<group>"; };
+		072DB80E1CDBF80D00023DC4 /* NewDrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDrawViewController.swift; sourceTree = "<group>"; };
+		072DB8121CDC15A900023DC4 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		072DB8131CDC15A900023DC4 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		072DB8161CDC15EC00023DC4 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		076A406F1CC6BD1E00BF936B /* SetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTableViewCell.swift; sourceTree = "<group>"; };
 		077D994C1CA3694E0052A853 /* turtle.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = turtle.jpg; sourceTree = "<group>"; };
 		07A82E141CA36F3B00D2804B /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
@@ -122,9 +130,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		072DB8101CDC15A900023DC4 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				072DB8111CDC15A900023DC4 /* App Icon */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		072DB8111CDC15A900023DC4 /* App Icon */ = {
+			isa = PBXGroup;
+			children = (
+				072DB8121CDC15A900023DC4 /* iTunesArtwork.png */,
+				072DB8131CDC15A900023DC4 /* iTunesArtwork@2x.png */,
+			);
+			path = "App Icon";
+			sourceTree = "<group>";
+		};
 		077D994B1CA3694E0052A853 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				072DB8161CDC15EC00023DC4 /* icon.png */,
 				072DB80A1CDBE2C700023DC4 /* check.png */,
 				072DB80B1CDBE2C700023DC4 /* x.png */,
 				071DEC0A1CDA52DB00B49791 /* add.png */,
@@ -163,6 +189,7 @@
 		B5B17F431C8CE15100DAF08B /* project */ = {
 			isa = PBXGroup;
 			children = (
+				072DB8101CDC15A900023DC4 /* Assets */,
 				B5B17F441C8CE15100DAF08B /* AppDelegate.swift */,
 				B5B17F461C8CE15100DAF08B /* ViewController.swift */,
 				B5B17F591C8CE43C00DAF08B /* HomeViewController.swift */,
@@ -185,13 +212,14 @@
 				076A406F1CC6BD1E00BF936B /* SetTableViewCell.swift */,
 				070F4FC11CA10E50004F77C1 /* EditSetTableViewController.swift */,
 				07D7D91B1CAA064700C2FF13 /* EditSetTableViewCell.swift */,
+				07B8E8171CB5920400ACEC65 /* NewSetTableViewCell.swift */,
+				07D7D91D1CADA31400C2FF13 /* NewSetTableViewController.swift */,
+				072DB80E1CDBF80D00023DC4 /* NewDrawViewController.swift */,
 				07B624D91CD83CC3006AD3B9 /* DrawViewController.swift */,
 				4D25C7BB1CDA8EA70003CB70 /* PracticeDrawViewController.swift */,
 				60B8EB8C1CDAA3160051E413 /* TestDrawViewController.swift */,
 				07B8E8111CB41F7F00ACEC65 /* ReviewSetCollectionViewController.swift */,
 				07B8E8131CB4275E00ACEC65 /* ReviewCollectionViewCell.swift */,
-				07D7D91D1CADA31400C2FF13 /* NewSetTableViewController.swift */,
-				07B8E8171CB5920400ACEC65 /* NewSetTableViewCell.swift */,
 				07B624DD1CD97949006AD3B9 /* EditImageViewController.swift */,
 				6050C2B11CD9DC0A0076BA36 /* TestSetCollectionViewController.swift */,
 				6050C2AF1CD9DBEE0076BA36 /* TestCollectionViewCell.swift */,
@@ -282,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				072DB80D1CDBE2C700023DC4 /* x.png in Resources */,
+				072DB8141CDC15A900023DC4 /* iTunesArtwork.png in Resources */,
 				071DEC011CDA472D00B49791 /* pioc-11.png in Resources */,
 				07A82E171CA377DD00D2804B /* pic-04.png in Resources */,
 				071DEC001CDA472D00B49791 /* black.png in Resources */,
@@ -292,7 +321,9 @@
 				B5B17F521C8CE15100DAF08B /* LaunchScreen.storyboard in Resources */,
 				077D994D1CA3694E0052A853 /* turtle.jpg in Resources */,
 				B5B17F4F1C8CE15100DAF08B /* Assets.xcassets in Resources */,
+				072DB8171CDC15EC00023DC4 /* icon.png in Resources */,
 				071DEC031CDA472D00B49791 /* green.png in Resources */,
+				072DB8151CDC15A900023DC4 /* iTunesArtwork@2x.png in Resources */,
 				071DEC071CDA50CA00B49791 /* draw.png in Resources */,
 				B5B17F4A1C8CE15100DAF08B /* Main.storyboard in Resources */,
 				071DEBFF1CDA472D00B49791 /* blue.png in Resources */,
@@ -382,6 +413,7 @@
 				070F4FC21CA10E50004F77C1 /* EditSetTableViewController.swift in Sources */,
 				6050C2B21CD9DC0A0076BA36 /* TestSetCollectionViewController.swift in Sources */,
 				4D25C7BA1CDA69BD0003CB70 /* PracticeCell.swift in Sources */,
+				072DB80F1CDBF80D00023DC4 /* NewDrawViewController.swift in Sources */,
 				07D7D91C1CAA064700C2FF13 /* EditSetTableViewCell.swift in Sources */,
 				4D25C7BC1CDA8EA70003CB70 /* PracticeDrawViewController.swift in Sources */,
 				070F4FB81CA0FC98004F77C1 /* CardSet.swift in Sources */,

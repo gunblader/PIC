@@ -35,6 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             idCounter.setObject(0, forKey: "numCards")
         }
         
+        let hand = NSUserDefaults.standardUserDefaults()
+
+        if hand.objectForKey("lefty") == nil {
+            hand.setObject(false, forKey:"lefty")
+        }
+        
         return true
     }
     

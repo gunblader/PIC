@@ -75,7 +75,6 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        // 1
         front = UITextField(frame: CGRect.null)
         back = UITextField(frame: CGRect.null)
         frontImgView = UIImageView(frame: CGRect.null)
@@ -99,14 +98,12 @@ class EditSetTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // 2
         front.delegate = self
         back.delegate = self
 
         front.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
         back.contentVerticalAlignment = UIControlContentVerticalAlignment.Center
 
-        // 3
         addSubview(front)
         addSubview(back)
         addSubview(frontImgView!)

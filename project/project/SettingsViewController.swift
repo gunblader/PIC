@@ -16,12 +16,17 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var redColorChange: UIButton!
 
+
+    @IBOutlet weak var leftHandModeSwitch: UISwitch!
     
     @IBOutlet weak var privateAccountSwitch: UISwitch!
     
+    let leftHandMode = NSUserDefaults.standardUserDefaults()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        leftHandModeSwitch.on =  (leftHandMode.objectForKey("lefty") as? Bool)!
+        print("vdl: \(leftHandModeSwitch.on)")
         // Do any additional setup after loading the view.
     }
 
@@ -29,7 +34,11 @@ class SettingsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+//    
+//    @IBAction func saveSettings(sender: AnyObject) {
+//        leftHandMode.setObject(leftHandModeSwitch.on, forKey:"lefty")
+//        print("sv: \(leftHandModeSwitch.on)")
+//    }
     @IBAction func editProfileBtn(sender: AnyObject) {
     }
 
@@ -75,6 +84,10 @@ class SettingsViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        leftHandMode.setObject(leftHandModeSwitch.on, forKey:"lefty")
+
+        print("sg: \(leftHandModeSwitch.on)")
+
     }
 
 }
